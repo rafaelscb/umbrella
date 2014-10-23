@@ -26,7 +26,7 @@ Run Umbrella Server and Start Demo:
 * `cd umbrella`
 * `run-server.sh`
 
-Every time a new class was added or removed, regenerate the dependency files:
+Every time a new class is added or removed, regenerate the dependency files:
 
 * `cd umbrella`
 * `run-deps.sh demos en`
