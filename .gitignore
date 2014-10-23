@@ -1,12 +1,13 @@
 *.o
 *.obj
+
 tools/*.exe
 tools/php-cgi
 tools/umcomp
 tools/umdeps
 tools/umserver
+
 work/*
-results/*
 !work/demos
 !work/posters
 !work/sayings
