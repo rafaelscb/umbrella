@@ -1,0 +1,55 @@
+all: umcomp.exe umdeps.exe umserver.exe
+
+umcomp.exe: umcomp.obj
+	gcc -o ./umcomp.exe umcomp.obj
+
+umcomp.obj: umcomp.c
+	gcc -o umcomp.obj -c umcomp.c
+
+umdeps.exe: umdeps.obj
+	gcc -o ./umdeps.exe umdeps.obj
+
+umdeps.obj: umdeps.c
+	gcc -o umdeps.obj -c umdeps.c
+
+umserver.exe: htlib.obj umserver.obj
+	gcc -o ./umserver.exe htlib.obj umserver.obj -lws2_32
+
+htlib.obj: htlib.c
+	gcc -o htlib.obj -c htlib.c
+
+umserver.obj: umserver.c
+	gcc -o umserver.obj -c umserver.c
+
+dist:
+	cd ~/Documents/umbrella; \
+		zip -r UMBRELLA_win32.zip . -x \
+			"work/demos/pacman/*" \
+			"work/bluejeans/*" \
+			"work/juston/*" \
+			"work/armazem/*" \
+			"work/demos/pacman.html" \
+			"results/*.*" \
+			"tools/*.c" \
+			"tools/*.h" \
+			"tools/*.o" \
+			"tools/*.obj" \
+			"tools/umserver" \
+			"tools/umdeps" \
+			"tools/umcomp" \
+			"tools/php-cgi" \
+			"tools/Makefile" \
+			"tools/Makefile.win32" \
+			".git/*" \
+			".gitignore" \
+			"*.sh" \
+			"*.zip" \
+			"README" \
+			; \
+		cd -
+
+clean:
+	rm -rf *.obj *.exe
+
+cleanall: clean
+	rm -rf ./umcomp.exe ./umdeps.exe ./umserver.exe
