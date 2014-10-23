@@ -39,8 +39,4 @@ To compile a final solution:
 
 ## Contributors
 
-Juston.co and BLUE JEANS .
-
-## License
-
-If you replicate some part of this project, you must mention this project and this link.
+[JUSTON.CO](http://juston.co) and [BLUE JEANS](http://lojabluejeans.com.br).
