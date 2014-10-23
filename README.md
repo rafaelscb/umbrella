@@ -16,6 +16,11 @@ Compile:
 * `cd umbrella/tools/`
 * `make`
 
+Compile (Windows):
+
+* `cd umbrella/tools/`
+* `make -f Makefile.win32`
+
 Run Umbrella Server and Start Demo:
 
 * `cd umbrella`
