@@ -40,8 +40,8 @@ Every time a new class is added or removed, regenerate the dependency files:
 To compile a final solution:
 
 * `cd umbrella`
-* `run-comp.sh demos en`
-* `cat results/demos.en.js`
+* `run-comp.sh demos.hello en`
+* `cat results/demos.hello.en.js`
 
 ## Testing the TODO list demo app
 
