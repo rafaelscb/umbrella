@@ -12,7 +12,6 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('demos/init.js');
 include('widgets/application.js');
 include('widgets/notif.js');
 include('demos/todo/crud.js');

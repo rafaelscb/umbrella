@@ -13,12 +13,12 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-$BASE_PATH = './receivers/';
+define('BASE_PATH', realpath("./receivers/")); 
 
 if (!isset($_POST) ||
     !isset($_POST['to']) ||
     !isset($_POST['action']) ||
-    !include($BASE_PATH.$_POST['to'].'.php')) {
+    !include(BASE_PATH.'/'.$_POST['to'].'.php')) {
   echo json_encode(array(
     'code' => 'REQUEST-ERROR',
     'to' => '', 'action' => '',
