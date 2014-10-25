@@ -261,6 +261,19 @@ widgets.Select.prototype.setValue = function(val) {
 };
 
 /**
+ * Gets the current text.
+ *
+ * @return {string} The current text.
+ * @public
+ */
+widgets.Select.prototype.getText = function() {
+  if (this.chosen) {
+    return this.chosen.getCaption();
+  }
+  return '';
+};
+
+/**
  * Occurs when the focus is lost.
  *
  * @param {Event} e Event information.
