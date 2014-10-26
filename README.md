@@ -53,3 +53,7 @@ To compile a final solution:
 ## Contributors
 
 [JUSTON.CO](http://juston.co) and [BLUE JEANS](http://lojabluejeans.com.br).
+
+## License
+
+**GNU GPLv3** or later; see [COPYING](COPYING) and [LICENSE](LICENSE).
