@@ -142,13 +142,23 @@ widgets.SpinButton.prototype.setMax = function(val) {
 };
 
 /**
+ * Get the numeric value.
+ *
+ * @return {number} The aria-valuenow property.
+ * @public
+ */
+widgets.SpinButton.prototype.getNumValue = function() {
+  return Number(this.dom.getAttribute('aria-valuenow'));
+};
+
+/**
  * Gets the value.
  *
  * @return {number} The aria-valuenow property.
  * @public
  */
 widgets.SpinButton.prototype.getValue = function() {
-  return Number(this.dom.getAttribute('aria-valuenow'));
+  return this.dom.getAttribute('aria-valuenow');
 };
 
 /**
@@ -174,7 +184,7 @@ widgets.SpinButton.prototype.setValue = function(val) {
  */
 widgets.SpinButton.prototype.decrement = function() {
   var min = this.getMin();
-  var nextValue = this.getValue() - this.incr;
+  var nextValue = this.getNumValue() - this.incr;
   if (nextValue < min) {
     nextValue = min;
   }
@@ -189,7 +199,7 @@ widgets.SpinButton.prototype.decrement = function() {
  */
 widgets.SpinButton.prototype.increment = function() {
   var max = this.getMax();
-  var nextValue = this.getValue() + this.incr;
+  var nextValue = this.getNumValue() + this.incr;
   if (nextValue > max) {
     nextValue = max;
   }
@@ -204,7 +214,7 @@ widgets.SpinButton.prototype.increment = function() {
  */
 widgets.SpinButton.prototype.decrementP = function() {
   var min = this.getMin();
-  var nextValue = this.getValue() - this.incrp;
+  var nextValue = this.getNumValue() - this.incrp;
   if (nextValue < min) {
     nextValue = min;
   }
@@ -219,7 +229,7 @@ widgets.SpinButton.prototype.decrementP = function() {
  */
 widgets.SpinButton.prototype.incrementP = function() {
   var max = this.getMax();
-  var nextValue = this.getValue() + this.incrp;
+  var nextValue = this.getNumValue() + this.incrp;
   if (nextValue > max) {
     nextValue = max;
   }
