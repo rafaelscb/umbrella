@@ -50,6 +50,7 @@ posters.Base = function(controller) {
   this.validations['email'] = this.isEmail;
   this.validations['enum'] = this.isEnum;
   this.validations['date'] = this.isDate;
+  this.validations['datetime'] = this.isDateTime;
   this.validations['currency'] = this.isCurrency;
 };
 inherit(posters.Base, widgets.Poster);
@@ -407,6 +408,19 @@ posters.Base.prototype.isEmail = function(value) {
  */
 posters.Base.prototype.isDate = function(value) {
   var pattern = new RegExp(/^(19|20)\d\d[- .\/](0[1-9]|1[012])[- .\/](0[1-9]|[12][0-9]|3[01])$/);
+  return pattern.test(value);
+};
+
+/**
+ * Validates if a value is a valid datetime. We always assume that a correct
+ * datetime has the format YYYY-MM-DD HH:MM:SS.
+ *
+ * @param {string} value The value to be validated.
+ * @return {boolean} true if value is a date; false otherwise.
+ * @protected
+ */
+posters.Base.prototype.isDateTime = function(value) {
+  var pattern = new RegExp(/^(19|20)\d\d[- .\/](0[1-9]|1[012])[- .\/](0[1-9]|[12][0-9]|3[01])[T ]([01][0-9]|2[0-3]):([0-5][0-9])(:([0-5][0-9]))?$/);
   return pattern.test(value);
 };
 
