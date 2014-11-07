@@ -132,6 +132,18 @@ widgets.Select.prototype.removeOption = function(index) {
 };
 
 /**
+ * Clears the list of options.
+ *
+ * @return {void}
+ * @public
+ */
+widgets.Select.prototype.clearOptions = function() {
+  for (var i = this.options.length-1; i >= 0; i--) {
+    this.removeOption();
+  }
+};
+
+/**
  * Checks if the list is opened.
  *
  * @return {boolean} true if opened, false otherwise.
@@ -177,13 +189,13 @@ widgets.Select.prototype.closeList = function() {
  */
 widgets.Select.prototype.previousIndex = function() {
   var currentIndex = this.index;
-  
+
   while (currentIndex > 0) {
     if (!this.options[--currentIndex].getHidden()) {
       return currentIndex;
     }
   }
-  
+
   return this.index;
 };
 
@@ -194,13 +206,13 @@ widgets.Select.prototype.previousIndex = function() {
  */
 widgets.Select.prototype.nextIndex = function() {
   var currentIndex = this.index;
-  
+
   while (currentIndex < (this.options.length - 1)) {
     if (!this.options[++currentIndex].getHidden()) {
       return currentIndex;
     }
   }
-  
+
   return this.index;
 };
 
@@ -522,9 +534,7 @@ widgets.Select.prototype.destroy = function() {
   this.unlisten('mousedown');
   this.unlisten('mouseenterlist');
   this.unlisten('mouseleavelist');
-  for (var i = this.options.length-1; i >= 0; i--) {
-    this.removeOption();
-  }
+  this.clearOptions();
   this.index = null;
   this.options = null;
   this.chosen = null;

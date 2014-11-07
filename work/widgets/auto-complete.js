@@ -260,6 +260,7 @@ widgets.AutoComplete.prototype.addRow = function(record, index) {
       'mouseenter', this.listeners['mouseenterrow'], false);
   tr.addEventListener(
       'mousedown', this.listeners['mousedownrow'], false);
+
   this.renderRecord(tr, record);
 };
 
@@ -314,6 +315,8 @@ widgets.AutoComplete.prototype.commit = function() {
   this.chosen = this.list.firstChild.rows[this.index];
   this.chosen.className = 'ac-row selected';
   this.dom.value = this.getDesc();
+
+  this.dispatch('commit');
 };
 
 /**
@@ -564,6 +567,12 @@ widgets.AutoComplete.prototype.listen = function(type, func, obj) {
   case 'mousedownrow':
     this.addListener(type, func, obj);
     return;
+  case 'commit':
+    this.addListener(type, func, obj);
+    return;
+  case 'close':
+    this.addListener(type, func, obj);
+    return;
   }
   widgets.Base.prototype.listen.call(this, type, func, obj);
 };
@@ -600,6 +609,12 @@ widgets.AutoComplete.prototype.unlisten = function(type) {
     this.removeListener(type);
     return;
   case 'mousedownrow':
+    this.removeListener(type);
+    return;
+  case 'commit':
+    this.removeListener(type);
+    return;
+  case 'close':
     this.removeListener(type);
     return;
   }
