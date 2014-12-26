@@ -28,11 +28,13 @@ include('widgets/poster.js');
  *
  * @param {string} controller The controller that receives the dispatches
  *    the message in the server side.
+ * @param {string} application The application name.
  * @extends {widgets.Poster}
  * @constructor
  */
-posters.Base = function(controller) {
+posters.Base = function(controller, application) {
   widgets.Poster.call(this, controller);
+  this.application = application;
   this.validations = new Object();
   this.validations['integer'] = this.isInteger;
   this.validations['greaterthan'] = this.isGreaterThan;
@@ -54,6 +56,14 @@ posters.Base = function(controller) {
   this.validations['currency'] = this.isCurrency;
 };
 inherit(posters.Base, widgets.Poster);
+
+/**
+ * The name of the current application.
+ *
+ * @type {string}
+ * @protected
+ */
+posters.Base.prototype.application;
 
 /**
  * Constraints. Each action has a set of constraints.
@@ -126,8 +136,11 @@ posters.Base.prototype.post = function(to, action, message, conk) {
     }
   }
 
-  widgets.Poster.prototype.post.call(this, 'to=' + to +
-      '&action=' + action + '&message=' + JSON.stringify(message));
+  widgets.Poster.prototype.post.call(this, 
+      'app=' + this.application +
+      '&to=' + to +
+      '&action=' + action +
+      '&message=' + JSON.stringify(message));
 };
 
 /**
