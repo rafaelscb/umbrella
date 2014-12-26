@@ -7,7 +7,7 @@ set app_dir=Work\%1
 :: set res_dir=assets/
 set res_dir=Global/
 set base_dir_from_app_dir=..
-set final=Global\deps.js
+set final=Global\Deps.js
 
 if "%2" == "" (
   set lang=multi

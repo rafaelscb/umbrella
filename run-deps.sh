@@ -5,7 +5,7 @@ app_dir=Work/$1
 #res_dir=assets/
 res_dir=Global
 base_dir_from_app_dir=..
-final=global/deps.js
+final=Global/Deps.js
 lang=${2:-multi}
 
 if [ ! -d "$app_dir" ]; then
