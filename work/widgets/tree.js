@@ -8,61 +8,61 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Tree} class.
+ * @fileoverview This file defines the {@code Widgets.Tree} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
-include('widgets/tree-item.js');
+include('Widgets/Base.js');
+include('Widgets/TreeItem.js');
 
 /**
  * The tree widget is to be used when we want hierarchical and selectable items
  * to be presented.
  *
  * @param {Element} dom Root element for the tree.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Tree = function(dom) {
+Widgets.Tree = function(dom) {
   this.items = new Array();
-  widgets.Base.call(this, dom);
+  Widgets.Base.call(this, dom);
 };
-inherit(widgets.Tree, widgets.Base);
+inherit(Widgets.Tree, Widgets.Base);
 
 /**
  * Contains the collection of tree items.
  *
- * @type {Array.<widgets.TreeItem>}
+ * @type {Array.<Widgets.TreeItem>}
  * @protected
  */
-widgets.Tree.prototype.items;
+Widgets.Tree.prototype.items;
 
 /**
  * Selected item.
  *
- * @type {widgets.TreeItem}
+ * @type {Widgets.TreeItem}
  * @protected
  */
-widgets.Tree.prototype.selectedItem;
+Widgets.Tree.prototype.selectedItem;
 
 /**
  * Gets the selected item.
  *
- * @return {widgets.TreeItem}
+ * @return {Widgets.TreeItem}
  * @public
  */
-widgets.Tree.prototype.getSelectedItem = function() {
+Widgets.Tree.prototype.getSelectedItem = function() {
   return this.selectedItem;
 };
 
 /**
  * Sets the selected item.
  *
- * @param {widgets.TreeItem} item The item to be selected.
+ * @param {Widgets.TreeItem} item The item to be selected.
  * @return {void}
  * @public
  */
-widgets.Tree.prototype.setSelectedItem = function(item) {
+Widgets.Tree.prototype.setSelectedItem = function(item) {
   if (this.selectedItem) {
     this.selectedItem.dom.className = '';
   }
@@ -78,7 +78,7 @@ widgets.Tree.prototype.setSelectedItem = function(item) {
  * @return {void} Nothing.
  * @public
  */
-widgets.Tree.prototype.selectItem = function(key, value) {
+Widgets.Tree.prototype.selectItem = function(key, value) {
   for (var i = 0; i < this.items.length; i++) {
     if (this.items[i].dom.getAttribute(key) == value) {
       var elem = this.items[i].dom;
@@ -105,7 +105,7 @@ widgets.Tree.prototype.selectItem = function(key, value) {
  * @return {void} Nothing.
  * @public
  */
-widgets.Tree.prototype.unselectItem = function(key, value) {
+Widgets.Tree.prototype.unselectItem = function(key, value) {
   for (var i = 0; i < this.items.length; i++) {
     if (this.items[i].dom.getAttribute(key) == value) {
       this.selectedItem = this.items[i];
@@ -119,12 +119,12 @@ widgets.Tree.prototype.unselectItem = function(key, value) {
 /**
  * Adds a new item to the items collection.
  *
- * @param {widgets.TreeItem} item A new item to be added.
+ * @param {Widgets.TreeItem} item A new item to be added.
  * @param {number} index The index position where the item will be added to. If
  *    no value is specified, it adds the item to the end of the list.
  * @return {void}
  */
-widgets.Tree.prototype.addItem = function(item, index) {
+Widgets.Tree.prototype.addItem = function(item, index) {
   index = (index == undefined) ? this.items.length : index;
   this.items.splice(index, 0, item);
   this.dom.insertBefore(item.dom, this.items[index+1]);
@@ -142,7 +142,7 @@ widgets.Tree.prototype.addItem = function(item, index) {
  *    list.
  * @return {void}
  */
-widgets.Tree.prototype.removeItem = function(index) {
+Widgets.Tree.prototype.removeItem = function(index) {
   index = (index == undefined) ? this.items.length-1 : index;
   this.items[index].unlisten('action');
   this.dom.removeChild(this.items[index].dom);
@@ -156,7 +156,7 @@ widgets.Tree.prototype.removeItem = function(index) {
  * @return {void}
  * @protected
  */
-widgets.Tree.prototype.clearAll = function() {
+Widgets.Tree.prototype.clearAll = function() {
   this.selectedItem = null;
   for (var i = this.items.length-1; i >= 0; i--) {
     this.removeItem();
@@ -173,7 +173,7 @@ widgets.Tree.prototype.clearAll = function() {
  * @return {void}
  * @protected
  */
-widgets.Tree.prototype.onAction = function(item) {
+Widgets.Tree.prototype.onAction = function(item) {
   this.dispatch('extended_action', item);
   this.setSelectedItem(item);
 };
@@ -185,7 +185,7 @@ widgets.Tree.prototype.onAction = function(item) {
  * @return {void}
  * @protected
  */
-widgets.Tree.prototype.onMouseEnter = function(e) {
+Widgets.Tree.prototype.onMouseEnter = function(e) {
   this.dom.style.overflowY = 'auto';
 };
 
@@ -196,7 +196,7 @@ widgets.Tree.prototype.onMouseEnter = function(e) {
  * @return {void}
  * @protected
  */
-widgets.Tree.prototype.onMouseLeave = function(e) {
+Widgets.Tree.prototype.onMouseLeave = function(e) {
   this.dom.style.overflowY = 'hidden';
 };
 
@@ -204,7 +204,7 @@ widgets.Tree.prototype.onMouseLeave = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.Tree.prototype.listen = function(type, func, obj) {
+Widgets.Tree.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'action':
     if (!this.listeners[type]) {
@@ -217,14 +217,14 @@ widgets.Tree.prototype.listen = function(type, func, obj) {
     }
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Tree.prototype.unlisten = function(type) {
+Widgets.Tree.prototype.unlisten = function(type) {
   switch (type) {
   case 'action':
     this.removeListener(type);
@@ -234,14 +234,14 @@ widgets.Tree.prototype.unlisten = function(type) {
     }
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Tree.prototype.flourish = function() {
+Widgets.Tree.prototype.flourish = function() {
   if (!this.dom.getAttribute('role')) {
     this.dom.setAttribute('role', 'tree');
     this.listen('action', this.onAction, this);
@@ -255,7 +255,7 @@ widgets.Tree.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Tree.prototype.destroy = function() {
+Widgets.Tree.prototype.destroy = function() {
   this.unlisten('action');
   this.unlisten('mouseenter');
   this.unlisten('mouseleave');
@@ -269,5 +269,5 @@ widgets.Tree.prototype.destroy = function() {
 
   this.dom.removeAttribute('role');
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

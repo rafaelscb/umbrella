@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Application} class.
+ * @fileoverview This file defines the {@code Widgets.Application} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/loader.js');
+include('Widgets/Loader.js');
 
 /**
  * This widget represents the {@code application} role and provides the
@@ -20,18 +20,17 @@ include('widgets/loader.js');
  *
  * @param {Element=} dom Root element for the widget. If no element is passed,
  *    it assumes the root element is {@code document.body}.
- * @extends {widgets.Loader}
+ * @extends {Widgets.Loader}
  * @constructor
  */
-widgets.Application = function(dom) {
-  widgets.Loader.call(this, dom);
-};
-inherit(widgets.Application, widgets.Loader);
+Widgets.Application = function(dom) {
+  Widgets.Loader.call(this, dom);
+}; inherit(Widgets.Application, Widgets.Loader);
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Application.prototype.flourish = function() {
+Widgets.Application.prototype.flourish = function() {
   this.dom.setAttribute('role', 'application');
 };

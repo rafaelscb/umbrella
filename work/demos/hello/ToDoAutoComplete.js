@@ -8,33 +8,33 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code demos.hello.TodoAc} class.
+ * @fileoverview This file defines the {@code Demos.Hello.ToDoAutoComplete} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/auto-complete.js');
-include('demos/posters/todo-item.js');
+include('Widgets/AutoComplete.js');
+include('Demos/Posters/ToDoItem.js');
 
 /**
  * An autocomplete widget for the todo-item data.
  *
  * @param {Element} dom Root element for the autocomplete.
- * @extends {widgets.AutoComplete}
+ * @extends {Widgets.AutoComplete}
  * @constructor
  */
-demos.hello.TodoAc = function(dom) {
-  widgets.AutoComplete.call(this,
-      dom, 200, true, new demos.posters.TodoItem());
+Demos.Hello.ToDoAutoComplete = function(dom) {
+  Widgets.AutoComplete.call(this,
+      dom, 200, true, new Demos.Posters.TodoItem());
   this.list.className += ' todo-ac';
 };
-inherit(demos.hello.TodoAc, widgets.AutoComplete);
+inherit(Demos.Hello.ToDoAutoComplete, Widgets.AutoComplete);
 
 /**
  * @inheritDoc
  * @override
  */
-demos.hello.TodoAc.prototype.onRead = function(message) {
-  widgets.AutoComplete.prototype.onRead.call(this, message);
+Demos.Hello.ToDoAutoComplete.prototype.onRead = function(message) {
+  Widgets.AutoComplete.prototype.onRead.call(this, message);
   this.setDesc('Do the dishes.');
   this.filter();
   this.close();

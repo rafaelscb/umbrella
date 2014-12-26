@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Option} class.
+ * @fileoverview This file defines the {@code Widgets.Option} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The option widget is an item of a listbox, where one or more options
@@ -20,23 +20,23 @@ include('widgets/base.js');
  *
  * @param {string} caption Option's caption.
  * @param {string} val Option's value.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Option = function(caption, val) {
+Widgets.Option = function(caption, val) {
   this.dom = document.createElement('div');
-  widgets.Base.call(this, this.dom);
+  Widgets.Base.call(this, this.dom);
   this.setCaption(caption);
   this.setValue(val);
 };
-inherit(widgets.Option, widgets.Base);
+inherit(Widgets.Option, Widgets.Base);
 
 /**
  * Gets the selected property, if selected returns true, false otherwise.
  *
  * @return {boolean} The selected property.
  */
-widgets.Option.prototype.getSelected = function() {
+Widgets.Option.prototype.getSelected = function() {
   return this.dom.className == 'selected';
 };
 
@@ -46,7 +46,7 @@ widgets.Option.prototype.getSelected = function() {
  * @param {boolean} val true to be selected, false otherwise.
  * @return {void}
  */
-widgets.Option.prototype.setSelected = function(val) {
+Widgets.Option.prototype.setSelected = function(val) {
   this.dom.className = (val) ? 'selected': '';
 };
 
@@ -55,7 +55,7 @@ widgets.Option.prototype.setSelected = function(val) {
  *
  * @return {string} the inner caption.
  */
-widgets.Option.prototype.getCaption = function() {
+Widgets.Option.prototype.getCaption = function() {
   return this.dom.innerHTML;
 };
 
@@ -65,7 +65,7 @@ widgets.Option.prototype.getCaption = function() {
  * @param {string} caption The caption to be added.
  * @return {void}
  */
-widgets.Option.prototype.setCaption = function(caption) {
+Widgets.Option.prototype.setCaption = function(caption) {
   this.dom.innerHTML = caption;
 };
 
@@ -75,7 +75,7 @@ widgets.Option.prototype.setCaption = function(caption) {
  * @return {string} the data-value attribute.
  * @public
  */
-widgets.Option.prototype.getValue = function() {
+Widgets.Option.prototype.getValue = function() {
   return this.dom.getAttribute('data-value');
 };
 
@@ -87,7 +87,7 @@ widgets.Option.prototype.getValue = function() {
  * @return {void}
  * @public
  */
-widgets.Option.prototype.setValue = function(val) {
+Widgets.Option.prototype.setValue = function(val) {
   this.dom.setAttribute('data-value', val);
 };
 
@@ -95,6 +95,6 @@ widgets.Option.prototype.setValue = function(val) {
  * @inheritDoc
  * @override
  */
-widgets.Option.prototype.flourish = function() {
+Widgets.Option.prototype.flourish = function() {
   this.dom.setAttribute('role', 'option');
 };

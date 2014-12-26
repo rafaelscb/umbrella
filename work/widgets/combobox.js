@@ -8,27 +8,27 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Combobox} class.
+ * @fileoverview This file defines the {@code Widgets.Combobox} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/base.js');
 
 /**
  * The combobox widget is to be used when an unique option must be selected.
  *
  * @param {Element} dom Root element for the combobox.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Combobox = function(dom) {
+Widgets.Combobox = function(dom) {
   this.index = -1;
   this.options = new Array();
   this.chosen = null;
 
   this.mouseInList = false;
 
-  widgets.Base.call(this, dom);
+  Widgets.Base.call(this, dom);
 
   this.listen('blur', this.onBlur, this);
   this.listen('input', this.onInput, this);
@@ -37,7 +37,7 @@ widgets.Combobox = function(dom) {
   this.listen('mouseenterlist', this.onMouseEnterList, this);
   this.listen('mouseleavelist', this.onMouseLeaveList, this);
 };
-inherit(widgets.Combobox, widgets.Base);
+inherit(Widgets.Combobox, Widgets.Base);
 
 /**
  * Contains the index to access the current option (selected|highlighted).
@@ -45,7 +45,7 @@ inherit(widgets.Combobox, widgets.Base);
  * @type {number}
  * @protected
  */
-widgets.Combobox.prototype.index;
+Widgets.Combobox.prototype.index;
 
 /**
  * Contains the collection of options.
@@ -53,7 +53,7 @@ widgets.Combobox.prototype.index;
  * @type {Array.<widgets.Option>}
  * @protected
  */
-widgets.Combobox.prototype.options;
+Widgets.Combobox.prototype.options;
 
 /**
  * Contains the chosen option.
@@ -61,7 +61,7 @@ widgets.Combobox.prototype.options;
  * @type {widgets.Option}
  * @protected
  */
-widgets.Combobox.prototype.chosen;
+Widgets.Combobox.prototype.chosen;
 
 /**
  * The input element associated with the combobox.
@@ -69,7 +69,7 @@ widgets.Combobox.prototype.chosen;
  * @type {Element}
  * @protected
  */
-widgets.Combobox.prototype.input;
+Widgets.Combobox.prototype.input;
 
 /**
  * The arrow element.
@@ -77,7 +77,7 @@ widgets.Combobox.prototype.input;
  * @type {Element}
  * @protected
  */
-widgets.Combobox.prototype.arrow;
+Widgets.Combobox.prototype.arrow;
 
 /**
  * The list element.
@@ -85,7 +85,7 @@ widgets.Combobox.prototype.arrow;
  * @type {Element}
  * @protected
  */
-widgets.Combobox.prototype.list;
+Widgets.Combobox.prototype.list;
 
 /**
  * Flag indicating if the mouse is in the list.
@@ -93,7 +93,7 @@ widgets.Combobox.prototype.list;
  * @type {Element}
  * @protected
  */
-widgets.Combobox.prototype.mouseInList;
+Widgets.Combobox.prototype.mouseInList;
 
 /**
  * Adds a new option to the options collection.
@@ -103,7 +103,7 @@ widgets.Combobox.prototype.mouseInList;
  *    no value is specified, it adds the option to the end of the list.
  * @return {void}
  */
-widgets.Combobox.prototype.addOption = function(option, index) {
+Widgets.Combobox.prototype.addOption = function(option, index) {
   index = (index == undefined) ? this.options.length : index;
   this.options.splice(index, 0, option);
 
@@ -121,7 +121,7 @@ widgets.Combobox.prototype.addOption = function(option, index) {
  *    list.
  * @return {void}
  */
-widgets.Combobox.prototype.removeOption = function(index) {
+Widgets.Combobox.prototype.removeOption = function(index) {
   index = (index == undefined) ? this.options.length-1 : index;
 
   this.options[index].unlisten('mousedown');
@@ -139,7 +139,7 @@ widgets.Combobox.prototype.removeOption = function(index) {
  * @return {boolean} true if opened, false otherwise.
  * @public
  */
-widgets.Combobox.prototype.isListOpened = function() {
+Widgets.Combobox.prototype.isListOpened = function() {
   return this.list.getAttribute('aria-hidden') != 'true';
 };
 
@@ -152,7 +152,7 @@ widgets.Combobox.prototype.isListOpened = function() {
  * @return {void}
  * @public
  */
-widgets.Combobox.prototype.filterAndMaybeShowList = function(restrictive) {
+Widgets.Combobox.prototype.filterAndMaybeShowList = function(restrictive) {
   var first = false, mustShow = false, caption = '';
   var token = this.input.value.trim().toLowerCase();
 
@@ -198,7 +198,7 @@ widgets.Combobox.prototype.filterAndMaybeShowList = function(restrictive) {
  * @return {void}
  * @public
  */
-widgets.Combobox.prototype.closeList = function() {
+Widgets.Combobox.prototype.closeList = function() {
   this.list.style.zIndex = 0;
   this.list.setAttribute('aria-hidden', true);
 };
@@ -210,7 +210,7 @@ widgets.Combobox.prototype.closeList = function() {
  * @param {string} caption The caption to check.
  * @param {string} token A string to look for at the start of {@caption}.
  */
-widgets.Combobox.prototype.matchFunction = function(caption, token) {
+Widgets.Combobox.prototype.matchFunction = function(caption, token) {
   return caption.lastIndexOf(token, 0) == 0;
 };
 
@@ -219,7 +219,7 @@ widgets.Combobox.prototype.matchFunction = function(caption, token) {
  *
  * @return {number} the previous index.
  */
-widgets.Combobox.prototype.previousIndex = function() {
+Widgets.Combobox.prototype.previousIndex = function() {
   var currentIndex = this.index;
 
   while (currentIndex > 0) {
@@ -236,7 +236,7 @@ widgets.Combobox.prototype.previousIndex = function() {
  *
  * @return {number} the next index.
  */
-widgets.Combobox.prototype.nextIndex = function() {
+Widgets.Combobox.prototype.nextIndex = function() {
   var currentIndex = this.index;
 
   while (currentIndex < (this.options.length - 1)) {
@@ -254,7 +254,7 @@ widgets.Combobox.prototype.nextIndex = function() {
  * @return {void}
  * @protected
  */
-widgets.Combobox.prototype.commit = function() {
+Widgets.Combobox.prototype.commit = function() {
   this.chosen = this.options[this.index];
   this.input.value = this.chosen.getCaption();
   this.input.select();
@@ -267,7 +267,7 @@ widgets.Combobox.prototype.commit = function() {
  * @return {void}
  * @protected
  */
-widgets.Combobox.prototype.release = function() {
+Widgets.Combobox.prototype.release = function() {
   this.chosen = null;
 };
 
@@ -277,7 +277,7 @@ widgets.Combobox.prototype.release = function() {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Combobox.prototype.onBlur = function(e) {
+Widgets.Combobox.prototype.onBlur = function(e) {
   if (!this.mouseInList) {
     this.closeList();
   }
@@ -289,7 +289,7 @@ widgets.Combobox.prototype.onBlur = function(e) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Combobox.prototype.onInput = function(e) {
+Widgets.Combobox.prototype.onInput = function(e) {
   this.release();
   this.filterAndMaybeShowList(true);
 };
@@ -301,7 +301,7 @@ widgets.Combobox.prototype.onInput = function(e) {
  * @param {Event} e Event information.
  * @public
  */
-widgets.Combobox.prototype.onKeyDown = function(e) {
+Widgets.Combobox.prototype.onKeyDown = function(e) {
   if (e.altKey) return true;
   var diff = 0, total = 0;
   var nav = false, prevIndex = this.index;
@@ -381,7 +381,7 @@ widgets.Combobox.prototype.onKeyDown = function(e) {
  * @param {Event} e Event information.
  * @return {boolean} false to stop it as soon as captured.
  */
-widgets.Combobox.prototype.onMouseDown = function(e) {
+Widgets.Combobox.prototype.onMouseDown = function(e) {
   this.input.focus();
   if (e.target == this.dom ||
       e.target == this.input || e.target == this.arrow) {
@@ -402,7 +402,7 @@ widgets.Combobox.prototype.onMouseDown = function(e) {
  * @param {Event} e Event information.
  * @public
  */
-widgets.Combobox.prototype.onOptionClick = function(e) {
+Widgets.Combobox.prototype.onOptionClick = function(e) {
   if (e.which == 1 || (e.buttons == 1 || e.buttons == 3)) {
     for (var i = 0; i < this.options.length; i++) {
       if (e.currentTarget == this.options[i].dom) {
@@ -420,7 +420,7 @@ widgets.Combobox.prototype.onOptionClick = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.Combobox.prototype.onOptionHover = function(e) {
+Widgets.Combobox.prototype.onOptionHover = function(e) {
   if (this.options[this.index]) {
     this.options[this.index].dom.className = '';
   }
@@ -438,7 +438,7 @@ widgets.Combobox.prototype.onOptionHover = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.Combobox.prototype.onMouseEnterList = function(e) {
+Widgets.Combobox.prototype.onMouseEnterList = function(e) {
   this.mouseInList = true;
 };
 
@@ -449,7 +449,7 @@ widgets.Combobox.prototype.onMouseEnterList = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.Combobox.prototype.onMouseLeaveList = function(e) {
+Widgets.Combobox.prototype.onMouseLeaveList = function(e) {
   this.mouseInList = false;
 };
 
@@ -457,7 +457,7 @@ widgets.Combobox.prototype.onMouseLeaveList = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.Combobox.prototype.listen = function(type, func, obj) {
+Widgets.Combobox.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'blur':
     this.addListener(type, func, obj);
@@ -479,14 +479,14 @@ widgets.Combobox.prototype.listen = function(type, func, obj) {
     this.list.addEventListener('mouseleave', this.listeners[type], false);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Combobox.prototype.unlisten = function(type) {
+Widgets.Combobox.prototype.unlisten = function(type) {
   switch (type) {
   case 'blur':
     this.input.removeEventListener(type, this.listeners[type], false);
@@ -508,14 +508,14 @@ widgets.Combobox.prototype.unlisten = function(type) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Combobox.prototype.flourish = function() {
+Widgets.Combobox.prototype.flourish = function() {
   this.dom.setAttribute('role', 'combobox');
   this.dom.innerHTML = "\
 <input type='text'><span class='combobox-arrow'>&#x25BC;</span>\
@@ -531,7 +531,7 @@ widgets.Combobox.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Combobox.prototype.destroy = function() {
+Widgets.Combobox.prototype.destroy = function() {
   this.unlisten('blur');
   this.unlisten('input');
   this.unlisten('keydown');
@@ -549,5 +549,5 @@ widgets.Combobox.prototype.destroy = function() {
   this.list = null;
   this.mouseInList = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

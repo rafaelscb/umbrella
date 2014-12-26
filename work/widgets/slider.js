@@ -10,11 +10,11 @@
 // TODO: Implement this widget.
 
 /**
- * @fileoverview This file defines the {@code widgets.Slider} class.
+ * @fileoverview This file defines the {@code Widgets.Slider} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js')
+include('Widgets/base.js')
 
 /**
  * The slider widget is to be used when we want a single value from a range
@@ -25,14 +25,14 @@ include('widgets/base.js')
  *    horizontal.
  * @param {boolean} isRange if true, two handles are added, otherwise a single
  *    handler is added.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Slider = function(dom, orientation, size, handleSize) {
-  widgets.Base.call(this, dom);
+Widgets.Slider = function(dom, orientation, size, handleSize) {
+  Widgets.Base.call(this, dom);
   this.setOrientation(orientation);
 };
-inherit(widgets.Slider, widgets.Base);
+inherit(Widgets.Slider, Widgets.Base);
 
 /**
  * Contains the first handle.
@@ -40,7 +40,7 @@ inherit(widgets.Slider, widgets.Base);
  * @type {Element}
  * @protected
  */
-widgets.Slider.prototype.handle;
+Widgets.Slider.prototype.handle;
 
 /**
  * Contains the second handle.
@@ -48,7 +48,7 @@ widgets.Slider.prototype.handle;
  * @type {Element}
  * @protected
  */
-widgets.Slider.prototype.handle2;
+Widgets.Slider.prototype.handle2;
 
 /**
  * Gets the orientation value.
@@ -57,7 +57,7 @@ widgets.Slider.prototype.handle2;
  *    is returned.
  * @public
  */
-widgets.Slider.prototype.getOrientation = function() {
+Widgets.Slider.prototype.getOrientation = function() {
   return this.dom.getAttribute('aria-orientation');
 };
 
@@ -68,7 +68,7 @@ widgets.Slider.prototype.getOrientation = function() {
  * @return {void}
  * @protected
  */
-widgets.Slider.prototype.setOrientation = function(val) {
+Widgets.Slider.prototype.setOrientation = function(val) {
   this.dom.setAttribute('aria-orientation',
       (val == 'vertical' ? 'vertical' : 'horizontal'));
 };
@@ -79,7 +79,7 @@ widgets.Slider.prototype.setOrientation = function(val) {
  * @return {void}
  * @public
  */
-widgets.Slider.prototype.reset = function() {
+Widgets.Slider.prototype.reset = function() {
   this.handle.style.top = (this.dom.offsetTop - 6) + 'px';
   this.handle.style.left = (this.dom.offsetLeft - 5) + 'px';
 
@@ -92,7 +92,7 @@ widgets.Slider.prototype.reset = function() {
  * @inheritDoc
  * @override
  */
-widgets.Slider.prototype.flourish = function() {
+Widgets.Slider.prototype.flourish = function() {
   this.dom.setAttribute('role', 'slider');
   this.dom.style.width = '150px';
   this.dom.innerHTML = "\

@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code posters.Base} class.
+ * @fileoverview This file defines the {@code Posters.Base} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/poster.js');
+include('Widgets/poster.js');
 
 /**
  * In the application level, a poster is the edge between the visual elements
@@ -29,11 +29,11 @@ include('widgets/poster.js');
  * @param {string} controller The controller that receives the dispatches
  *    the message in the server side.
  * @param {string} application The application name.
- * @extends {widgets.Poster}
+ * @extends {Widgets.Poster}
  * @constructor
  */
-posters.Base = function(controller, application) {
-  widgets.Poster.call(this, controller);
+Posters.Base = function(controller, application) {
+  Widgets.Poster.call(this, controller);
   this.application = application;
   this.validations = new Object();
   this.validations['integer'] = this.isInteger;
@@ -55,7 +55,7 @@ posters.Base = function(controller, application) {
   this.validations['datetime'] = this.isDateTime;
   this.validations['currency'] = this.isCurrency;
 };
-inherit(posters.Base, widgets.Poster);
+inherit(Posters.Base, Widgets.Poster);
 
 /**
  * The name of the current application.
@@ -63,7 +63,7 @@ inherit(posters.Base, widgets.Poster);
  * @type {string}
  * @protected
  */
-posters.Base.prototype.application;
+Posters.Base.prototype.application;
 
 /**
  * Constraints. Each action has a set of constraints.
@@ -71,7 +71,7 @@ posters.Base.prototype.application;
  * @type {Object}
  * @protected
  */
-posters.Base.prototype.constraints;
+Posters.Base.prototype.constraints;
 
 /**
  * Validations.
@@ -79,7 +79,7 @@ posters.Base.prototype.constraints;
  * @type {Object}
  * @protected
  */
-posters.Base.prototype.validations;
+Posters.Base.prototype.validations;
 
 /**
  * Errors. Each action can generate errors.
@@ -87,13 +87,13 @@ posters.Base.prototype.validations;
  * @type {Object}
  * @public
  */
-posters.Base.prototype.errors;
+Posters.Base.prototype.errors;
 
 /**
  * @inheritDoc
  * @override
  */
-posters.Base.prototype.onResponse = function(e) {
+Posters.Base.prototype.onResponse = function(e) {
   var pack = {};
   if (e.type == 'load') {
     pack = JSON.parse(e.target.responseText);
@@ -110,7 +110,7 @@ posters.Base.prototype.onResponse = function(e) {
  * @inheritDoc
  * @override
  */
-posters.Base.prototype.onProgress = function(e) {
+Posters.Base.prototype.onProgress = function(e) {
   this.dispatch('progress', e.loaded, e.total);
 };
 
@@ -124,7 +124,7 @@ posters.Base.prototype.onProgress = function(e) {
  * @return {void}
  * @public
  */
-posters.Base.prototype.post = function(to, action, message, conk) {
+Posters.Base.prototype.post = function(to, action, message, conk) {
   conk = conk || action;
   this.errors = {};
 
@@ -136,7 +136,7 @@ posters.Base.prototype.post = function(to, action, message, conk) {
     }
   }
 
-  widgets.Poster.prototype.post.call(this, 
+  Widgets.Poster.prototype.post.call(this, 
       'app=' + this.application +
       '&to=' + to +
       '&action=' + action +
@@ -154,7 +154,7 @@ posters.Base.prototype.post = function(to, action, message, conk) {
  * @return {boolean} true if validation passes; false otherwise.
  * @protected
  */
-posters.Base.prototype.validate = function(data, conk) {
+Posters.Base.prototype.validate = function(data, conk) {
   var result = true;
   var iResult = true;
   var isRequired = false;
@@ -189,7 +189,7 @@ posters.Base.prototype.validate = function(data, conk) {
  * @return {boolean} true if validation passed; false otherwise.
  * @public
  */
-posters.Base.prototype.validateValue = function(value, conk, field) {
+Posters.Base.prototype.validateValue = function(value, conk, field) {
   var rules = this.constraints[conk][field];
   var rule, args, func;
   var result = true, iResult = true;
@@ -224,7 +224,7 @@ posters.Base.prototype.validateValue = function(value, conk, field) {
  * @return {boolean} true if the value is an integer; false otherwise.
  * @protected
  */
-posters.Base.prototype.isInteger = function(value) {
+Posters.Base.prototype.isInteger = function(value) {
   return value == parseInt(value);
 };
 
@@ -237,7 +237,7 @@ posters.Base.prototype.isInteger = function(value) {
  *    false otherwise.
  * @protected
  */
-posters.Base.prototype.isGreaterThan = function(value, other) {
+Posters.Base.prototype.isGreaterThan = function(value, other) {
   return value > other;
 };
 
@@ -250,7 +250,7 @@ posters.Base.prototype.isGreaterThan = function(value, other) {
  *    other one; false otherwise.
  * @protected
  */
-posters.Base.prototype.isGreaterThanOrEqual = function(value, other) {
+Posters.Base.prototype.isGreaterThanOrEqual = function(value, other) {
   return value >= other;
 };
 
@@ -263,7 +263,7 @@ posters.Base.prototype.isGreaterThanOrEqual = function(value, other) {
  *    false otherwise.
  * @protected
  */
-posters.Base.prototype.isLessThan = function(value, other) {
+Posters.Base.prototype.isLessThan = function(value, other) {
   return value < other;
 };
 
@@ -276,7 +276,7 @@ posters.Base.prototype.isLessThan = function(value, other) {
  *    other one; false otherwise.
  * @protected
  */
-posters.Base.prototype.isLessThanOrEqual = function(value, other) {
+Posters.Base.prototype.isLessThanOrEqual = function(value, other) {
   return value <= other;
 };
 
@@ -288,7 +288,7 @@ posters.Base.prototype.isLessThanOrEqual = function(value, other) {
  * @return {boolean} true if the value is equal the other; false otherwise.
  * @protected
  */
-posters.Base.prototype.isEqual = function(value, other) {
+Posters.Base.prototype.isEqual = function(value, other) {
   return value === other;
 };
 
@@ -302,7 +302,7 @@ posters.Base.prototype.isEqual = function(value, other) {
  *    false otherwise.
  * @protected
  */
-posters.Base.prototype.isBetween = function(value, min, max) {
+Posters.Base.prototype.isBetween = function(value, min, max) {
   return value >= min && value <= max;
 };
 
@@ -313,7 +313,7 @@ posters.Base.prototype.isBetween = function(value, min, max) {
  * @return {boolean} true if the value is a string; false otherwise.
  * @protected
  */
-posters.Base.prototype.isString = function(value) {
+Posters.Base.prototype.isString = function(value) {
   return (typeof value == 'string' || value instanceof String);
 };
 
@@ -325,7 +325,7 @@ posters.Base.prototype.isString = function(value) {
  *    false otherwise.
  * @protected
  */
-posters.Base.prototype.isUpperCase = function(value) {
+Posters.Base.prototype.isUpperCase = function(value) {
   return value.toUpperCase() == value;
 };
 
@@ -337,7 +337,7 @@ posters.Base.prototype.isUpperCase = function(value) {
  *    false otherwise.
  * @protected
  */
-posters.Base.prototype.isLowerCase = function(value) {
+Posters.Base.prototype.isLowerCase = function(value) {
   return value.toLowerCase() == value;
 };
 
@@ -348,7 +348,7 @@ posters.Base.prototype.isLowerCase = function(value) {
  * @return {boolean} true if the value is not null; false otherwise.
  * @protected
  */
-posters.Base.prototype.isNotNull = function(value) {
+Posters.Base.prototype.isNotNull = function(value) {
   return value != null && value != undefined && value != '';
 };
 
@@ -360,7 +360,7 @@ posters.Base.prototype.isNotNull = function(value) {
  * @return {boolean} true if value has the given size; false otherwise.
  * @protected
  */
-posters.Base.prototype.hasSize = function(value, size) {
+Posters.Base.prototype.hasSize = function(value, size) {
   if (typeof value.length !== 'undefined') {
     return value.length <= size;
   }
@@ -376,7 +376,7 @@ posters.Base.prototype.hasSize = function(value, size) {
  * @return {boolean} true if value has the exact size; false otherwise.
  * @protected
  */
-posters.Base.prototype.hasSizeStrict = function(value, size) {
+Posters.Base.prototype.hasSizeStrict = function(value, size) {
   if (typeof value.length !== 'undefined') {
     return value.length == size;
   }
@@ -392,7 +392,7 @@ posters.Base.prototype.hasSizeStrict = function(value, size) {
  * @return {boolean} true if value has the minimum size; false otherwise.
  * @protected
  */
-posters.Base.prototype.hasMinimumSize = function(value, size) {
+Posters.Base.prototype.hasMinimumSize = function(value, size) {
   if (typeof value.length !== 'undefined') {
     return value.length >= size;
   }
@@ -406,7 +406,7 @@ posters.Base.prototype.hasMinimumSize = function(value, size) {
  * @return {boolean} true if value is an e-mail address; false otherwise.
  * @protected
  */
-posters.Base.prototype.isEmail = function(value) {
+Posters.Base.prototype.isEmail = function(value) {
   var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
   return pattern.test(value);
 };
@@ -419,7 +419,7 @@ posters.Base.prototype.isEmail = function(value) {
  * @return {boolean} true if value is a date; false otherwise.
  * @protected
  */
-posters.Base.prototype.isDate = function(value) {
+Posters.Base.prototype.isDate = function(value) {
   var pattern = new RegExp(/^(19|20)\d\d[- .\/](0[1-9]|1[012])[- .\/](0[1-9]|[12][0-9]|3[01])$/);
   return pattern.test(value);
 };
@@ -432,7 +432,7 @@ posters.Base.prototype.isDate = function(value) {
  * @return {boolean} true if value is a date; false otherwise.
  * @protected
  */
-posters.Base.prototype.isDateTime = function(value) {
+Posters.Base.prototype.isDateTime = function(value) {
   var pattern = new RegExp(/^(19|20)\d\d[- .\/](0[1-9]|1[012])[- .\/](0[1-9]|[12][0-9]|3[01])[T ]([01][0-9]|2[0-3]):([0-5][0-9])(:([0-5][0-9]))?$/);
   return pattern.test(value);
 };
@@ -445,7 +445,7 @@ posters.Base.prototype.isDateTime = function(value) {
  * @return {boolean} true if in the enum; false otherwise.
  * @protected
  */
-posters.Base.prototype.isEnum = function(value, options) {
+Posters.Base.prototype.isEnum = function(value, options) {
   options = options.split(',');
   for (var i = 0; i < options.length; i++) {
     if (value == options[i]) return true;
@@ -460,7 +460,7 @@ posters.Base.prototype.isEnum = function(value, options) {
  * @return {boolean} true if it is a currency; false otherwise.
  * @protected
  */
-posters.Base.prototype.isCurrency = function(value) {
+Posters.Base.prototype.isCurrency = function(value) {
   var pattern = /^\d+(?:\.\d{0,2})$/;
   return pattern.test(value);
 };
@@ -474,7 +474,7 @@ posters.Base.prototype.isCurrency = function(value) {
  * @return {void}
  * @protected
  */
-posters.Base.prototype.addError = function(field, error) {
+Posters.Base.prototype.addError = function(field, error) {
   if (!this.errors.hasOwnProperty(field)) {
     this.errors[field] = [];
   }

@@ -8,28 +8,28 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.ColumnChart} class.
+ * @fileoverview This file defines the {@code Widgets.ColumnChart} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/canvas.js');
-include('utils/nice-scale.js');
-include('utils/number.js');
+include('Widgets/Canvas.js');
+include('Utils/NiceScale.js');
+include('Utils/Number.js');
 
 /**
  * The column chart widget is to be used in reports that require column
  * x bar perspective.
  *
  * @param {Element} dom Root element for the column char widget.
- * @extends {widgets.Canvas}
+ * @extends {Widgets.Canvas}
  * @constructor
  */
-widgets.ColumnChart = function(dom) {
-  widgets.Canvas.call(this, dom, '2d');
+Widgets.ColumnChart = function(dom) {
+  Widgets.Canvas.call(this, dom, '2d');
   this.title = 'Hello World';
-  this.niceScale = new utils.NiceScale(5);
+  this.niceScale = new Utils.NiceScale(5);
 };
-inherit(widgets.ColumnChart, widgets.Canvas);
+inherit(Widgets.ColumnChart, Widgets.Canvas);
 
 /**
  * To be used to calculate a nice scale.
@@ -37,7 +37,7 @@ inherit(widgets.ColumnChart, widgets.Canvas);
  * @type {utils.NiceScale}
  * @protected
  */
-widgets.ColumnChart.prototype.niceScale;
+Widgets.ColumnChart.prototype.niceScale;
 
 /**
  * Nice minimum value.
@@ -45,7 +45,7 @@ widgets.ColumnChart.prototype.niceScale;
  * @type {double}
  * @protected
  */
-widgets.ColumnChart.prototype.niceMin;
+Widgets.ColumnChart.prototype.niceMin;
 
 /**
  * Nice maximum value.
@@ -53,7 +53,7 @@ widgets.ColumnChart.prototype.niceMin;
  * @type {double}
  * @protected
  */
-widgets.ColumnChart.prototype.niceMax;
+Widgets.ColumnChart.prototype.niceMax;
 
 /**
  * Nice iterator value.
@@ -61,7 +61,7 @@ widgets.ColumnChart.prototype.niceMax;
  * @type {double}
  * @protected
  */
-widgets.ColumnChart.prototype.niceIt;
+Widgets.ColumnChart.prototype.niceIt;
 
 
 /**
@@ -70,7 +70,7 @@ widgets.ColumnChart.prototype.niceIt;
  * @type {string}
  * @public
  */
-widgets.ColumnChart.prototype.title;
+Widgets.ColumnChart.prototype.title;
 
 /**
  * Draws the title.
@@ -78,7 +78,7 @@ widgets.ColumnChart.prototype.title;
  * @return {void}
  * @protected
  */
-widgets.ColumnChart.prototype.drawTitle = function() {
+Widgets.ColumnChart.prototype.drawTitle = function() {
   var ctx = this.context;
   ctx.font = 'bold 25px Calibri, Arial, Georgia, serif';
   ctx.textAlign = 'center';
@@ -92,7 +92,7 @@ widgets.ColumnChart.prototype.drawTitle = function() {
  * @return {void}
  * @protected
  */
-widgets.ColumnChart.prototype.resetScale = function() {
+Widgets.ColumnChart.prototype.resetScale = function() {
   this.niceScale.reset(0, 80000);
   this.niceMin = this.niceScale.minimum;
   this.niceMax = this.niceScale.maximum;
@@ -105,7 +105,7 @@ widgets.ColumnChart.prototype.resetScale = function() {
  * @return {void}
  * @protected
  */
-widgets.ColumnChart.prototype.drawScaleLines = function() {
+Widgets.ColumnChart.prototype.drawScaleLines = function() {
   var ctx = this.context;
   this.resetScale();
 
@@ -173,7 +173,7 @@ widgets.ColumnChart.prototype.drawScaleLines = function() {
  * @inheritDoc
  * @override
  */
-widgets.ColumnChart.prototype.draw = function() {
+Widgets.ColumnChart.prototype.draw = function() {
   var ctx = this.context;
   ctx.fillStyle = 'rgb(200, 0, 0)';
 

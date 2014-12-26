@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Radio} class.
+ * @fileoverview This file defines the {@code Widgets.Radio} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/checkbox.js');
+include('Widgets/checkbox.js');
 
 /**
  * The radio widget handles checked state(s).
@@ -21,14 +21,14 @@ include('widgets/checkbox.js');
  * @param {Element} dom Root element for the radio button.
  * @param {?boolean} checked Optional value for the {@code aria-checked}'s
  *    state: true = 'true'; otherwise = 'false'.
- * @extends {widgets.Checkbox}
+ * @extends {Widgets.Checkbox}
  * @constructor
  */
-widgets.Radio = function(dom, checked) {
-  widgets.Checkbox.call(this, dom, (checked == true));
+Widgets.Radio = function(dom, checked) {
+  Widgets.Checkbox.call(this, dom, (checked == true));
   this.listen('focus', this.onClick, this);
 };
-inherit(widgets.Radio, widgets.Checkbox);
+inherit(Widgets.Radio, Widgets.Checkbox);
 
 /**
  * Handler function in response of the click event. Every time a
@@ -38,7 +38,7 @@ inherit(widgets.Radio, widgets.Checkbox);
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Radio.prototype.onClick = function(e) {
+Widgets.Radio.prototype.onClick = function(e) {
   if (this.getChecked() !== true) {
     this.setChecked(true);
     this.dispatch('change', e);
@@ -49,7 +49,7 @@ widgets.Radio.prototype.onClick = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.Radio.prototype.flourish = function() {
+Widgets.Radio.prototype.flourish = function() {
   this.dom.setAttribute('role', 'radio');
   if (!this.dom.hasAttribute('tabindex')) {
     this.dom.setAttribute('tabindex', '-1');
@@ -60,7 +60,7 @@ widgets.Radio.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Radio.prototype.destroy = function() {
+Widgets.Radio.prototype.destroy = function() {
   this.unlisten('focus');
-  widgets.Checkbox.prototype.destroy.call(this);
+  Widgets.Checkbox.prototype.destroy.call(this);
 };

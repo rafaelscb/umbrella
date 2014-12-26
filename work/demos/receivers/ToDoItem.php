@@ -13,9 +13,9 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('db/sql-parser.php');
-include('db/base.php');
-include('db/todo-item.php');
+include('DB/SQLParser.php');
+include('DB/Base.php');
+include('DB/ToDoItem.php');
 
 function read($query, $order, $p, $rpp, $total) {
   static $dictionary = array(
@@ -24,7 +24,7 @@ function read($query, $order, $p, $rpp, $total) {
     'status' => array('todo_item.status')
   );
 
-  $dbItem = new db_TodoItem();
+  $dbItem = new db_ToDoItem();
   $rows = $dbItem->read($query, $order, $p, $rpp, $dictionary, $total);
 
   return array(
@@ -34,7 +34,7 @@ function read($query, $order, $p, $rpp, $total) {
 }
 
 function write($id, $desc, $status) {
-  $dbItem = new db_TodoItem();
+  $dbItem = new db_ToDoItem();
   $data = array(
     'id' => $id,
     'description' => $desc,
@@ -49,7 +49,7 @@ function write($id, $desc, $status) {
 }
 
 function remove($id) {
-  $dbItem = new db_TodoItem();
+  $dbItem = new db_ToDoItem();
   $result = $dbItem->remove($id);
 
   return array(

@@ -8,30 +8,30 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.MenuSeparator} class.
+ * @fileoverview This file defines the {@code Widgets.MenuSeparator} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The menuseparator widget is to be used with menu widget.
  * It should not handle events, and only separate the menuitems.
  *
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.MenuSeparator = function() {
+Widgets.MenuSeparator = function() {
   this.dom = document.createElement('div');
-  widgets.Base.call(this, this.dom);
+  Widgets.Base.call(this, this.dom);
 };
-inherit(widgets.MenuSeparator, widgets.Base);
+inherit(Widgets.MenuSeparator, Widgets.Base);
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.MenuSeparator.prototype.flourish = function() {
+Widgets.MenuSeparator.prototype.flourish = function() {
   this.dom.setAttribute('role', 'separator');
   this.dom.innerHTML = "";
 };

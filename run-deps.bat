@@ -2,12 +2,12 @@
 
 :: CALCULATING DEPENDENCY for %1 app.
 
-set deps=..\..\tools\umdeps.exe
-set app_dir=work\%1
+set deps=..\..\Tools\umdeps.exe
+set app_dir=Work\%1
 :: set res_dir=assets/
-set res_dir=global/
+set res_dir=Global/
 set base_dir_from_app_dir=..
-set final=global\deps.js
+set final=Global\deps.js
 
 if "%2" == "" (
   set lang=multi
@@ -25,10 +25,10 @@ if not exist work\%1\%res_dir% (
   goto :eof
 )
 
-if "%1" == "demos" (
-  set required_libs=widgets posters utils demos
+if "%1" == "Demos" (
+  set required_libs=Widgets Posters Utils Demos
 ) else (
-  set required_libs=widgets posters utils sayings %1
+  set required_libs=Widgets Posters Utils Sayings %1
 )
 
 pushd %app_dir%

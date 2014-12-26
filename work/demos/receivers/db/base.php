@@ -20,7 +20,7 @@ class db_Base {
   function __construct() { }
   function connect() {
     if (!self::$dbh) {
-      self::$dbh = new PDO('sqlite:'.BASE_PATH.'/db/db.sqlite');
+      self::$dbh = new PDO('sqlite:'.BASE_PATH.'/DB/DB.sqlite');
       self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
   }

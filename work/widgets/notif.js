@@ -8,25 +8,25 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Notif} class.
+ * @fileoverview This file defines the {@code Widgets.Notif} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/base.js');
 
 /**
  * The notif widget is to be used when we want to notify the user about
  * a given status of the application.
  *
  * @param {Element} dom Root element for the notif.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Notif = function(dom) {
-  widgets.Base.call(this, dom);
+Widgets.Notif = function(dom) {
+  Widgets.Base.call(this, dom);
   this.stack = new Object();
 };
-inherit(widgets.Notif, widgets.Base);
+inherit(Widgets.Notif, Widgets.Base);
 
 /**
  * Stack of message strings.
@@ -34,7 +34,7 @@ inherit(widgets.Notif, widgets.Base);
  * @type {object}
  * @protected
  */
-widgets.Notif.prototype.stack;
+Widgets.Notif.prototype.stack;
 
 /**
  * DOM for the message area.
@@ -42,7 +42,7 @@ widgets.Notif.prototype.stack;
  * @type {Element}
  * @protected
  */
-widgets.Notif.prototype.message;
+Widgets.Notif.prototype.message;
 
 /**
  * DOM for the close button.
@@ -50,7 +50,7 @@ widgets.Notif.prototype.message;
  * @type {Element}
  * @protected
  */
-widgets.Notif.prototype.closeButton;
+Widgets.Notif.prototype.closeButton;
 
 /**
  * Do it. Notify the user with a given message.
@@ -61,7 +61,7 @@ widgets.Notif.prototype.closeButton;
  * @return {void}
  * @public
  */
-widgets.Notif.prototype.show = function(msg, action, cls) {
+Widgets.Notif.prototype.show = function(msg, action, cls) {
   this.stack[action] = {
     'message': msg,
     'class': cls
@@ -78,7 +78,7 @@ widgets.Notif.prototype.show = function(msg, action, cls) {
  * @return {void}
  * @protected
  */
-widgets.Notif.prototype.onClose = function(action) {
+Widgets.Notif.prototype.onClose = function(action) {
   var isEmpty = true;
 
   if (typeof action == 'string' || action instanceof String) {
@@ -102,35 +102,35 @@ widgets.Notif.prototype.onClose = function(action) {
  * @inheritDoc
  * @override
  */
-widgets.Notif.prototype.listen = function(type, func, obj) {
+Widgets.Notif.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'close':
     this.addListener(type, func, obj);
     this.closeButton.addEventListener('click', this.listeners[type], false);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Notif.prototype.unlisten = function(type, func, obj) {
+Widgets.Notif.prototype.unlisten = function(type, func, obj) {
   switch (type) {
   case 'close':
     this.closeButton.removeEventListener('click', this.listeners[type], false);
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Notif.prototype.flourish = function() {
+Widgets.Notif.prototype.flourish = function() {
   this.dom.innerHTML = "\
 <div class='bubble'>\
   <div class='message'>Notification...</div>\
@@ -148,11 +148,11 @@ widgets.Notif.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Notif.prototype.destroy = function() {
+Widgets.Notif.prototype.destroy = function() {
   this.unlisten('close');
 
   this.message = null;
   this.closeButton = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

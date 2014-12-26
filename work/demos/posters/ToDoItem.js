@@ -12,18 +12,18 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('posters/base.js');
+include('Posters/Base.js');
 
 /**
  * This class contains post methods against the api/todo-item receiver.
  *
- * @extends {posters.Base}
+ * @extends {Posters.Base}
  * @constructor
  */
-demos.posters.TodoItem = function() {
-  posters.Base.call(this, 'api.php');
+Demos.Posters.ToDoItem = function() {
+  posters.Base.call(this, 'API.php');
 };
-inherit(demos.posters.TodoItem, posters.Base);
+inherit(Demos.Posters.ToDoItem, Posters.Base);
 
 /**
  * Reads load-item records from server.
@@ -31,7 +31,7 @@ inherit(demos.posters.TodoItem, posters.Base);
  * @return {void}
  * @public
  */
-demos.posters.TodoItem.prototype.read = function(query, order, p, rpp, total) {
+Demos.Posters.ToDoItem.prototype.read = function(query, order, p, rpp, total) {
   var message = [query, order, p, rpp, total];
   this.post('todo-item', 'read', message);
 };
@@ -42,7 +42,7 @@ demos.posters.TodoItem.prototype.read = function(query, order, p, rpp, total) {
  * @return {void}
  * @public
  */
-demos.posters.TodoItem.prototype.write = function(id, desc, st) {
+Demos.Posters.ToDoItem.prototype.write = function(id, desc, st) {
   var message = [id, desc, st];
   this.post('todo-item', 'write', message);
 }
@@ -53,7 +53,7 @@ demos.posters.TodoItem.prototype.write = function(id, desc, st) {
  * @return {void}
  * @public
  */
-demos.posters.TodoItem.prototype.remove = function(id) {
+Demos.Posters.ToDoItem.prototype.remove = function(id) {
   var message = [id];
   this.post('todo-item', 'remove', message);
 };

@@ -4,7 +4,7 @@
 
 set compiler=tools\umcomp.exe
 if "%1" == "" (
-  set app=demos.hello
+  set app=Demos.Hello
 ) else (
   set app=%1
 )
@@ -13,16 +13,15 @@ if "%2" == "" (
 ) else (
   set lang=%2
 )
-set main_path=work\%app:.=/%\main.js
+set main_path=work\%app:.=/%\Main.js
 if "%lang%" == "multi" (
-  set out_js=results\%app%.js
+  set out_js=Results\%app%.js
 ) else (
-  set out_js=results\%app%.%lang%.js
+  set out_js=Results\%app%.%lang%.js
 )
-set out_css=results\%app%.css
+set out_css=Results\%app%.css
 for /f "delims=." %%a in ("%app%") do (
-  :: set res_path=assets/%%a/
-  set res_path=global/%%a/
+  set res_path=Global/%%a/
   goto :break
 )
 :break

@@ -1,8 +1,8 @@
 # COMPILING $1 app.
 
 compiler=tools/umcomp
-app=${1:-demos.hello}
-main_path=work/${app//.//}/main.js
+app=${1:-Demos.Hello}
+main_path=Work/${app//.//}/Main.js
 lang=${2:-multi}
 if [ "$lang" == "multi" ]; then
   out_js=results/${app}.js
@@ -12,7 +12,7 @@ fi
 out_css=results/${app}.css
 
 #res_path=assets/`echo $app | cut -d'.' -f1`/
-res_path=global/`echo $app | cut -d'.' -f1`/
+res_path=Global/`echo $app | cut -d'.' -f1`/
 
 if [ ! -s "$main_path" ]; then
   echo "ERROR: Directory '$main_path' non-existent."

@@ -8,7 +8,7 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code utils.NiceScale} class.
+ * @fileoverview This file defines the {@code Utils.NiceScale} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
@@ -21,7 +21,7 @@
  * @param {double?} max The maximum value.
  * @constructor
  */
-utils.NiceScale = function(maxTicks, min, max) {
+Utils.NiceScale = function(maxTicks, min, max) {
   this.maxTicks = maxTicks || 10; this.maxTicks--;
   this.minimum = this.maximum = this.tickIt = 0;
 
@@ -36,7 +36,7 @@ utils.NiceScale = function(maxTicks, min, max) {
  * @type {double}
  * @protected
  */
-utils.NiceScale.prototype.maxTicks;
+Utils.NiceScale.prototype.maxTicks;
 
 /**
  * Contains the value that represents the space between
@@ -45,7 +45,7 @@ utils.NiceScale.prototype.maxTicks;
  * @type {double}
  * @protected
  */
-utils.NiceScale.prototype.tickIt;
+Utils.NiceScale.prototype.tickIt;
 
 /**
  * Contains the nice minimum value.
@@ -53,7 +53,7 @@ utils.NiceScale.prototype.tickIt;
  * @type {double}
  * @protected
  */
-utils.NiceScale.prototype.minimum;
+Utils.NiceScale.prototype.minimum;
 
 /**
  * Contains the nice maximum value.
@@ -61,7 +61,7 @@ utils.NiceScale.prototype.minimum;
  * @type {double}
  * @protected
  */
-utils.NiceScale.prototype.maximum;
+Utils.NiceScale.prototype.maximum;
 
 /**
  * Reset the values.
@@ -71,7 +71,7 @@ utils.NiceScale.prototype.maximum;
  * @return {void} Nothing.
  * @public
  */
-utils.NiceScale.prototype.reset = function(min, max) {
+Utils.NiceScale.prototype.reset = function(min, max) {
   this.tickIt = this.niceNum(
       this.niceNum(max - min, false) / (this.maxTicks), true);
   this.mininum = Math.floor(min / this.tickIt) * this.tickIt;
@@ -87,7 +87,7 @@ utils.NiceScale.prototype.reset = function(min, max) {
  * @return {double} A nice number to be used for the data range.
  * @protected
  */
-utils.NiceScale.prototype.niceNum = function(range, round) {
+Utils.NiceScale.prototype.niceNum = function(range, round) {
   var exponent; /** exponent of range */
   var fraction; /** fractional part of range */
   var niceFraction; /** nice, rounded fraction */

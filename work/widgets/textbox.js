@@ -8,24 +8,24 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Textbox} class.
+ * @fileoverview This file defines the {@code Widgets.Textbox} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The textbox widget handles text input related states.
  *
  * @param {Element} dom Root element for the textbox.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Textbox = function(dom) {
+Widgets.Textbox = function(dom) {
   widgets.Base.call(this, dom);
   this.setMultiline(this.dom.tagName == 'TEXTAREA');
 };
-inherit(widgets.Textbox, widgets.Base);
+inherit(Widgets.Textbox, Widgets.Base);
 
 /**
  * Gets the {@code aria-multiline} attribute.
@@ -33,7 +33,7 @@ inherit(widgets.Textbox, widgets.Base);
  * @return {boolean} true = is multiline; false = is simple.
  * @public
  */
-widgets.Textbox.prototype.getMultiline = function() {
+Widgets.Textbox.prototype.getMultiline = function() {
   return this.dom.getAttribute('aria-multiline') == 'true';  
 };
 
@@ -43,7 +43,7 @@ widgets.Textbox.prototype.getMultiline = function() {
  * @param {boolean} multiline true = is multiline; false = is simple.
  * @public
  */
-widgets.Textbox.prototype.setMultiline = function(multiline) {
+Widgets.Textbox.prototype.setMultiline = function(multiline) {
   this.dom.setAttribute('aria-multiline', !!multiline);
 };
 
@@ -53,7 +53,7 @@ widgets.Textbox.prototype.setMultiline = function(multiline) {
  * @return {boolean} true = is readonly; false = is editable.
  * @public
  */
-widgets.Textbox.prototype.getReadonly = function() {
+Widgets.Textbox.prototype.getReadonly = function() {
   return !!this.dom.getAttribute('aria-readonly');
 };
 
@@ -63,7 +63,7 @@ widgets.Textbox.prototype.getReadonly = function() {
  * @param {boolean} val true = is readonly; false = is editable.
  * @public
  */
-widgets.Textbox.prototype.setReadonly = function(val) {
+Widgets.Textbox.prototype.setReadonly = function(val) {
   val = !!val;
   this.dom.setAttribute('aria-readonly', val);
   if (val) {
@@ -77,8 +77,8 @@ widgets.Textbox.prototype.setReadonly = function(val) {
  * @inheritDoc
  * @override
  */
-widgets.Textbox.prototype.setDisabled = function(val) {
-  widgets.Base.prototype.setDisabled.call(this, val);
+Widgets.Textbox.prototype.setDisabled = function(val) {
+  Widgets.Base.prototype.setDisabled.call(this, val);
   if (!!val) {
     this.dom.setAttribute('disabled', 'true');
   } else {
@@ -92,7 +92,7 @@ widgets.Textbox.prototype.setDisabled = function(val) {
  * @return {string} The value of the textbox.
  * @public
  */
-widgets.Textbox.prototype.getValue = function() {
+Widgets.Textbox.prototype.getValue = function() {
   return this.dom.value;
 };
 
@@ -103,7 +103,7 @@ widgets.Textbox.prototype.getValue = function() {
  * @return {void} Nothing.
  * @public
  */
-widgets.Textbox.prototype.setValue = function(value) {
+Widgets.Textbox.prototype.setValue = function(value) {
   this.dom.value = value;
 };
 
@@ -111,7 +111,7 @@ widgets.Textbox.prototype.setValue = function(value) {
  * @inheritDoc
  * @override
  */
-widgets.Textbox.prototype.flourish = function() {
+Widgets.Textbox.prototype.flourish = function() {
   this.dom.setAttribute('role', 'textbox');
   if (!this.dom.hasAttribute('tabindex')) {
     this.dom.setAttribute('tabindex', '0');

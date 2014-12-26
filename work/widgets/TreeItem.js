@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.TreeItem} class.
+ * @fileoverview This file defines the {@code Widgets.TreeItem} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The treeitem widget is to be used as part of the tree widget.
@@ -22,13 +22,13 @@ include('widgets/base.js');
  * @param {string} caption Text for the treeitem.
  * @param {boolean} hasSub If true, the treeitem has a sub-tree, otherwise
  *    it is a simple treeitem.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.TreeItem = function(caption, hasSub) {
+Widgets.TreeItem = function(caption, hasSub) {
   this.dom = document.createElement('div');
   this.hasSub = hasSub;
-  widgets.Base.call(this, this.dom);
+  Widgets.Base.call(this, this.dom);
   this.setCaption(caption);
   this.listen('mouseenter', this.onMouseEnter, this);
   this.listen('mouseleave', this.onMouseLeave, this);
@@ -38,7 +38,7 @@ widgets.TreeItem = function(caption, hasSub) {
     this.listen('arrowmouseleave', this.onArrowMouseLeave, this);
   }
 };
-inherit(widgets.TreeItem, widgets.Base);
+inherit(Widgets.TreeItem, Widgets.Base);
 
 /**
  * Flag indicating if it has a sub-tree.
@@ -46,7 +46,7 @@ inherit(widgets.TreeItem, widgets.Base);
  * @type {boolean}
  * @protected
  */
-widgets.TreeItem.prototype.hasSub;
+Widgets.TreeItem.prototype.hasSub;
 
 /**
  * DOM region for the treeitem's inner area.
@@ -54,7 +54,7 @@ widgets.TreeItem.prototype.hasSub;
  * @type {Element}
  * @protected
  */
-widgets.TreeItem.prototype.inner;
+Widgets.TreeItem.prototype.inner;
 
 /**
  * DOM region for the treeitem's content area.
@@ -62,7 +62,7 @@ widgets.TreeItem.prototype.inner;
  * @type {Element}
  * @protected
  */
-widgets.TreeItem.prototype.content;
+Widgets.TreeItem.prototype.content;
 
 /**
  * DOM region for the treeitem's arrow area.
@@ -70,7 +70,7 @@ widgets.TreeItem.prototype.content;
  * @type {Element}
  * @protected
  */
-widgets.TreeItem.prototype.arrow;
+Widgets.TreeItem.prototype.arrow;
 
 /**
  * DOM region for the treeitem's body area.
@@ -78,7 +78,7 @@ widgets.TreeItem.prototype.arrow;
  * @type {Element}
  * @protected
  */
-widgets.TreeItem.prototype.body;
+Widgets.TreeItem.prototype.body;
 
 /**
  * Sub-group region.
@@ -86,7 +86,7 @@ widgets.TreeItem.prototype.body;
  * @type {widgets.Tree}
  * @protected
  */
-widgets.TreeItem.prototype.sub;
+Widgets.TreeItem.prototype.sub;
 
 /**
  * Gets the aria-expanded value.
@@ -94,7 +94,7 @@ widgets.TreeItem.prototype.sub;
  * @return {boolean}
  * @public
  */
-widgets.TreeItem.prototype.getExpanded = function() {
+Widgets.TreeItem.prototype.getExpanded = function() {
   return this.dom.getAttribute('aria-expanded') == 'true';
 };
 
@@ -104,7 +104,7 @@ widgets.TreeItem.prototype.getExpanded = function() {
  * @param {boolean}
  * @public
  */
-widgets.TreeItem.prototype.setExpanded = function(val) {
+Widgets.TreeItem.prototype.setExpanded = function(val) {
   this.dom.setAttribute('aria-expanded', !!val);
 };
 
@@ -114,7 +114,7 @@ widgets.TreeItem.prototype.setExpanded = function(val) {
  * @return {string}
  * @public
  */
-widgets.TreeItem.prototype.getCaption = function() {
+Widgets.TreeItem.prototype.getCaption = function() {
   return this.body.children[0].innerHTML;
 };
 
@@ -124,7 +124,7 @@ widgets.TreeItem.prototype.getCaption = function() {
  * @param {string} val Caption text.
  * @public
  */
-widgets.TreeItem.prototype.setCaption = function(val) {
+Widgets.TreeItem.prototype.setCaption = function(val) {
   this.body.children[0].innerHTML = val;
 };
 
@@ -134,7 +134,7 @@ widgets.TreeItem.prototype.setCaption = function(val) {
  * @return {void}
  * @public
  */
-widgets.TreeItem.prototype.expand = function() {
+Widgets.TreeItem.prototype.expand = function() {
   this.setExpanded(true);
   this.sub.setHidden(false);
 };
@@ -145,7 +145,7 @@ widgets.TreeItem.prototype.expand = function() {
  * @return {void}
  * @public
  */
-widgets.TreeItem.prototype.collapse = function() {
+Widgets.TreeItem.prototype.collapse = function() {
   this.setExpanded(false);
   this.sub.setHidden(true);
 };
@@ -156,7 +156,7 @@ widgets.TreeItem.prototype.collapse = function() {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.TreeItem.prototype.onMouseEnter = function(e) {
+Widgets.TreeItem.prototype.onMouseEnter = function(e) {
   this.inner.className = 'inner hovered';
 };
 
@@ -166,7 +166,7 @@ widgets.TreeItem.prototype.onMouseEnter = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.TreeItem.prototype.onMouseLeave = function(e) {
+Widgets.TreeItem.prototype.onMouseLeave = function(e) {
   this.inner.className = 'inner';
 };
 
@@ -176,7 +176,7 @@ widgets.TreeItem.prototype.onMouseLeave = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.TreeItem.prototype.onClick = function(e) {
+Widgets.TreeItem.prototype.onClick = function(e) {
   if (e.target == this.arrow) {
     if (this.getExpanded()) {
       this.collapse();
@@ -194,7 +194,7 @@ widgets.TreeItem.prototype.onClick = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.TreeItem.prototype.onArrowMouseEnter = function(e) {
+Widgets.TreeItem.prototype.onArrowMouseEnter = function(e) {
   this.arrow.className = 'arrow hovered';
 };
 
@@ -204,7 +204,7 @@ widgets.TreeItem.prototype.onArrowMouseEnter = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.TreeItem.prototype.onArrowMouseLeave = function(e) {
+Widgets.TreeItem.prototype.onArrowMouseLeave = function(e) {
   this.arrow.className = 'arrow';
 };
 
@@ -212,7 +212,7 @@ widgets.TreeItem.prototype.onArrowMouseLeave = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.TreeItem.prototype.listen = function(type, func, obj) {
+Widgets.TreeItem.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'action':
     this.addListener(type, func, obj);
@@ -245,14 +245,14 @@ widgets.TreeItem.prototype.listen = function(type, func, obj) {
     this.arrow.addEventListener('mouseleave', this.listeners[type], false);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.TreeItem.prototype.unlisten = function(type) {
+Widgets.TreeItem.prototype.unlisten = function(type) {
   switch (type) {
   case 'action':
     this.removeListener(type);
@@ -287,14 +287,14 @@ widgets.TreeItem.prototype.unlisten = function(type) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.TreeItem.prototype.flourish = function() {
+Widgets.TreeItem.prototype.flourish = function() {
   this.dom.setAttribute('role', 'treeitem');
   if (this.hasSub) {
     this.dom.innerHTML = "\
@@ -331,7 +331,7 @@ widgets.TreeItem.prototype.flourish = function() {
  * @return {void}
  * @protected
  */
-widgets.TreeItem.prototype.flourishSub = function() {
+Widgets.TreeItem.prototype.flourishSub = function() {
   var subElem = document.createElement('div');
   subElem.setAttribute('role', 'group');
   this.sub = new widgets.Tree(subElem);
@@ -345,7 +345,7 @@ widgets.TreeItem.prototype.flourishSub = function() {
  * @return {void} Nothing.
  * @public
  */
-widgets.TreeItem.prototype.selectItem = function(key, value) {
+Widgets.TreeItem.prototype.selectItem = function(key, value) {
   if (this.hasSub) {
     this.sub.selectItem(key, value);
   }
@@ -359,7 +359,7 @@ widgets.TreeItem.prototype.selectItem = function(key, value) {
  * @return {void} Nothing.
  * @public
  */
-widgets.TreeItem.prototype.unselectItem = function(key, value) {
+Widgets.TreeItem.prototype.unselectItem = function(key, value) {
   if (this.hasSub) {
     this.sub.unselectItem(key, value);
   }
@@ -369,7 +369,7 @@ widgets.TreeItem.prototype.unselectItem = function(key, value) {
  * @inheritDoc
  * @override
  */
-widgets.TreeItem.prototype.destroy = function() {
+Widgets.TreeItem.prototype.destroy = function() {
   this.unlisten('mouseenter');
   this.unlisten('mouseleave');
   this.unlisten('click');
@@ -386,5 +386,5 @@ widgets.TreeItem.prototype.destroy = function() {
   this.body = null;
   this.sub = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

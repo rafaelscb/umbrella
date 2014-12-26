@@ -12,7 +12,7 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The canvas widget is to be used when we want to draw something
@@ -29,7 +29,7 @@ widgets.Canvas = function(dom, dim) {
   this.width = this.dom.width;
   this.height = this.dom.height;
 };
-inherit(widgets.Canvas, widgets.Base);
+inherit(Widgets.Canvas, Widgets.Base);
 
 /**
  * Context object.
@@ -37,7 +37,7 @@ inherit(widgets.Canvas, widgets.Base);
  * @type {object}
  * @public
  */
-widgets.Canvas.prototype.context;
+Widgets.Canvas.prototype.context;
 
 /**
  * Width in pixels.
@@ -45,7 +45,7 @@ widgets.Canvas.prototype.context;
  * @type {number}
  * @protected
  */
-widgets.Canvas.prototype.width;
+Widgets.Canvas.prototype.width;
 
 /**
  * Height in pixels.
@@ -53,7 +53,7 @@ widgets.Canvas.prototype.width;
  * @type {number}
  * @protected
  */
-widgets.Canvas.prototype.height;
+Widgets.Canvas.prototype.height;
 
 /**
  * Draw anything on the canvas using the
@@ -62,4 +62,4 @@ widgets.Canvas.prototype.height;
  * @return {void} Nothing.
  * @public
  */
-widgets.Canvas.prototype.draw = function() { };
+Widgets.Canvas.prototype.draw = function() { };

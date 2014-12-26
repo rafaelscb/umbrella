@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Loader} class.
+ * @fileoverview This file defines the {@code Widgets.Loader} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The loader widget handles load and hashchange events.
@@ -22,10 +22,10 @@ include('widgets/base.js');
  *
  * @param {Element=} dom Root element for the widget. If no element is passed,
  *    it assumes the root element is {@code document.body}.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Loader = function(dom) {
+Widgets.Loader = function(dom) {
   this.listeners = new Object();
   if (dom) {
     this.dom = dom;
@@ -34,13 +34,13 @@ widgets.Loader = function(dom) {
     this.listen('load', this.onLoad, this);
   }
 };
-inherit(widgets.Loader, widgets.Base);
+inherit(Widgets.Loader, Widgets.Base);
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Loader.prototype.listen = function(type, func, obj) {
+Widgets.Loader.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'load':
     this.addListener(type, func, obj);
@@ -52,14 +52,14 @@ widgets.Loader.prototype.listen = function(type, func, obj) {
     window.addEventListener('resize', this.listeners[type], false);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Loader.prototype.unlisten = function(type) {
+Widgets.Loader.prototype.unlisten = function(type) {
   switch (type) {
   case 'load':
     window.removeEventListener('load', this.listeners[type], false);
@@ -71,7 +71,7 @@ widgets.Loader.prototype.unlisten = function(type) {
     this.removeListener(type, func, obj);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
@@ -81,7 +81,7 @@ widgets.Loader.prototype.unlisten = function(type) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Loader.prototype.onLoad = function(e) {
+Widgets.Loader.prototype.onLoad = function(e) {
   if (e.type == 'load') {
     this.dom = document.body;
     this.flourish();
@@ -117,13 +117,13 @@ widgets.Loader.prototype.onLoad = function(e) {
  * @param {Array} args Remaining arguments.
  * @return {void}
  */
-widgets.Loader.prototype.loadView = function(viewName, args) {};
+Widgets.Loader.prototype.loadView = function(viewName, args) {};
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Loader.prototype.destroy = function() {
+Widgets.Loader.prototype.destroy = function() {
   this.unlisten('load');
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

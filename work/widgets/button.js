@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Button} class.
+ * @fileoverview This file defines the {@code Widgets.Button} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The button widget handles click states.
@@ -24,12 +24,12 @@ include('widgets/base.js');
  * @extends {widgets.Base}
  * @constructor
  */
-widgets.Button = function(dom, content) {
-  widgets.Base.call(this, dom);
+Widgets.Button = function(dom, content) {
+  Widgets.Base.call(this, dom);
   this.setContent(content);
   this.listen('keyup', this.onKeyUp, this);
 };
-inherit(widgets.Button, widgets.Base);
+inherit(Widgets.Button, Widgets.Base);
 
 /**
  * Gets the Content for the button.
@@ -37,7 +37,7 @@ inherit(widgets.Button, widgets.Base);
  * @return {string} The inner content.
  * @public
  */
-widgets.Button.prototype.getContent = function() {
+Widgets.Button.prototype.getContent = function() {
   return this.dom.innerHTML;
 };
 
@@ -48,7 +48,7 @@ widgets.Button.prototype.getContent = function() {
  * @return {void}
  * @public
  */
-widgets.Button.prototype.setContent = function(content) {
+Widgets.Button.prototype.setContent = function(content) {
   this.dom.innerHTML = content;
 };
 
@@ -59,7 +59,7 @@ widgets.Button.prototype.setContent = function(content) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Button.prototype.onKeyUp = function(e) {
+Widgets.Button.prototype.onKeyUp = function(e) {
   if (e.keyCode === 32) {
     this.dispatch('click', e);
   }
@@ -69,7 +69,7 @@ widgets.Button.prototype.onKeyUp = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.Button.prototype.flourish = function() {
+Widgets.Button.prototype.flourish = function() {
   this.dom.setAttribute('role', 'button');
   if (!this.dom.hasAttribute('tabindex')) {
     this.dom.setAttribute('tabindex', '0');
@@ -80,7 +80,7 @@ widgets.Button.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Button.prototype.destroy = function() {
+Widgets.Button.prototype.destroy = function() {
   this.unlisten('keyup');
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

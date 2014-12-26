@@ -8,43 +8,42 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code demos.todo.Crud} class.
+ * @fileoverview This file defines the {@code Demos.Todo.Crud} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
-include('widgets/textbox.js');
-include('widgets/toggle-button.js');
-include('widgets/button.js');
-include('demos/posters/todo-item.js');
+include('Widgets/Base.js');
+include('Widgets/Textbox.js');
+include('Widgets/ToggleButton.js');
+include('Widgets/Button.js');
+include('Demos/Posters/TodoItem.js');
 
 /**
  * This class is a widget that handles todo_item records. It creates, reads, updates,
  * deletes todo_item's.
  *
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-demos.todo.Crud = function(dom) {
-  widgets.Base.call(this, dom);
-};
-inherit(demos.todo.Crud, widgets.Base);
+Demos.ToDo.Crud = function(dom) {
+  Widgets.Base.call(this, dom);
+}; inherit(Demos.ToDo.Crud, Widgets.Base);
 
 /**
  * Poster for the todo-item crud operations.
  *
- * @type {demos.posters.TodoItem}
+ * @type {Demos.Posters.ToDoItem}
  * @protected
  */
-demos.todo.Crud.prototype.poster;
+Demos.Todo.Crud.prototype.poster;
 
 /**
  * New input widget.
  *
- * @type {widgets.Textbox}
+ * @type {Widgets.Textbox}
  * @protected
  */
-demos.todo.Crud.prototype.newInput;
+Demos.Todo.Crud.prototype.newInput;
 
 /**
  * New button widget.

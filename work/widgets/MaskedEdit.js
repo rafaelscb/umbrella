@@ -8,32 +8,32 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.MaskedEdit} class.
+ * @fileoverview This file defines the {@code Widgets.MaskedEdit} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/textbox.js');
+include('Widgets/Textbox.js');
 
 /**
  * The masked-edit widget handles text input that should obbey a specific format.
  *
  * @param {Element} dom Root element for the masked-edit.
  * @param {string} mask The format of the mask.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.MaskedEdit = function(dom, mask) {
+Widgets.MaskedEdit = function(dom, mask) {
   this.mask = mask;
   this.rawVal = "";
 
-  widgets.Textbox.call(this, dom);
+  Widgets.Textbox.call(this, dom);
 
   this.listen('focus', this.onFocus, this);
   this.listen('keydown', this.onKeyDown, this);
   this.listen('keypress', this.onKeyPress, this);
   this.listen('mousedown', this.onMouseDown, this);
 };
-inherit(widgets.MaskedEdit, widgets.Textbox);
+inherit(Widgets.MaskedEdit, Widgets.Textbox);
 
 /**
  * Mask format.
@@ -41,7 +41,7 @@ inherit(widgets.MaskedEdit, widgets.Textbox);
  * @type {string}
  * @protected
  */
-widgets.MaskedEdit.prototype.mask;
+Widgets.MaskedEdit.prototype.mask;
 
 /**
  * Current cursor position.
@@ -49,7 +49,7 @@ widgets.MaskedEdit.prototype.mask;
  * @type {number}
  * @protected
  */
-widgets.MaskedEdit.prototype.pos;
+Widgets.MaskedEdit.prototype.pos;
 
 /**
  * Raw value (with no format) from input.
@@ -57,7 +57,7 @@ widgets.MaskedEdit.prototype.pos;
  * @type {string}
  * @protected
  */
-widgets.MaskedEdit.prototype.rawVal;
+Widgets.MaskedEdit.prototype.rawVal;
 
 /**
  * (Re-)sets the cursor to a specific position.
@@ -66,7 +66,7 @@ widgets.MaskedEdit.prototype.rawVal;
  * @return {void}
  * @protected
  */
-widgets.MaskedEdit.prototype.resetCursor = function() {
+Widgets.MaskedEdit.prototype.resetCursor = function() {
   if (this.dom.createTextRange) {
     var range = this.dom.createTextRange();
     range.move('character', this.pos);
@@ -81,7 +81,7 @@ widgets.MaskedEdit.prototype.resetCursor = function() {
  *
  * @protected
  */
-widgets.MaskedEdit.prototype.resetMask = function() {
+Widgets.MaskedEdit.prototype.resetMask = function() {
   var mask = ''; this.pos = undefined;
   for (var j = 0, i = 0; i < this.mask.length; i++) {
     switch (this.mask[i]) {
@@ -114,7 +114,7 @@ widgets.MaskedEdit.prototype.resetMask = function() {
  * @return {void}
  * @protected
  */
-widgets.MaskedEdit.prototype.addChar = function(chr) {
+Widgets.MaskedEdit.prototype.addChar = function(chr) {
   this.rawVal += chr;
   this.resetMask();
   this.resetCursor();
@@ -126,7 +126,7 @@ widgets.MaskedEdit.prototype.addChar = function(chr) {
  * @return {void}
  * @protected
  */
-widgets.MaskedEdit.prototype.backSpace = function() {
+Widgets.MaskedEdit.prototype.backSpace = function() {
   if (this.rawVal.length > 0) {
     this.rawVal = this.rawVal.slice(0, -1);
     this.resetMask();
@@ -140,7 +140,7 @@ widgets.MaskedEdit.prototype.backSpace = function() {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.MaskedEdit.prototype.onFocus = function(e) {
+Widgets.MaskedEdit.prototype.onFocus = function(e) {
   this.resetCursor();
   e.preventDefault();
   e.stopPropagation();
@@ -154,7 +154,7 @@ widgets.MaskedEdit.prototype.onFocus = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.MaskedEdit.prototype.onKeyDown = function(e) {
+Widgets.MaskedEdit.prototype.onKeyDown = function(e) {
   if (e.altKey) return true;
   var nav = false;
 
@@ -187,7 +187,7 @@ widgets.MaskedEdit.prototype.onKeyDown = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.MaskedEdit.prototype.onKeyPress = function(e) {
+Widgets.MaskedEdit.prototype.onKeyPress = function(e) {
   var token = this.mask[this.pos];
   var chr = undefined;
 
@@ -232,7 +232,7 @@ widgets.MaskedEdit.prototype.onKeyPress = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.MaskedEdit.prototype.onMouseDown = function(e) {
+Widgets.MaskedEdit.prototype.onMouseDown = function(e) {
   this.dom.focus();
   e.preventDefault();
   e.stopPropagation();
@@ -243,8 +243,8 @@ widgets.MaskedEdit.prototype.onMouseDown = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.MaskedEdit.prototype.flourish = function() {
-  widgets.Textbox.prototype.flourish.call(this);
+Widgets.MaskedEdit.prototype.flourish = function() {
+  Widgets.Textbox.prototype.flourish.call(this);
   this.resetMask();
 };
 
@@ -252,7 +252,7 @@ widgets.MaskedEdit.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.MaskedEdit.prototype.destroy = function() {
+Widgets.MaskedEdit.prototype.destroy = function() {
   this.unlisten('focus');
   this.unlisten('keydown');
   this.unlisten('keypress');
@@ -262,5 +262,5 @@ widgets.MaskedEdit.prototype.destroy = function() {
   this.pos = null;
   this.rawVal = null;
 
-  widgets.Textbox.prototype.destroy.call(this);
+  Widgets.Textbox.prototype.destroy.call(this);
 };

@@ -7,15 +7,15 @@
 :: browser.
 
 if "%1" == "" (
-  set app=demos
+  set app=Demos
 ) else (
   set app=%1
 )
 set server=tools\umserver.exe
 set name=localhost
 set port=8080
-set document_root=work
-set cgi_interpreter=tools\php\php-cgi.exe
+set document_root=Work
+set cgi_interpreter=Tools\php\php-cgi.exe
 
 start /B %server% %document_root% %port% %cgi_interpreter%
 start http://%name%:%port%/%app%

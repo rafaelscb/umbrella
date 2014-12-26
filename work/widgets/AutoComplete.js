@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.AutoComplete} class.
+ * @fileoverview This file defines the {@code Widgets.AutoComplete} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/textbox.js');
+include('Widgets/Textbox.js');
 
 /**
  * The autocomplete widget handles selections from database.
@@ -23,11 +23,11 @@ include('widgets/textbox.js');
  *    the input is changed.
  * @param {boolean} clientFilter Who filters? The server of the client?
  * @param {posters.Base} poster The poster associated with the autocomplete.
- * @extends {widgets.Textbox}
+ * @extends {Widgets.Textbox}
  * @constructor
  */
-widgets.AutoComplete = function(dom, delay, clientFilter, poster) {
-  widgets.Textbox.call(this, dom);
+Widgets.AutoComplete = function(dom, delay, clientFilter, poster) {
+  Widgets.Textbox.call(this, dom);
 
   this.delay = delay;
   this.clientFilter = !!clientFilter;
@@ -45,7 +45,7 @@ widgets.AutoComplete = function(dom, delay, clientFilter, poster) {
   this.listen('mouseenterrow', this.onMouseEnterRow, this);
   this.listen('mousedownrow', this.onMouseDownRow, this);
 };
-inherit(widgets.AutoComplete, widgets.Textbox);
+inherit(Widgets.AutoComplete, Widgets.Textbox);
 
 /**
  * Stores the timeout ID so we can clear if the input event did not expire.
@@ -53,7 +53,7 @@ inherit(widgets.AutoComplete, widgets.Textbox);
  * @type {number}
  * @protected
  */
-widgets.AutoComplete.prototype.timeoutId;
+Widgets.AutoComplete.prototype.timeoutId;
 
 /**
  * Contains how many milliseconds to wait before we call the search function.
@@ -61,7 +61,7 @@ widgets.AutoComplete.prototype.timeoutId;
  * @type {number}
  * @protected
  */
-widgets.AutoComplete.prototype.delay;
+Widgets.AutoComplete.prototype.delay;
 
 /**
  * The filtering occur in the client side or in the server side?
@@ -69,7 +69,7 @@ widgets.AutoComplete.prototype.delay;
  * @type {boolean}
  * @protected
  */
-widgets.AutoComplete.prototype.clientFilter;
+Widgets.AutoComplete.prototype.clientFilter;
 
 /**
  * The poster associated with the autocomplete.
@@ -77,7 +77,7 @@ widgets.AutoComplete.prototype.clientFilter;
  * @type {posters.Base}
  * @protected
  */
-widgets.AutoComplete.prototype.poster;
+Widgets.AutoComplete.prototype.poster;
 
 /**
  * Data containing an array of records.
@@ -85,7 +85,7 @@ widgets.AutoComplete.prototype.poster;
  * @type {array}
  * @protected
  */
-widgets.AutoComplete.prototype.data;
+Widgets.AutoComplete.prototype.data;
 
 /**
  * Flag indicating if the mouse is in the list.
@@ -93,7 +93,7 @@ widgets.AutoComplete.prototype.data;
  * @type {Element}
  * @protected
  */
-widgets.AutoComplete.prototype.mouseInList;
+Widgets.AutoComplete.prototype.mouseInList;
 
 /**
  * The list element.
@@ -101,7 +101,7 @@ widgets.AutoComplete.prototype.mouseInList;
  * @type {Element}
  * @protected
  */
-widgets.AutoComplete.prototype.list;
+Widgets.AutoComplete.prototype.list;
 
 /**
  * Contains the index to access the current row.
@@ -109,7 +109,7 @@ widgets.AutoComplete.prototype.list;
  * @type {number}
  * @protected
  */
-widgets.AutoComplete.prototype.index;
+Widgets.AutoComplete.prototype.index;
 
 /**
  * The selected row.
@@ -117,7 +117,7 @@ widgets.AutoComplete.prototype.index;
  * @type {Element}
  * @protected
  */
-widgets.AutoComplete.prototype.chosen;
+Widgets.AutoComplete.prototype.chosen;
 
 /**
  * Occurs when a response comes from the server.
@@ -129,7 +129,7 @@ widgets.AutoComplete.prototype.chosen;
  * @return {void}
  * @protected
  */
-widgets.AutoComplete.prototype.onServerResponse =
+Widgets.AutoComplete.prototype.onServerResponse =
 function(code, from, action, message) {
   if (code == 'OK') {
     this.onRead(message);
@@ -145,7 +145,7 @@ function(code, from, action, message) {
  * @return {void}
  * @protected
  */
-widgets.AutoComplete.prototype.onRead = function(message) {
+Widgets.AutoComplete.prototype.onRead = function(message) {
   this.clear();
   if (this.clientFilter) {
     this.data = message['rows'];
@@ -168,7 +168,7 @@ widgets.AutoComplete.prototype.onRead = function(message) {
  * @return {void}
  * @protected
  */
-widgets.AutoComplete.prototype.onError = function(code, message) { };
+Widgets.AutoComplete.prototype.onError = function(code, message) { };
 
 /**
  * Reads data from the server.
@@ -179,7 +179,7 @@ widgets.AutoComplete.prototype.onError = function(code, message) { };
  * @return {void}
  * @public
  */
-widgets.AutoComplete.prototype.read = function(pQuery, ord) {
+Widgets.AutoComplete.prototype.read = function(pQuery, ord) {
   if (!ord) ord = {'desc': 'asc'};
   var query = '';
   if (pQuery) query += pQuery + ';';
@@ -194,7 +194,7 @@ widgets.AutoComplete.prototype.read = function(pQuery, ord) {
  * @return {void}
  * @protected
  */
-widgets.AutoComplete.prototype.filter = function() {
+Widgets.AutoComplete.prototype.filter = function() {
   var result = 0;
   for (var i = 0; i < this.data.length; i++) {
     if (result = this.match(this.data[i])) {
@@ -217,7 +217,7 @@ widgets.AutoComplete.prototype.filter = function() {
  * @return {number} 1 if it matches; 2 if it matches exactly; 0 otherwise.
  * @protected
  */
-widgets.AutoComplete.prototype.match = function(record) {
+Widgets.AutoComplete.prototype.match = function(record) {
   var token = this.dom.value.toLowerCase(); var val;
   for (var field in record) {
     val = record[field].toLowerCase();
@@ -237,7 +237,7 @@ widgets.AutoComplete.prototype.match = function(record) {
  * @return {void}
  * @protected
  */
-widgets.AutoComplete.prototype.renderRecord = function(tr, record) {
+Widgets.AutoComplete.prototype.renderRecord = function(tr, record) {
   tr.setAttribute('data-value', record['value']);
   var td = tr.insertCell(-1);
   td.innerHTML = record['desc'];
@@ -251,7 +251,7 @@ widgets.AutoComplete.prototype.renderRecord = function(tr, record) {
  * @return {void}
  * @protected
  */
-widgets.AutoComplete.prototype.addRow = function(record, index) {
+Widgets.AutoComplete.prototype.addRow = function(record, index) {
   index = (index != undefined) ? index : -1;
 
   var tr = this.list.firstChild.insertRow(index);
@@ -270,7 +270,7 @@ widgets.AutoComplete.prototype.addRow = function(record, index) {
  * @return {void}
  * @protected
  */
-widgets.AutoComplete.prototype.clear = function() {
+Widgets.AutoComplete.prototype.clear = function() {
   this.close();
 
   var table = this.list.firstChild;
@@ -290,18 +290,18 @@ widgets.AutoComplete.prototype.clear = function() {
  * @return {void|void|boolean}
  * @protected
  */
-widgets.AutoComplete.prototype.close = function() {
+Widgets.AutoComplete.prototype.close = function() {
   this.list.setAttribute('aria-hidden', true);
   this.dispatch('close');
 };
-widgets.AutoComplete.prototype.open = function() {
+Widgets.AutoComplete.prototype.open = function() {
   this.list.style.top =
     (this.dom.offsetTop + this.dom.offsetHeight - 1) + 'px';
   this.list.style.left = this.dom.offsetLeft + 'px';
   this.list.style.width = this.dom.clientWidth + 'px';
   this.list.setAttribute('aria-hidden', false);
 };
-widgets.AutoComplete.prototype.isOpened = function() {
+Widgets.AutoComplete.prototype.isOpened = function() {
   return this.list.getAttribute('aria-hidden') == 'false';
 };
 
@@ -311,7 +311,7 @@ widgets.AutoComplete.prototype.isOpened = function() {
  * @return {void}
  * @protected
  */
-widgets.AutoComplete.prototype.commit = function() {
+Widgets.AutoComplete.prototype.commit = function() {
   this.chosen = this.list.firstChild.rows[this.index];
   this.chosen.className = 'ac-row selected';
   this.dom.value = this.getDesc();
@@ -325,14 +325,14 @@ widgets.AutoComplete.prototype.commit = function() {
  * @return {number} The previous|next index.
  * @protected
  */
-widgets.AutoComplete.prototype.previousIndex = function() {
+Widgets.AutoComplete.prototype.previousIndex = function() {
   var currentIndex = this.index;
   if (this.list.firstChild.rows[--currentIndex]) {
     return currentIndex;
   }
   return this.index;
 };
-widgets.AutoComplete.prototype.nextIndex = function() {
+Widgets.AutoComplete.prototype.nextIndex = function() {
   var currentIndex = this.index;
   if (this.list.firstChild.rows[++currentIndex]) {
     return currentIndex;
@@ -346,13 +346,13 @@ widgets.AutoComplete.prototype.nextIndex = function() {
  * @return {string}
  * @public
  */
-widgets.AutoComplete.prototype.getDesc = function() {
+Widgets.AutoComplete.prototype.getDesc = function() {
   if (this.chosen) {
     return this.chosen.cells[0].innerHTML;
   }
   return '';
 };
-widgets.AutoComplete.prototype.getValue = function() {
+Widgets.AutoComplete.prototype.getValue = function() {
   if (this.chosen) {
     return this.chosen.getAttribute('data-value');
   }
@@ -366,7 +366,7 @@ widgets.AutoComplete.prototype.getValue = function() {
  * @return {void}
  * @public
  */
-widgets.AutoComplete.prototype.setValue = function(val) {
+Widgets.AutoComplete.prototype.setValue = function(val) {
   this.clear();
   this.dom.value = '';
   if (!val) return;
@@ -387,7 +387,7 @@ widgets.AutoComplete.prototype.setValue = function(val) {
  * @return {void}
  * @public
  */
-widgets.AutoComplete.prototype.setDesc = function(val) {
+Widgets.AutoComplete.prototype.setDesc = function(val) {
   this.dom.value = val;
 };
 
@@ -397,7 +397,7 @@ widgets.AutoComplete.prototype.setDesc = function(val) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.AutoComplete.prototype.onInput = function(e) {
+Widgets.AutoComplete.prototype.onInput = function(e) {
   clearTimeout(this.timeoutId);
   this.timeoutId = setTimeout(function() {
     this.clear();
@@ -416,7 +416,7 @@ widgets.AutoComplete.prototype.onInput = function(e) {
  * @param {Event} e Event information.
  * @public
  */
-widgets.AutoComplete.prototype.onKeyDown = function(e) {
+Widgets.AutoComplete.prototype.onKeyDown = function(e) {
   if (e.altKey) return true;
   var diff = 0, total = 0;
   var nav = false, oldIndex = this.index;
@@ -497,9 +497,9 @@ widgets.AutoComplete.prototype.onKeyDown = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.AutoComplete.prototype.onMouseEnterList = function(e) { this.mouseInList = true; };
-widgets.AutoComplete.prototype.onMouseLeaveList = function(e) { this.mouseInList = false; };
-widgets.AutoComplete.prototype.onBlur = function(e) {
+Widgets.AutoComplete.prototype.onMouseEnterList = function(e) { this.mouseInList = true; };
+Widgets.AutoComplete.prototype.onMouseLeaveList = function(e) { this.mouseInList = false; };
+Widgets.AutoComplete.prototype.onBlur = function(e) {
   if (!this.mouseInList) this.close();
   this.dispatch('blur', e);
 };
@@ -510,7 +510,7 @@ widgets.AutoComplete.prototype.onBlur = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.AutoComplete.prototype.onMouseEnterRow = function(e) {
+Widgets.AutoComplete.prototype.onMouseEnterRow = function(e) {
   if (e.target.className == 'ac-row') {
     if (this.index >= 0) {
       this.list.firstChild.rows[this.index].className = 'ac-row';
@@ -526,7 +526,7 @@ widgets.AutoComplete.prototype.onMouseEnterRow = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.AutoComplete.prototype.onMouseDownRow = function(e) {
+Widgets.AutoComplete.prototype.onMouseDownRow = function(e) {
   this.dom.focus();
   this.commit();
   this.close();
@@ -537,7 +537,7 @@ widgets.AutoComplete.prototype.onMouseDownRow = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.AutoComplete.prototype.listen = function(type, func, obj) {
+Widgets.AutoComplete.prototype.listen = function(type, func, obj) {
   switch (type) {
   case '_input': // Internal input
     this.addListener(type, func, obj);
@@ -574,14 +574,14 @@ widgets.AutoComplete.prototype.listen = function(type, func, obj) {
     this.addListener(type, func, obj);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.AutoComplete.prototype.unlisten = function(type) {
+Widgets.AutoComplete.prototype.unlisten = function(type) {
   switch (type) {
   case '_input': // Internal input
     this.dom.removeEventListener('input', this.listeners[type], false);
@@ -618,15 +618,15 @@ widgets.AutoComplete.prototype.unlisten = function(type) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.AutoComplete.prototype.flourish = function() {
-  widgets.Textbox.prototype.flourish.call(this);
+Widgets.AutoComplete.prototype.flourish = function() {
+  Widgets.Textbox.prototype.flourish.call(this);
 
   this.list = document.createElement('div');
   this.list.className = 'ac-list';

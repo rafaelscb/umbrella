@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.MenuItem} class.
+ * @fileoverview This file defines the {@code Widgets.MenuItem} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/base.js');
 
 /**
  * The menuitem widget is to be used as part of the menu widget.
@@ -22,26 +22,26 @@ include('widgets/base.js');
  * @param {string} caption Text for the menuitem.
  * @param {boolean} hasPopup value for the {@code aria-haspopup} menu. If true,
  *    the menuitem has a sub-menu, otherwise it is a simple menuitem.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.MenuItem = function(caption, hasPopup) {
+Widgets.MenuItem = function(caption, hasPopup) {
   this.dom = document.createElement('div');
-  widgets.Base.call(this, this.dom);
+  Widgets.Base.call(this, this.dom);
   this.setCaption(caption);
   this.setHasPopup(hasPopup);  
   this.listen('mouseover', this.onMouseOver, this);
   this.listen('click', this.onClick, this);
 };
-inherit(widgets.MenuItem, widgets.Base);
+inherit(Widgets.MenuItem, Widgets.Base);
 
 /**
  * Sub-Menu.
  *
- * @type {widgets.Menu}
+ * @type {Widgets.Menu}
  * @protected
  */
-widgets.MenuItem.prototype.subMenu;
+Widgets.MenuItem.prototype.subMenu;
 
 /**
  * DOM region for the menuitem content.
@@ -49,7 +49,7 @@ widgets.MenuItem.prototype.subMenu;
  * @type {Element}
  * @protected
  */
-widgets.MenuItem.prototype.content;
+Widgets.MenuItem.prototype.content;
 
 /**
  * Highlights the menuitem.
@@ -57,7 +57,7 @@ widgets.MenuItem.prototype.content;
  * @param {boolean} val true = highlight; false = obfuscate;
  * @return {void}
  */
-widgets.MenuItem.prototype.highlight = function(val) {
+Widgets.MenuItem.prototype.highlight = function(val) {
   if (!!val) {
     this.dom.className = 'highlight';
     this.dispatch('highlight', this);
@@ -73,7 +73,7 @@ widgets.MenuItem.prototype.highlight = function(val) {
  * @return {string}
  * @public
  */
-widgets.MenuItem.prototype.getCaption = function() {
+Widgets.MenuItem.prototype.getCaption = function() {
   return this.content.childNodes[0].nodeValue;
 };
 
@@ -84,7 +84,7 @@ widgets.MenuItem.prototype.getCaption = function() {
  * @param {string} val Content value.
  * @public
  */
-widgets.MenuItem.prototype.setCaption = function(val) {
+Widgets.MenuItem.prototype.setCaption = function(val) {
   this.content.childNodes[0].nodeValue = val;
 };
 
@@ -94,7 +94,7 @@ widgets.MenuItem.prototype.setCaption = function(val) {
  * @return {boolean} 'true' = true; 'false' = false.
  * @public
  */
-widgets.MenuItem.prototype.getHasPopup = function() {
+Widgets.MenuItem.prototype.getHasPopup = function() {
   return this.dom.getAttribute('aria-haspopup') === 'true';
 };
 
@@ -104,7 +104,7 @@ widgets.MenuItem.prototype.getHasPopup = function() {
  * @param {boolean} hasPopup true = 'true'; false = 'false'.
  * @public
  */
-widgets.MenuItem.prototype.setHasPopup = function(hasPopup) {
+Widgets.MenuItem.prototype.setHasPopup = function(hasPopup) {
   this.dom.setAttribute('aria-haspopup', (hasPopup = !!hasPopup));
   if (hasPopup) {
     if (!this.content.childNodes[1]) {
@@ -125,7 +125,7 @@ widgets.MenuItem.prototype.setHasPopup = function(hasPopup) {
  *
  * @return {void}
  */
-widgets.MenuItem.prototype.addSub = function() {
+Widgets.MenuItem.prototype.addSub = function() {
   this.subMenu = new widgets.Menu(document.createElement('div'));
   this.subMenu.listen('action', this.listeners['action']);
   this.dom.appendChild(this.subMenu.dom);
@@ -137,7 +137,7 @@ widgets.MenuItem.prototype.addSub = function() {
  *
  * @return {void}
  */
-widgets.MenuItem.prototype.openSub = function() {
+Widgets.MenuItem.prototype.openSub = function() {
   var prect = this.dom.parentNode.getBoundingClientRect();
   var rect = this.dom.getBoundingClientRect();
   
@@ -151,7 +151,7 @@ widgets.MenuItem.prototype.openSub = function() {
  *
  * @return {void}
  */
-widgets.MenuItem.prototype.closeSub = function() {
+Widgets.MenuItem.prototype.closeSub = function() {
   this.subMenu.reset();
   this.subMenu.setHidden(true);
 };
@@ -160,7 +160,7 @@ widgets.MenuItem.prototype.closeSub = function() {
  * @inheritDoc
  * @override
  */
-widgets.MenuItem.prototype.listen = function(type, func, obj) {
+Widgets.MenuItem.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'action':
     this.addListener(type, func, obj);
@@ -172,14 +172,14 @@ widgets.MenuItem.prototype.listen = function(type, func, obj) {
     this.addListener(type, func, obj);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.MenuItem.prototype.unlisten = function(type) {
+Widgets.MenuItem.prototype.unlisten = function(type) {
   switch (type) {
   case 'action':
     this.removeListener(type);
@@ -191,7 +191,7 @@ widgets.MenuItem.prototype.unlisten = function(type) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
@@ -200,11 +200,11 @@ widgets.MenuItem.prototype.unlisten = function(type) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.MenuItem.prototype.onMouseOver = function(e) {
+Widgets.MenuItem.prototype.onMouseOver = function(e) {
   if (this.dom.className != 'highlight') {
     this.highlight(true);    
   }
-}
+};
 
 /**
  * Occurs when the element is clicked.
@@ -212,7 +212,7 @@ widgets.MenuItem.prototype.onMouseOver = function(e) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.MenuItem.prototype.onClick = function(e) {
+Widgets.MenuItem.prototype.onClick = function(e) {
   if (this.getHasPopup() == false) {
     this.dispatch('action', this);
   }
@@ -222,7 +222,7 @@ widgets.MenuItem.prototype.onClick = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.MenuItem.prototype.flourish = function() {
+Widgets.MenuItem.prototype.flourish = function() {
   this.dom.setAttribute('role', 'menuitem');
   this.dom.innerHTML = "<div class='menuitem-content'> </div>";
   this.content = this.dom.children[0];
@@ -232,7 +232,7 @@ widgets.MenuItem.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.MenuItem.prototype.destroy = function() {
+Widgets.MenuItem.prototype.destroy = function() {
   this.unlisten('mouseover');
   this.unlisten('click');
 
@@ -243,5 +243,5 @@ widgets.MenuItem.prototype.destroy = function() {
   this.subMenu = null;
   this.content = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

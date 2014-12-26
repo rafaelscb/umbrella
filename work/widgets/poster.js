@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Poster} class.
+ * @fileoverview This file defines the {@code Widgets.Poster} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The poster widget handles post events.
@@ -21,16 +21,16 @@ include('widgets/base.js');
  *
  * @param {string} controller The controller which will receive
  *    the post message.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Poster = function(controller) {
-  widgets.Base.call(this);
+Widgets.Poster = function(controller) {
+  Widgets.Base.call(this);
   this.controller = controller;
   this.listen('_response', this.onResponse, this);
   this.listen('_progress', this.onProgress, this);
 };
-inherit(widgets.Poster, widgets.Base);
+inherit(Widgets.Poster, Widgets.Base);
 
 /**
  * The address of the controller.
@@ -38,7 +38,7 @@ inherit(widgets.Poster, widgets.Base);
  * @type {string}
  * @protected
  */
-widgets.Poster.prototype.controller;
+Widgets.Poster.prototype.controller;
 
 /**
  * Occurs when a request dispatches a {@code load|error|abort} event -
@@ -48,7 +48,7 @@ widgets.Poster.prototype.controller;
  * @return {void}
  * @protected
  */
-widgets.Poster.prototype.onResponse = function(e) {
+Widgets.Poster.prototype.onResponse = function(e) {
   this.dispatch('response', e);
 };
 
@@ -59,7 +59,7 @@ widgets.Poster.prototype.onResponse = function(e) {
  * @return {void}
  * @protected
  */
-widgets.Poster.prototype.onProgress = function(e) {
+Widgets.Poster.prototype.onProgress = function(e) {
   this.dispatch('progress', e);
 };
 
@@ -67,7 +67,7 @@ widgets.Poster.prototype.onProgress = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.Poster.prototype.listen = function(type, func, obj) {
+Widgets.Poster.prototype.listen = function(type, func, obj) {
   switch (type) {
   case '_response':
   case '_progress':
@@ -76,14 +76,14 @@ widgets.Poster.prototype.listen = function(type, func, obj) {
     this.addListener(type, func, obj);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Poster.prototype.unlisten = function(type) {
+Widgets.Poster.prototype.unlisten = function(type) {
   switch (type) {
   case '_response':
   case '_progress':
@@ -92,7 +92,7 @@ widgets.Poster.prototype.unlisten = function(type) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
@@ -102,7 +102,7 @@ widgets.Poster.prototype.unlisten = function(type) {
  * @return {void} The return is retrieved by the reponse callback.
  * @public
  */
-widgets.Poster.prototype.post = function(msg) {
+Widgets.Poster.prototype.post = function(msg) {
   var request = this.openRequest();
   if (this.listeners['progress']) {
     request.addEventListener(
@@ -125,7 +125,7 @@ widgets.Poster.prototype.post = function(msg) {
  * @return {XMLHttpRequest}
  * @protected
  */
-widgets.Poster.prototype.openRequest = function() {
+Widgets.Poster.prototype.openRequest = function() {
   var request = new XMLHttpRequest();
   request.open('POST', this.controller, true);
   request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -136,11 +136,11 @@ widgets.Poster.prototype.openRequest = function() {
  * @inheritDoc
  * @override
  */
-widgets.Poster.prototype.destroy = function() {
+Widgets.Poster.prototype.destroy = function() {
   this.unlisten('_response');
   this.unlisten('_progress');
 
   this.controller = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

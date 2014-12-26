@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.ToggleButton} class.
+ * @fileoverview This file defines the {@code Widgets.ToggleButton} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/button.js');
+include('Widgets/Button.js');
 
 /**
  * The toggle-button widget handles pressed/not-pressed states.
@@ -23,15 +23,15 @@ include('widgets/button.js');
  *    toggle button.
  * @param {?boolean} pressed Optional value for the {@code aria-pressed}'s
  *    state: true = 'true'; false = 'false'; otherwise = 'mixed'.
- * @extends {widgets.Button}
+ * @extends {Widgets.Button}
  * @constructor
  */
-widgets.ToggleButton = function(dom, label, pressed) {
-  widgets.Button.call(this, dom, label);
+Widgets.ToggleButton = function(dom, label, pressed) {
+  Widgets.Button.call(this, dom, label);
   this.setPressed(pressed);
   this.listen('click', this.onClick, this);
 };
-inherit(widgets.ToggleButton, widgets.Button);
+inherit(Widgets.ToggleButton, Widgets.Button);
 
 /**
  * Gets the {@code aria-pressed} attribute.
@@ -39,7 +39,7 @@ inherit(widgets.ToggleButton, widgets.Button);
  * @return {?boolean} 'true' = true; 'false' = false; 'mixed' = null.
  * @public
  */
-widgets.ToggleButton.prototype.getPressed = function() {
+Widgets.ToggleButton.prototype.getPressed = function() {
   var pressed = this.dom.getAttribute('aria-pressed');
   if (pressed === 'true' || pressed === 'false') {
     return (pressed === 'true');
@@ -54,7 +54,7 @@ widgets.ToggleButton.prototype.getPressed = function() {
  *    otherwise = 'mixed'.
  * @public
  */
-widgets.ToggleButton.prototype.setPressed = function(pressed) {
+Widgets.ToggleButton.prototype.setPressed = function(pressed) {
   this.dom.setAttribute('aria-pressed',
       ((typeof(pressed) === 'boolean') ? pressed : 'mixed'));
 };
@@ -66,7 +66,7 @@ widgets.ToggleButton.prototype.setPressed = function(pressed) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.ToggleButton.prototype.onClick = function(e) {
+Widgets.ToggleButton.prototype.onClick = function(e) {
   var nextState = !(this.getPressed() === true);
 
   this.setPressed(nextState);
@@ -77,7 +77,7 @@ widgets.ToggleButton.prototype.onClick = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.ToggleButton.prototype.destroy = function() {
+Widgets.ToggleButton.prototype.destroy = function() {
   this.unlisten('click');
-  widgets.Button.prototype.destroy.call(this);
+  Widgets.Button.prototype.destroy.call(this);
 };

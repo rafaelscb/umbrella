@@ -8,7 +8,7 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Base} class.
+ * @fileoverview This file defines the {@code Widgets.Base} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
@@ -27,7 +27,7 @@
  * @param {Element=|string=} dom Root element for the widget (or its ID).
  * @constructor
  */
-widgets.Base = function(dom) {
+Widgets.Base = function(dom) {
   this.listeners = new Object();
   this.disabledListeners = new Object();
   if (dom) {
@@ -43,7 +43,7 @@ widgets.Base = function(dom) {
  * @type {Object.<string, Function>}
  * @protected
  */
-widgets.Base.prototype.listeners;
+Widgets.Base.prototype.listeners;
 
 /**
  * Contains a collection of disabled events.
@@ -51,7 +51,7 @@ widgets.Base.prototype.listeners;
  * @type {Object.<string, Function>}
  * @protected
  */
-widgets.Base.prototype.disabledListeners;
+Widgets.Base.prototype.disabledListeners;
 
 /**
  * Contains the tabindex of the element.
@@ -59,7 +59,7 @@ widgets.Base.prototype.disabledListeners;
  * @type {string}
  * @protected
  */
-widgets.Base.prototype.tabIndex;
+Widgets.Base.prototype.tabIndex;
 
 /**
  * Contains the root element for the widget.
@@ -67,7 +67,7 @@ widgets.Base.prototype.tabIndex;
  * @type {Element}
  * @public
  */
-widgets.Base.prototype.dom;
+Widgets.Base.prototype.dom;
 
 /**
  * Exclusively adds a listener to the listeners collection.
@@ -78,7 +78,7 @@ widgets.Base.prototype.dom;
  *    handler.
  * @return {void}
  */
-widgets.Base.prototype.addListener = function(type, func, obj) {
+Widgets.Base.prototype.addListener = function(type, func, obj) {
   this.listeners[type] = (obj ? func.bind(obj) : func);
 };
 
@@ -88,7 +88,7 @@ widgets.Base.prototype.addListener = function(type, func, obj) {
  * @param {string} type The event to be remove.
  * @return {void}
  */
-widgets.Base.prototype.removeListener = function(type, func, obj) {
+Widgets.Base.prototype.removeListener = function(type, func, obj) {
   delete this.listeners[type];
 };
 
@@ -102,7 +102,7 @@ widgets.Base.prototype.removeListener = function(type, func, obj) {
  * @param {Object} obj The object that is relevant to the function handler.
  * @return {void}
  */
-widgets.Base.prototype.listen = function(type, func, obj) {
+Widgets.Base.prototype.listen = function(type, func, obj) {
   this.addListener(type, func, obj);
   this.dom.addEventListener(type, this.listeners[type], false);
 };
@@ -113,7 +113,7 @@ widgets.Base.prototype.listen = function(type, func, obj) {
  * @param {string} type The event to be removed.
  * @return {void}
  */
-widgets.Base.prototype.unlisten = function(type) {
+Widgets.Base.prototype.unlisten = function(type) {
   this.dom.removeEventListener(type, this.listeners[type], false);
   this.removeListener(type);
 };
@@ -124,7 +124,7 @@ widgets.Base.prototype.unlisten = function(type) {
  * @param {string} type The event to be dispatched.
  * @return {void}
  */
-widgets.Base.prototype.dispatch = function(type) {
+Widgets.Base.prototype.dispatch = function(type) {
   var func = this.listeners[type];
   if (func) {
     func.apply(this, Array.prototype.slice.call(arguments, 1));
@@ -137,7 +137,7 @@ widgets.Base.prototype.dispatch = function(type) {
  * @param {string} type The event to be disabled.
  * @public
  */
-widgets.Base.prototype.disableListener = function(type) {
+Widgets.Base.prototype.disableListener = function(type) {
   this.disabledListeners[type] = this.listeners[type];
   this.unlisten(type);
 };
@@ -148,7 +148,7 @@ widgets.Base.prototype.disableListener = function(type) {
  * @param {string} type The event to be enabled.
  * @public
  */
-widgets.Base.prototype.enableListener = function(type) {
+Widgets.Base.prototype.enableListener = function(type) {
   this.listen(type, this.disabledListeners[type]);
   delete this.disabledListeners[type];
 };
@@ -159,7 +159,7 @@ widgets.Base.prototype.enableListener = function(type) {
  * @return {boolean} true = is disabled; false = not disabled.
  * @public
  */
-widgets.Base.prototype.getDisabled = function() {
+Widgets.Base.prototype.getDisabled = function() {
   return this.dom.getAttribute('aria-disabled') == 'true';
 };
 
@@ -169,7 +169,7 @@ widgets.Base.prototype.getDisabled = function() {
  * @param {boolean} val true = is disabled; false = is not disabled.
  * @public
  */
-widgets.Base.prototype.setDisabled = function(val) {
+Widgets.Base.prototype.setDisabled = function(val) {
   var elem; val = !!val;
   if (val) {
     if (this.dom.hasAttribute('tabindex')) {
@@ -195,7 +195,7 @@ widgets.Base.prototype.setDisabled = function(val) {
  * @return {boolean} true = is hidden; false = is not hidden.
  * @public
  */
-widgets.Base.prototype.getHidden = function() {
+Widgets.Base.prototype.getHidden = function() {
   return this.dom.getAttribute('aria-hidden') == 'true';
 };
 
@@ -205,7 +205,7 @@ widgets.Base.prototype.getHidden = function() {
  * @param {boolean} val true = is hidden; false = is not hidden.
  * @public
  */
-widgets.Base.prototype.setHidden = function(val) {
+Widgets.Base.prototype.setHidden = function(val) {
   this.dom.setAttribute('aria-hidden', !!val);
 };
 
@@ -218,7 +218,7 @@ widgets.Base.prototype.setHidden = function(val) {
  *    otherwise = is valid.
  * @public
  */
-widgets.Base.prototype.getInvalid = function() {
+Widgets.Base.prototype.getInvalid = function() {
   var val = this.dom.getAttribute('aria-invalid');
   if (val == 'grammar' || val == 'spelling') {
     return val;
@@ -236,7 +236,7 @@ widgets.Base.prototype.getInvalid = function() {
  *    otherwise = is valid.
  * @public
  */
-widgets.Base.prototype.setInvalid = function(val) {
+Widgets.Base.prototype.setInvalid = function(val) {
   if (val == 'grammar' || val == 'spelling') {
     this.dom.setAttribute('aria-invalid', val);
   } else {
@@ -250,7 +250,7 @@ widgets.Base.prototype.setInvalid = function(val) {
  * @return {boolean|string} true = is required; false = is not required.
  * @public
  */
-widgets.Base.prototype.getRequired = function() {
+Widgets.Base.prototype.getRequired = function() {
   return this.dom.getAttribute('aria-required') == 'true';
 };
 
@@ -260,7 +260,7 @@ widgets.Base.prototype.getRequired = function() {
  * @param {boolean|string} val true = is required; false = is not required.
  * @public
  */
-widgets.Base.prototype.setRequired = function(val) {
+Widgets.Base.prototype.setRequired = function(val) {
   this.dom.setAttribute('aria-required', !!val);
 };
 
@@ -269,14 +269,14 @@ widgets.Base.prototype.setRequired = function(val) {
  *
  * @return {void}
  */
-widgets.Base.prototype.flourish = function() {};
+Widgets.Base.prototype.flourish = function() {};
 
 /**
  * Destroys the current object of this class.
  *
  * @return {void} Nothing.
  */
-widgets.Base.prototype.destroy = function() {
+Widgets.Base.prototype.destroy = function() {
   this.listeners = null;
   this.disabledListeners = null;
   this.tabIndex = null;

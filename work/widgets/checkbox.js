@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Checkbox} class.
+ * @fileoverview This file defines the {@code Widgets.Checkbox} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The checkbox widget handles checked/unchecked/mixed states.
@@ -21,16 +21,16 @@ include('widgets/base.js');
  * @param {Element} dom Root element for the checkbox.
  * @param {?boolean} checked Optional value for the {@code aria-checked}'s
  *    state: true = 'true'; false = 'false'; otherwise = 'mixed'.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Checkbox = function(dom, checked) {
-  widgets.Base.call(this, dom);
+Widgets.Checkbox = function(dom, checked) {
+  Widgets.Base.call(this, dom);
   this.setChecked(checked);
   this.listen('click', this.onClick, this);
   this.listen('keyup', this.onKeyUp, this);
 };
-inherit(widgets.Checkbox, widgets.Base);
+inherit(Widgets.Checkbox, Widgets.Base);
 
 /**
  * Value to be used when it is checked.
@@ -38,7 +38,7 @@ inherit(widgets.Checkbox, widgets.Base);
  * @type {mixed}
  * @protected
  */
-widgets.Checkbox.prototype.checkedValue;
+Widgets.Checkbox.prototype.checkedValue;
 
 /**
  * Value to be used when it is unchecked.
@@ -46,7 +46,7 @@ widgets.Checkbox.prototype.checkedValue;
  * @type {mixed}
  * @protected
  */
-widgets.Checkbox.prototype.uncheckedValue;
+Widgets.Checkbox.prototype.uncheckedValue;
 
 /**
  * Gets the {@code aria-checked} attribute.
@@ -54,7 +54,7 @@ widgets.Checkbox.prototype.uncheckedValue;
  * @return {?boolean} 'true' = true; 'false' = false; 'mixed' = null.
  * @public
  */
-widgets.Checkbox.prototype.getChecked = function() {
+Widgets.Checkbox.prototype.getChecked = function() {
   var checked = this.dom.getAttribute('aria-checked');
   if (checked === 'true' || checked === 'false') {
     return (checked === 'true');
@@ -69,7 +69,7 @@ widgets.Checkbox.prototype.getChecked = function() {
  *    otherwise = 'mixed'.
  * @public
  */
-widgets.Checkbox.prototype.setChecked = function(checked) {
+Widgets.Checkbox.prototype.setChecked = function(checked) {
   this.dom.setAttribute('aria-checked',
       ((typeof(checked) === 'boolean') ? checked : 'mixed'));
 };
@@ -80,7 +80,7 @@ widgets.Checkbox.prototype.setChecked = function(checked) {
  * @return {?boolean}
  * @public
  */
-widgets.Checkbox.prototype.getValue = function() {
+Widgets.Checkbox.prototype.getValue = function() {
   if (this.getChecked()) {
     return this.checkedValue;
   } else {
@@ -94,7 +94,7 @@ widgets.Checkbox.prototype.getValue = function() {
  * @param {?boolean} val
  * @public
  */
-widgets.Checkbox.prototype.setValue = function(val) {
+Widgets.Checkbox.prototype.setValue = function(val) {
   this.setChecked(val == this.checkedValue);
 };
 
@@ -102,26 +102,26 @@ widgets.Checkbox.prototype.setValue = function(val) {
  * @inheritDoc
  * @override
  */
-widgets.Checkbox.prototype.listen = function(type, func, obj) {
+Widgets.Checkbox.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'change':
     this.addListener(type, func, obj);
     return; 
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Checkbox.prototype.unlisten = function(type) {
+Widgets.Checkbox.prototype.unlisten = function(type) {
   switch (type) {
   case 'change':
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
@@ -132,7 +132,7 @@ widgets.Checkbox.prototype.unlisten = function(type) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Checkbox.prototype.onClick = function(e) {
+Widgets.Checkbox.prototype.onClick = function(e) {
   var nextState = !(this.getChecked() === true);
 
   this.setChecked(nextState);
@@ -146,7 +146,7 @@ widgets.Checkbox.prototype.onClick = function(e) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Checkbox.prototype.onKeyUp = function(e) {
+Widgets.Checkbox.prototype.onKeyUp = function(e) {
   if (e.keyCode === 32) {
     this.dispatch('click', e);
   }
@@ -156,7 +156,7 @@ widgets.Checkbox.prototype.onKeyUp = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.Checkbox.prototype.flourish = function() {
+Widgets.Checkbox.prototype.flourish = function() {
   this.dom.setAttribute('role', 'checkbox');
   if (!this.dom.hasAttribute('tabindex')) {
     this.dom.setAttribute('tabindex', '0');
@@ -179,8 +179,8 @@ widgets.Checkbox.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Checkbox.prototype.destroy = function() {
+Widgets.Checkbox.prototype.destroy = function() {
   this.unlisten('click');
   this.unlisten('keyup');
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

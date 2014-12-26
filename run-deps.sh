@@ -1,9 +1,9 @@
 # CALCULATING DEPENDENCY for $1 app.
 
 deps=../../tools/umdeps
-app_dir=work/$1
+app_dir=Work/$1
 #res_dir=assets/
-res_dir=global
+res_dir=Global
 base_dir_from_app_dir=..
 final=global/deps.js
 lang=${2:-multi}
@@ -13,14 +13,14 @@ if [ ! -d "$app_dir" ]; then
   exit 1
 fi
 
-if [ ! -d "work/$1/$res_dir" ]; then
-  echo "ERROR: Directory 'work/$1/$res_dir' non-existent."
+if [ ! -d "Work/$1/$res_dir" ]; then
+  echo "ERROR: Directory 'Work/$1/$res_dir' non-existent."
   exit 1
 fi
 
 case "$1" in
-  "demos") required_libs="widgets posters utils demos";;
-        *) required_libs="widgets posters utils sayings $1";;
+  "demos") required_libs="Widgets Posters Utils Demos";;
+        *) required_libs="Widgets Posters Utils Sayings $1";;
 esac
 
 pushd $app_dir

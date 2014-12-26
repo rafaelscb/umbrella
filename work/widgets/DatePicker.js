@@ -8,28 +8,28 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.DatePicker} class.
+ * @fileoverview This file defines the {@code Widgets.DatePicker} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
- * The date-picker widget is to be used when the user wants to pick a given
+ * The DatePicker widget is to be used when the user wants to pick a given
  * date.
  *
  * @param {Element} dom Root element for the date-picker.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.DatePicker = function(dom) {
+Widgets.DatePicker = function(dom) {
   this.weeks = Array();
   this.days = Array();
   this.monthNames = new Array('January', 'February', 'March', 'April', 'May',
       'June', 'July', 'August', 'September', 'October', 'November', 'December');
   this.weekNames = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 
-  widgets.Base.call(this, dom);
+  Widgets.Base.call(this, dom);
 
   this.listen('blur', this.onBlur, this);
   this.listen('mousedown', this.onMouseDown, this);
@@ -43,7 +43,7 @@ widgets.DatePicker = function(dom) {
   this.listen('todayclick', this.onTodayClick, this);
   this.listen('noneclick', this.onNoneClick, this);
 };
-inherit(widgets.DatePicker, widgets.Base);
+inherit(Widgets.DatePicker, Widgets.Base);
 
 /**
  * The input element associated with the date-picker.
@@ -51,7 +51,7 @@ inherit(widgets.DatePicker, widgets.Base);
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.input;
+Widgets.DatePicker.prototype.input;
 
 /**
  * The element where the calendar is presented.
@@ -59,7 +59,7 @@ widgets.DatePicker.prototype.input;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.calendar;
+Widgets.DatePicker.prototype.calendar;
 
 /**
  * The element for the previous month button.
@@ -67,7 +67,7 @@ widgets.DatePicker.prototype.calendar;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.prevMonthButton;
+Widgets.DatePicker.prototype.prevMonthButton;
 
 /**
  * The element for the current month button.
@@ -75,7 +75,7 @@ widgets.DatePicker.prototype.prevMonthButton;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.monthButton;
+Widgets.DatePicker.prototype.monthButton;
 
 /**
  * The element for the next month button.
@@ -83,7 +83,7 @@ widgets.DatePicker.prototype.monthButton;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.nextMonthButton;
+Widgets.DatePicker.prototype.nextMonthButton;
 
 /**
  * The element for the previous year button.
@@ -91,7 +91,7 @@ widgets.DatePicker.prototype.nextMonthButton;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.prevYearButton;
+Widgets.DatePicker.prototype.prevYearButton;
 
 /**
  * The element for the current year button.
@@ -99,7 +99,7 @@ widgets.DatePicker.prototype.prevYearButton;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.yearButton;
+Widgets.DatePicker.prototype.yearButton;
 
 /**
  * The element for the next year button.
@@ -107,7 +107,7 @@ widgets.DatePicker.prototype.yearButton;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.nextYearButton;
+Widgets.DatePicker.prototype.nextYearButton;
 
 /**
  * The grid where the collection of days are.
@@ -115,7 +115,7 @@ widgets.DatePicker.prototype.nextYearButton;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.grid;
+Widgets.DatePicker.prototype.grid;
 
 /**
  * A collection of elements that represent the week numbers.
@@ -123,7 +123,7 @@ widgets.DatePicker.prototype.grid;
  * @type {Array.<Element>}
  * @protected
  */
-widgets.DatePicker.prototype.weeks;
+Widgets.DatePicker.prototype.weeks;
 
 /**
  * A collection of elements that represent the day numbers.
@@ -131,7 +131,7 @@ widgets.DatePicker.prototype.weeks;
  * @type {Array.<Element>}
  * @protected
  */
-widgets.DatePicker.prototype.days;
+Widgets.DatePicker.prototype.days;
 
 /**
  * Today button.
@@ -139,7 +139,7 @@ widgets.DatePicker.prototype.days;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.todayButton;
+Widgets.DatePicker.prototype.todayButton;
 
 /**
  * None button.
@@ -147,7 +147,7 @@ widgets.DatePicker.prototype.todayButton;
  * @type {Element}
  * @protected
  */
-widgets.DatePicker.prototype.noneButton;
+Widgets.DatePicker.prototype.noneButton;
 
 /**
  * Contains the month names.
@@ -163,7 +163,7 @@ widgets.DatePicker.prototype.monthNames;
  * @type {Array.<string>}
  * @protected
  */
-widgets.DatePicker.prototype.weekNames;
+Widgets.DatePicker.prototype.weekNames;
 
 /**
  * Calculates the week number.
@@ -172,7 +172,7 @@ widgets.DatePicker.prototype.weekNames;
  * @return {number} The number of the week.
  * @protected
  */
-widgets.DatePicker.prototype.calcWeek = function(date) {
+Widgets.DatePicker.prototype.calcWeek = function(date) {
   var janFirst = new Date(date.getFullYear(), 0, 1);
   return Math.ceil(
     (((date - janFirst) / 86400000) + janFirst.getDay() + 1) / 7);
@@ -184,7 +184,7 @@ widgets.DatePicker.prototype.calcWeek = function(date) {
  * @return {?number} The selected month.
  * @protected
  */
-widgets.DatePicker.prototype.getMonthButton = function() {
+Widgets.DatePicker.prototype.getMonthButton = function() {
   var month = Number(this.monthButton.getAttribute('data-value'));
   return month;
 };
@@ -196,7 +196,7 @@ widgets.DatePicker.prototype.getMonthButton = function() {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.setMonthButton = function(month) {
+Widgets.DatePicker.prototype.setMonthButton = function(month) {
   this.monthButton.className = 'month-button';
   this.monthButton.innerHTML = this.monthNames[month];
   this.monthButton.setAttribute('data-value', month);
@@ -208,7 +208,7 @@ widgets.DatePicker.prototype.setMonthButton = function(month) {
  * @return {?number} The selected year.
  * @protected
  */
-widgets.DatePicker.prototype.getYearButton = function() {
+Widgets.DatePicker.prototype.getYearButton = function() {
   var year = Number(this.yearButton.innerHTML);
   return year;
 };
@@ -220,7 +220,7 @@ widgets.DatePicker.prototype.getYearButton = function() {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.setYearButton = function(year) {
+Widgets.DatePicker.prototype.setYearButton = function(year) {
   this.yearButton.className = 'year-button';
   this.yearButton.innerHTML = year;
 };
@@ -231,7 +231,7 @@ widgets.DatePicker.prototype.setYearButton = function(year) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.populateCalendar = function() {
+Widgets.DatePicker.prototype.populateCalendar = function() {
   var today = new Date();
   var selMonth = this.getMonthButton();
   var selYear = this.getYearButton();
@@ -284,7 +284,7 @@ widgets.DatePicker.prototype.populateCalendar = function() {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.showCalendar = function() {
+Widgets.DatePicker.prototype.showCalendar = function() {
   this.calendar.style.zIndex = 100;
   this.calendar.setAttribute('aria-hidden', 'false');
 };
@@ -295,7 +295,7 @@ widgets.DatePicker.prototype.showCalendar = function() {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.closeCalendar = function() {
+Widgets.DatePicker.prototype.closeCalendar = function() {
   this.calendar.style.zIndex = 0;
   this.calendar.setAttribute('aria-hidden', 'true');
 };
@@ -306,7 +306,7 @@ widgets.DatePicker.prototype.closeCalendar = function() {
  * @return {string} The current value.
  * @public
  */
-widgets.DatePicker.prototype.getValue = function() {
+Widgets.DatePicker.prototype.getValue = function() {
   return this.input.value;
 };
 
@@ -317,7 +317,7 @@ widgets.DatePicker.prototype.getValue = function() {
  * @return {void}
  * @public
  */
-widgets.DatePicker.prototype.setValue = function(val) {
+Widgets.DatePicker.prototype.setValue = function(val) {
   this.input.value = val;
 };
 
@@ -327,7 +327,7 @@ widgets.DatePicker.prototype.setValue = function(val) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.DatePicker.prototype.onBlur = function(e) {
+Widgets.DatePicker.prototype.onBlur = function(e) {
   this.closeCalendar();
 };
 
@@ -338,7 +338,7 @@ widgets.DatePicker.prototype.onBlur = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onMouseDown = function(e) {
+Widgets.DatePicker.prototype.onMouseDown = function(e) {
   if (e.target == this.input) {
     if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(this.input.value)) {
       var delems = this.input.value.split('-');
@@ -361,7 +361,7 @@ widgets.DatePicker.prototype.onMouseDown = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onPrevMonthClick = function(e) {
+Widgets.DatePicker.prototype.onPrevMonthClick = function(e) {
   var month = this.getMonthButton();
   if (month > 0) {
     month--;
@@ -380,7 +380,7 @@ widgets.DatePicker.prototype.onPrevMonthClick = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onMonthClick = function(e) {
+Widgets.DatePicker.prototype.onMonthClick = function(e) {
   console.log(e);
 };
 
@@ -391,7 +391,7 @@ widgets.DatePicker.prototype.onMonthClick = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onNextMonthClick = function(e) {
+Widgets.DatePicker.prototype.onNextMonthClick = function(e) {
   var month = this.getMonthButton();
   if (month < 11) {
     month++;
@@ -410,7 +410,7 @@ widgets.DatePicker.prototype.onNextMonthClick = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onPrevYearClick = function(e) {
+Widgets.DatePicker.prototype.onPrevYearClick = function(e) {
   this.setYearButton(this.getYearButton()-1);
   this.populateCalendar();
 };
@@ -422,7 +422,7 @@ widgets.DatePicker.prototype.onPrevYearClick = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onYearClick = function(e) {
+Widgets.DatePicker.prototype.onYearClick = function(e) {
   console.log(e);
 };
 
@@ -433,7 +433,7 @@ widgets.DatePicker.prototype.onYearClick = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onNextYearClick = function(e) {
+Widgets.DatePicker.prototype.onNextYearClick = function(e) {
   this.setYearButton(this.getYearButton()+1);
   this.populateCalendar();
 };
@@ -445,7 +445,7 @@ widgets.DatePicker.prototype.onNextYearClick = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onGridClick = function(e) {
+Widgets.DatePicker.prototype.onGridClick = function(e) {
   var day = e.target.getAttribute('data-date');
   if (day) {
     this.input.value = day;
@@ -460,7 +460,7 @@ widgets.DatePicker.prototype.onGridClick = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onTodayClick = function(e) {
+Widgets.DatePicker.prototype.onTodayClick = function(e) {
   var d = new Date();
   var year = d.getFullYear(), month = d.getMonth(), day = d.getDate();
   var strDate = year + '-' +
@@ -478,7 +478,7 @@ widgets.DatePicker.prototype.onTodayClick = function(e) {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.onNoneClick = function(e) {
+Widgets.DatePicker.prototype.onNoneClick = function(e) {
   this.input.value = '';
   this.closeCalendar();
 };
@@ -487,7 +487,7 @@ widgets.DatePicker.prototype.onNoneClick = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.DatePicker.prototype.listen = function(type, func, obj) {
+Widgets.DatePicker.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'blur':
     this.addListener(type, func, obj);
@@ -540,7 +540,7 @@ widgets.DatePicker.prototype.listen = function(type, func, obj) {
  * @inheritDoc
  * @override
  */
-widgets.DatePicker.prototype.unlisten = function(type) {
+Widgets.DatePicker.prototype.unlisten = function(type) {
   switch (type) {
   case 'blur':
     this.input.removeEventListener(type, this.listeners[type], false);
@@ -589,14 +589,14 @@ widgets.DatePicker.prototype.unlisten = function(type) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.DatePicker.prototype.flourish = function() {
+Widgets.DatePicker.prototype.flourish = function() {
   this.dom.className = 'date-picker';
   this.dom.innerHTML = "<input type='text'><div></div>";
 
@@ -613,7 +613,7 @@ widgets.DatePicker.prototype.flourish = function() {
  * @return {void}
  * @protected
  */
-widgets.DatePicker.prototype.flourishCalendar = function() {
+Widgets.DatePicker.prototype.flourishCalendar = function() {
   this.calendar.className = 'calendar';
   this.closeCalendar();
 
@@ -706,7 +706,7 @@ widgets.DatePicker.prototype.flourishCalendar = function() {
  * @inheritDoc
  * @override
  */
-widgets.DatePicker.prototype.destroy = function() {
+Widgets.DatePicker.prototype.destroy = function() {
   this.unlisten('blur');
   this.unlisten('mousedown');
   this.unlisten('gridclick');
@@ -735,5 +735,5 @@ widgets.DatePicker.prototype.destroy = function() {
   this.monthNames = null;
   this.weekNames = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

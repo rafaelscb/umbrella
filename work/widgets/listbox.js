@@ -8,27 +8,27 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Listbox} class.
+ * @fileoverview This file defines the {@code Widgets.Listbox} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The listbox widget is to be used when we want the user to select
  * on or more options.
  *
  * @param {Element} dom Root element for the listbox.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Listbox = function(dom) {
+Widgets.Listbox = function(dom) {
   this.index = this.index2 = -1;
   this.options = new Array();
-  widgets.Base.call(this, dom);
+  Widgets.Base.call(this, dom);
   this.listen('keydown', this.onKeyDown, this);
 };
-inherit(widgets.Listbox, widgets.Base);
+inherit(Widgets.Listbox, Widgets.Base);
 
 /**
  * Lower cursor.
@@ -36,7 +36,7 @@ inherit(widgets.Listbox, widgets.Base);
  * @type {number}
  * @public
  */
-widgets.Listbox.prototype.index;
+Widgets.Listbox.prototype.index;
 
 /**
  * Higher cursor.
@@ -44,7 +44,7 @@ widgets.Listbox.prototype.index;
  * @type {number}
  * @public
  */
-widgets.Listbox.prototype.index2;
+Widgets.Listbox.prototype.index2;
 
 /**
  * Contains the collection of options.
@@ -52,7 +52,7 @@ widgets.Listbox.prototype.index2;
  * @type {Array.<widgets.Option>}
  * @public
  */
-widgets.Listbox.prototype.options;
+Widgets.Listbox.prototype.options;
 
 /**
  * Adds a new option to the options collection.
@@ -62,7 +62,7 @@ widgets.Listbox.prototype.options;
  *    no value is specified, it adds the option to the end of the list.
  * @return {void}
  */
-widgets.Listbox.prototype.addOption = function(option, index) {
+Widgets.Listbox.prototype.addOption = function(option, index) {
   index = (index == undefined) ? this.options.length : index;
   this.options.splice(index, 0, option);
 
@@ -80,7 +80,7 @@ widgets.Listbox.prototype.addOption = function(option, index) {
  *    list.
  * @return {void}
  */
-widgets.Listbox.prototype.removeOption = function(index) {
+Widgets.Listbox.prototype.removeOption = function(index) {
   index = (index == undefined) ? this.options.length-1 : index;
 
   this.options[index].unlisten('mousedown');
@@ -98,7 +98,7 @@ widgets.Listbox.prototype.removeOption = function(index) {
  * @param {string} id IDREF of the option to be removed.
  * @return {void}
  */
-widgets.Listbox.prototype.removeOptionById = function(id) {
+Widgets.Listbox.prototype.removeOptionById = function(id) {
   for (var i = 0; i < this.options.length; i++) {
     if (id == this.options[i].dom.id) {
       this.removeItem(i);
@@ -114,7 +114,7 @@ widgets.Listbox.prototype.removeOptionById = function(id) {
  * @param {Event} e Event information.
  * @return {boolean} false = to stop the flow, true to pass the event.
  */
-widgets.Listbox.prototype.onKeyDown = function(e) {
+Widgets.Listbox.prototype.onKeyDown = function(e) {
   if (e.altKey) return true;
   var process = false, diff = 0, total = 0;
 
@@ -186,7 +186,7 @@ widgets.Listbox.prototype.onKeyDown = function(e) {
  * @param {Event} e Event information.
  * @public
  */
-widgets.Listbox.prototype.onOptionHover = function(e) {
+Widgets.Listbox.prototype.onOptionHover = function(e) {
   if (e.which == 1 && (e.buttons == 1 || 
       e.buttons == 3 || e.buttons == undefined)) {
     this.index = -1;
@@ -217,7 +217,7 @@ widgets.Listbox.prototype.onOptionHover = function(e) {
  * @param {Event} e Event information.
  * @public
  */
-widgets.Listbox.prototype.onOptionClick = function(e) {
+Widgets.Listbox.prototype.onOptionClick = function(e) {
   if (e.which == 1) {
     this.index = -1;
     if (!e.shiftKey) {
@@ -251,7 +251,7 @@ widgets.Listbox.prototype.onOptionClick = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.Listbox.prototype.flourish = function() {
+Widgets.Listbox.prototype.flourish = function() {
   this.dom.setAttribute('role', 'listbox');
   if (!this.dom.hasAttribute('tabindex')) {
     this.dom.setAttribute('tabindex', '0');
@@ -263,7 +263,7 @@ widgets.Listbox.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Listbox.prototype.destroy = function() {
+Widgets.Listbox.prototype.destroy = function() {
   this.unlisten('keydown');
   for (var i = this.options.length-1; i >= 0; i--) {
     this.removeOption();
@@ -272,5 +272,5 @@ widgets.Listbox.prototype.destroy = function() {
   this.index2 = null;
   this.options = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

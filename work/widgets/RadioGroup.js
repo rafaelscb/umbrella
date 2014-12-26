@@ -8,12 +8,12 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.RadioGroup} class.
+ * @fileoverview This file defines the {@code Widgets.RadioGroup} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
-include('widgets/radio.js');
+include('Widgets/Base.js');
+include('Widgets/Radio.js');
 
 /**
  * The radiogroup widget handles a group o radio buttons.
@@ -21,16 +21,16 @@ include('widgets/radio.js');
  *
  * @param {Element} dom Root element for the radiogroup.
  * @param {number=} index The initial index for the radios.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.RadioGroup = function(dom, index) {
+Widgets.RadioGroup = function(dom, index) {
   this.radios = new Array();
   this.index = (index ? index : 0);
-  widgets.Base.call(this, dom);  
+  Widgets.Base.call(this, dom);  
   this.listen('keydown', this.onKeyDown, this);
 };
-inherit(widgets.RadioGroup, widgets.Base);
+inherit(Widgets.RadioGroup, Widgets.Base);
 
 /**
  * The current index.
@@ -38,7 +38,7 @@ inherit(widgets.RadioGroup, widgets.Base);
  * @type {number}
  * @protected
  */
-widgets.RadioGroup.prototype.index;
+Widgets.RadioGroup.prototype.index;
 
 /**
  * Contains the collection of radio elements.
@@ -46,7 +46,7 @@ widgets.RadioGroup.prototype.index;
  * @type {Array.<widgets.Radio>}
  * @protected
  */
-widgets.RadioGroup.prototype.radios;
+Widgets.RadioGroup.prototype.radios;
 
 /**
  * Adds a new item to the radios collection.
@@ -54,7 +54,7 @@ widgets.RadioGroup.prototype.radios;
  * @param {widgets.Radio} item A new radio to be added.
  * @return {void}
  */
-widgets.RadioGroup.prototype.addRadio = function(item) {
+Widgets.RadioGroup.prototype.addRadio = function(item) {
   for (var i = 0; i < this.radios.length; i++) {
     if (this.radios[i].dom.id == item.dom.id) return;
   }
@@ -71,7 +71,7 @@ widgets.RadioGroup.prototype.addRadio = function(item) {
  * @param {string} id IDREF of the radio to be removed.
  * @return {void}
  */
-widgets.RadioGroup.prototype.removeRadio = function(id) {
+Widgets.RadioGroup.prototype.removeRadio = function(id) {
   for (var i = 0; i < this.radios.length; i++) {
     if (this.radios[i].dom.id == id) {
       this.radios[i].unlisten('change');
@@ -86,7 +86,7 @@ widgets.RadioGroup.prototype.removeRadio = function(id) {
  *
  * @return {widgets.Radio} The existing selected option, or null.
  */
-widgets.RadioGroup.prototype.getOption = function() {
+Widgets.RadioGroup.prototype.getOption = function() {
   var radio = this.radios[this.index];
   if (radio.getChecked()) {
     return radio;
@@ -100,7 +100,7 @@ widgets.RadioGroup.prototype.getOption = function() {
  * @param {Element} e The event information.
  * @return {void}
  */
-widgets.RadioGroup.prototype.onChange = function(e) {
+Widgets.RadioGroup.prototype.onChange = function(e) {
   for (var i = 0; i < this.radios.length; i++) {
     if (this.radios[i].dom.id !== e.target.id) {
       this.radios[i].setChecked(false);
@@ -119,7 +119,7 @@ widgets.RadioGroup.prototype.onChange = function(e) {
  * @param {Element} e The event information.
  * @return {boolean} Returns false if consuming event; true if propagating.
  */
-widgets.RadioGroup.prototype.onKeyDown = function(e) {
+Widgets.RadioGroup.prototype.onKeyDown = function(e) {
   if (e.altKey) return true;
   var prevIdx = this.index;
   switch (e.keyCode) {
@@ -150,13 +150,13 @@ widgets.RadioGroup.prototype.onKeyDown = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.RadioGroup.prototype.flourish = function() {
+Widgets.RadioGroup.prototype.flourish = function() {
   var i = 0; var radio;
   var elems = this.dom.querySelectorAll('[role="radio"]');
 
   this.dom.setAttribute('role', 'radiogroup');
   for (i = 0; i < elems.length; i++) {
-    this.addRadio(new widgets.Radio(elems[i]));
+    this.addRadio(new Widgets.Radio(elems[i]));
   }
 };
 
@@ -164,7 +164,7 @@ widgets.RadioGroup.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.RadioGroup.prototype.destroy = function() {
+Widgets.RadioGroup.prototype.destroy = function() {
   this.unlisten('keydown');
   for (var i = 0; i < this.radios.length; i++) {
     this.radios[i].unlisten('change');
@@ -173,5 +173,5 @@ widgets.RadioGroup.prototype.destroy = function() {
   }
   this.index = null;
   this.radios = null;
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

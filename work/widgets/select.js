@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Select} class.
+ * @fileoverview This file defines the {@code Widgets.Select} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The select widget is to be used when a unique option must be selected, but
@@ -22,14 +22,14 @@ include('widgets/base.js');
  * @extends {widgets.Base}
  * @constructor
  */
-widgets.Select = function(dom, index) {
+Widgets.Select = function(dom, index) {
   this.index = (index > 0) ? index : 0;
   this.options = new Array();
   this.chosen = null;
 
   this.mouseInList = false;
 
-  widgets.Base.call(this, dom);
+  Widgets.Base.call(this, dom);
 
   this.listen('blur', this.onBlur, this);
   this.listen('keydown', this.onKeyDown, this);
@@ -37,7 +37,7 @@ widgets.Select = function(dom, index) {
   this.listen('mouseenterlist', this.onMouseEnterList, this);
   this.listen('mouseleavelist', this.onMouseLeaveList, this);
 };
-inherit(widgets.Select, widgets.Base);
+inherit(Widgets.Select, Widgets.Base);
 
 /**
  * Contains the index to access the current option (selected|highlighted).
@@ -45,23 +45,23 @@ inherit(widgets.Select, widgets.Base);
  * @type {number}
  * @protected
  */
-widgets.Select.prototype.index;
+Widgets.Select.prototype.index;
 
 /**
  * Contains the collection of options.
  *
- * @type {Array.<widgets.Option>}
+ * @type {Array.<Widgets.Option>}
  * @protected
  */
-widgets.Select.prototype.options;
+Widgets.Select.prototype.options;
 
 /**
  * Contains the chosen option.
  *
- * @type {widgets.Option}
+ * @type {Widgets.Option}
  * @protected
  */
-widgets.Select.prototype.chosen;
+Widgets.Select.prototype.chosen;
 
 /**
  * The button element associated with the select.
@@ -69,7 +69,7 @@ widgets.Select.prototype.chosen;
  * @type {Element}
  * @protected
  */
-widgets.Select.prototype.button;
+Widgets.Select.prototype.button;
 
 /**
  * The list element.
@@ -77,7 +77,7 @@ widgets.Select.prototype.button;
  * @type {Element}
  * @protected
  */
-widgets.Select.prototype.list;
+Widgets.Select.prototype.list;
 
 /**
  * Flag indicating if the mouse is in the list.
@@ -90,12 +90,12 @@ widgets.Select.prototype.mouseInList;
 /**
  * Adds a new option to the options collection.
  *
- * @param {widgets.Option} option A new option to be added.
+ * @param {Widgets.Option} option A new option to be added.
  * @param {number} index The index position where the item will be added to. If
  *    no value is specified, it adds the option to the end of the list.
  * @return {void}
  */
-widgets.Select.prototype.addOption = function(option, index) {
+Widgets.Select.prototype.addOption = function(option, index) {
   index = (index == undefined) ? this.options.length : index;
   var pOpt = this.options[index];
 
@@ -119,7 +119,7 @@ widgets.Select.prototype.addOption = function(option, index) {
  *    list.
  * @return {void}
  */
-widgets.Select.prototype.removeOption = function(index) {
+Widgets.Select.prototype.removeOption = function(index) {
   index = (index == undefined) ? this.options.length-1 : index;
 
   this.options[index].unlisten('mousedown');
@@ -137,7 +137,7 @@ widgets.Select.prototype.removeOption = function(index) {
  * @return {void}
  * @public
  */
-widgets.Select.prototype.clearOptions = function() {
+Widgets.Select.prototype.clearOptions = function() {
   for (var i = this.options.length-1; i >= 0; i--) {
     this.removeOption();
   }
@@ -149,7 +149,7 @@ widgets.Select.prototype.clearOptions = function() {
  * @return {boolean} true if opened, false otherwise.
  * @public
  */
-widgets.Select.prototype.isListOpened = function() {
+Widgets.Select.prototype.isListOpened = function() {
   return this.list.getAttribute('aria-hidden') != 'true';
 };
 
@@ -159,7 +159,7 @@ widgets.Select.prototype.isListOpened = function() {
  * @return {void}
  * @protected
  */
-widgets.Select.prototype.showList = function() {
+Widgets.Select.prototype.showList = function() {
   if (!this.list.style.top) {
     this.list.style.top =
       (this.button.offsetTop + this.button.offsetHeight) + 'px';
@@ -177,7 +177,7 @@ widgets.Select.prototype.showList = function() {
  * @return {void}
  * @public
  */
-widgets.Select.prototype.closeList = function() {
+Widgets.Select.prototype.closeList = function() {
   this.list.style.zIndex = 0;
   this.list.setAttribute('aria-hidden', true);
 };
@@ -187,7 +187,7 @@ widgets.Select.prototype.closeList = function() {
  *
  * @return {number} The previous index.
  */
-widgets.Select.prototype.previousIndex = function() {
+Widgets.Select.prototype.previousIndex = function() {
   var currentIndex = this.index;
 
   while (currentIndex > 0) {
@@ -204,7 +204,7 @@ widgets.Select.prototype.previousIndex = function() {
  *
  * @return {number} The next index.
  */
-widgets.Select.prototype.nextIndex = function() {
+Widgets.Select.prototype.nextIndex = function() {
   var currentIndex = this.index;
 
   while (currentIndex < (this.options.length - 1)) {
@@ -222,7 +222,7 @@ widgets.Select.prototype.nextIndex = function() {
  * @return {void}
  * @protected
  */
-widgets.Select.prototype.commit = function() {
+Widgets.Select.prototype.commit = function() {
   this.chosen = this.options[this.index];
   this.button.children[0].innerHTML = this.chosen.getCaption();
   this.dispatch('change', this);
@@ -234,7 +234,7 @@ widgets.Select.prototype.commit = function() {
  * @return {void}
  * @protected
  */
-widgets.Select.prototype.release = function() {
+Widgets.Select.prototype.release = function() {
   this.chosen = null;
 };
 
@@ -244,7 +244,7 @@ widgets.Select.prototype.release = function() {
  * @return {string} The current value.
  * @public
  */
-widgets.Select.prototype.getValue = function() {
+Widgets.Select.prototype.getValue = function() {
   if (this.chosen) {
     return this.chosen.getValue();
   }
@@ -258,7 +258,7 @@ widgets.Select.prototype.getValue = function() {
  * @return {void}
  * @public
  */
-widgets.Select.prototype.setValue = function(val) {
+Widgets.Select.prototype.setValue = function(val) {
   if (this.index >= 0) {
     this.chosen.dom.className = '';
   }
@@ -278,7 +278,7 @@ widgets.Select.prototype.setValue = function(val) {
  * @return {string} The current text.
  * @public
  */
-widgets.Select.prototype.getText = function() {
+Widgets.Select.prototype.getText = function() {
   if (this.chosen) {
     return this.chosen.getCaption();
   }
@@ -291,7 +291,7 @@ widgets.Select.prototype.getText = function() {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Select.prototype.onBlur = function(e) {
+Widgets.Select.prototype.onBlur = function(e) {
   if (!this.mouseInList) {
     this.closeList();
   }
@@ -304,7 +304,7 @@ widgets.Select.prototype.onBlur = function(e) {
  * @param {Event} e Event information.
  * @public
  */
-widgets.Select.prototype.onKeyDown = function(e) {
+Widgets.Select.prototype.onKeyDown = function(e) {
   if (e.altKey) return true;
   var diff = 0, total = 0;
   var nav = false, prevIndex = this.index;
@@ -384,7 +384,7 @@ widgets.Select.prototype.onKeyDown = function(e) {
  * @param {Event} e Event information.
  * @return {boolean} false to stop it as soon as captured.
  */
-widgets.Select.prototype.onMouseDown = function(e) {
+Widgets.Select.prototype.onMouseDown = function(e) {
   this.button.focus();
   
   if (e.target == this.button || e.target.parentNode == this.button) {
@@ -405,7 +405,7 @@ widgets.Select.prototype.onMouseDown = function(e) {
  * @param {Event} e Event information.
  * @public
  */
-widgets.Select.prototype.onOptionClick = function(e) {
+Widgets.Select.prototype.onOptionClick = function(e) {
   if (e.which == 1 || (e.buttons == 1 || e.buttons == 3)) {
     for (var i = 0; i < this.options.length; i++) {
       if (e.currentTarget == this.options[i].dom) {
@@ -423,7 +423,7 @@ widgets.Select.prototype.onOptionClick = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.Select.prototype.onOptionHover = function(e) {
+Widgets.Select.prototype.onOptionHover = function(e) {
   if (this.options[this.index]) {
     this.options[this.index].dom.className = '';
   }
@@ -441,7 +441,7 @@ widgets.Select.prototype.onOptionHover = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.Select.prototype.onMouseEnterList = function(e) {
+Widgets.Select.prototype.onMouseEnterList = function(e) {
   this.mouseInList = true;
 };
 
@@ -452,7 +452,7 @@ widgets.Select.prototype.onMouseEnterList = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.Select.prototype.onMouseLeaveList = function(e) {
+Widgets.Select.prototype.onMouseLeaveList = function(e) {
   this.mouseInList = false;
 };
 
@@ -460,7 +460,7 @@ widgets.Select.prototype.onMouseLeaveList = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.Select.prototype.listen = function(type, func, obj) {
+Widgets.Select.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'blur':
     this.addListener(type, func, obj);
@@ -478,14 +478,14 @@ widgets.Select.prototype.listen = function(type, func, obj) {
     this.list.addEventListener('mouseleave', this.listeners[type], false);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Select.prototype.unlisten = function(type) {
+Widgets.Select.prototype.unlisten = function(type) {
   switch (type) {
   case 'blur':
     this.button.removeEventListener(type, this.listeners[type], false);
@@ -503,14 +503,14 @@ widgets.Select.prototype.unlisten = function(type) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Select.prototype.flourish = function() {
+Widgets.Select.prototype.flourish = function() {
   this.dom.className = 'select';
   this.dom.innerHTML = "\
 <div class='button' tabindex='0'>\
@@ -528,7 +528,7 @@ widgets.Select.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Select.prototype.destroy = function() {
+Widgets.Select.prototype.destroy = function() {
   this.unlisten('blur');
   this.unlisten('keydown');
   this.unlisten('mousedown');
@@ -542,5 +542,5 @@ widgets.Select.prototype.destroy = function() {
   this.list = null;
   this.mouseInList = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

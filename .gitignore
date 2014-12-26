@@ -1,16 +1,16 @@
 *.o
 *.obj
 
-tools/*.exe
-tools/php-cgi
-tools/umcomp
-tools/umdeps
-tools/umserver
+Tools/*.exe
+Tools/php-cgi
+Tools/umcomp
+Tools/umdeps
+Tools/umserver
 
-work/*
-!work/demos
-!work/posters
-!work/sayings
-!work/utils
-!work/widgets
-!work/primitives.js
+Work/*
+!Work/Demos
+!Work/Posters
+!Work/Sayings
+!Work/Utils
+!Work/Widgets
+!Work/Primitives.js

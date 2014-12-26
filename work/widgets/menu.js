@@ -8,34 +8,34 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Menu} class.
+ * @fileoverview This file defines the {@code Widgets.Menu} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The menu widget is to be used with a list of menuitems.
  * This widget provides the following event(s): action.
  *
  * @param {Element} dom Root element for the menu.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Menu = function(dom) {
+Widgets.Menu = function(dom) {
   this.items = new Array();
   this.indexHigh = -1;
-  widgets.Base.call(this, dom);
+  Widgets.Base.call(this, dom);
 };
-inherit(widgets.Menu, widgets.Base);
+inherit(Widgets.Menu, Widgets.Base);
 
 /**
  * Contains the collection of menu items.
  *
- * @type {Array.<widgets.MenuItem|widgets.MenuSeparator>}
+ * @type {Array.<Widgets.MenuItem|Widgets.MenuSeparator>}
  * @public
  */
-widgets.Menu.prototype.items;
+Widgets.Menu.prototype.items;
 
 /**
  * Contains the index of the highlighted item.
@@ -43,17 +43,17 @@ widgets.Menu.prototype.items;
  * @type {number}
  * @public
  */
-widgets.Menu.prototype.indexHigh;
+Widgets.Menu.prototype.indexHigh;
 
 /**
  * Adds a new item to the items collection.
  *
- * @param {widgets.MenuItem|widgets.MenuSeparator} item A new item to be added.
+ * @param {Widgets.MenuItem|Widgets.MenuSeparator} item A new item to be added.
  * @param {number} index The index position where the item will be added to. If
  *    no value is specified, it adds the item to the end of the list.
  * @return {void}
  */
-widgets.Menu.prototype.addItem = function(item, index) {
+Widgets.Menu.prototype.addItem = function(item, index) {
   index = (index == undefined) ? this.items.length : index;
   this.items.splice(index, 0, item);
   this.dom.insertBefore(item.dom, this.dom.children[index]);
@@ -69,7 +69,7 @@ widgets.Menu.prototype.addItem = function(item, index) {
  *    list.
  * @return {void}
  */
-widgets.Menu.prototype.removeItem = function(index) {
+Widgets.Menu.prototype.removeItem = function(index) {
   index = (index == undefined) ? this.items.length-1 : index;
   this.items[index].unlisten('highlight');
   this.items[index].unlisten('action');
@@ -86,7 +86,7 @@ widgets.Menu.prototype.removeItem = function(index) {
  * @param {string} id IDREF of the item to be removed.
  * @return {void}
  */
-widgets.Menu.prototype.removeItemById = function(id) {
+Widgets.Menu.prototype.removeItemById = function(id) {
   for (var i = 0; i < this.items.length; i++) {
     if (id == this.items[i].dom.id) {
       this.removeItem(i);
@@ -100,7 +100,7 @@ widgets.Menu.prototype.removeItemById = function(id) {
  *
  * @return {void}
  */
-widgets.Menu.prototype.reset = function() {
+Widgets.Menu.prototype.reset = function() {
   var hItem = this.items[this.indexHigh];
   if (hItem) {
     hItem.highlight(false);
@@ -115,36 +115,36 @@ widgets.Menu.prototype.reset = function() {
  * @inheritDoc
  * @override
  */
-widgets.Menu.prototype.listen = function(type, func, obj) {
+Widgets.Menu.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'action':
     this.addListener(type, func, obj);
     for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i] instanceof widgets.MenuItem) {
+      if (this.items[i] instanceof Widgets.MenuItem) {
         this.items[i].listen(type, func, obj);
       }
     }
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Menu.prototype.unlisten = function(type) {
+Widgets.Menu.prototype.unlisten = function(type) {
   switch (type) {
   case 'action':
     this.removeListeners(type);
     for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i] instanceof widgets.MenuItem) {
+      if (this.items[i] instanceof Widgets.MenuItem) {
         this.items[i].unlisten(type);
       }
     }
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type);
+  Widgets.Base.prototype.unlisten.call(this, type);
 };
 
 /**
@@ -153,7 +153,7 @@ widgets.Menu.prototype.unlisten = function(type) {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.Menu.prototype.onItemHighlight = function(item) {
+Widgets.Menu.prototype.onItemHighlight = function(item) {
   var prevItem = this.items[this.indexHigh];
   if (prevItem) {
     prevItem.highlight(false);
@@ -175,7 +175,7 @@ widgets.Menu.prototype.onItemHighlight = function(item) {
  * @inheritDoc
  * @override
  */
-widgets.Menu.prototype.flourish = function() {
+Widgets.Menu.prototype.flourish = function() {
   this.dom.setAttribute('role', 'menu');
   this.dom.innerHTML = "";
 };
@@ -184,7 +184,7 @@ widgets.Menu.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.Menu.prototype.destroy = function() {
+Widgets.Menu.prototype.destroy = function() {
   this.unlisten('mouseover');
   this.unlisten('click');
 
@@ -195,5 +195,5 @@ widgets.Menu.prototype.destroy = function() {
   this.items = null;
   this.indexHigh = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

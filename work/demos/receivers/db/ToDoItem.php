@@ -11,7 +11,7 @@
 /**
  * A class that represents the arm_address table with its business rules.
  */
-class db_TodoItem extends db_Base {
+class db_ToDoItem extends db_Base {
   function read($query, $order, $p, $rpp, $total=true) {
     $dictionary = array(
       'id' => array('todo_item.id'),

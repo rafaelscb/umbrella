@@ -8,12 +8,12 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.Form} class.
+ * @fileoverview This file defines the {@code Widgets.Form} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
-include('posters/base.js');
+include('Widgets/Base.js');
+include('Posters/Base.js');
 
 /**
  * The form widget is to be used when there is a need to submit a set
@@ -23,18 +23,18 @@ include('posters/base.js');
  * the events: submit, reset and response.
  *
  * @param {Element} dom Root element for the form.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.Form = function(dom, poster) {
-  widgets.Base.call(this, dom);
+Widgets.Form = function(dom, poster) {
+  Widgets.Base.call(this, dom);
   this.poster = poster;
   this.listen('keypress', this.onKeyPress, this);
   this.listen('submit', this.onSubmit, this);
   this.listen('reset', this.onReset, this);
   this.listen('response', this.onResponse, this);
 };
-inherit(widgets.Form, widgets.Base);
+inherit(Widgets.Form, Widgets.Base);
 
 /**
  * The poster to be used to post the form.
@@ -42,7 +42,7 @@ inherit(widgets.Form, widgets.Base);
  * @type {posters.Base}
  * @protected
  */
-widgets.Form.prototype.poster;
+Widgets.Form.prototype.poster;
 
 /**
  * The button that submits the form. This button is optional.
@@ -50,7 +50,7 @@ widgets.Form.prototype.poster;
  * @type {widgets.Button}
  * @protected
  */
-widgets.Form.prototype.submitButton;
+Widgets.Form.prototype.submitButton;
 
 /*
  * The button that resets the form. This button is optional.
@@ -58,7 +58,7 @@ widgets.Form.prototype.submitButton;
  * @type {widgets.Button}
  * @protected
  */
-widgets.Form.prototype.resetButton;
+Widgets.Form.prototype.resetButton;
 
 /**
  * Occurs everytime we press a key in the form element.
@@ -67,7 +67,7 @@ widgets.Form.prototype.resetButton;
  * @return {void}
  * @protected
  */
-widgets.Form.prototype.onKeyPress = function(e) {
+Widgets.Form.prototype.onKeyPress = function(e) {
   if (e.keyCode == 13) {
     this.dispatch('submit', e);
   } else if (e.keyCode == 27) {
@@ -83,7 +83,7 @@ widgets.Form.prototype.onKeyPress = function(e) {
  * @return {void}
  * @protected
  */
-widgets.Form.prototype.onSubmit = function(e) { };
+Widgets.Form.prototype.onSubmit = function(e) { };
 
 /**
  * Occurs everytime it dispatches the 'reset' message, such
@@ -93,7 +93,7 @@ widgets.Form.prototype.onSubmit = function(e) { };
  * @return {void}
  * @protected
  */
-widgets.Form.prototype.onReset = function(e) { };
+Widgets.Form.prototype.onReset = function(e) { };
 
 /**
  * Occurs everytime the poster dispatches the 'response' message.
@@ -102,14 +102,14 @@ widgets.Form.prototype.onReset = function(e) { };
  * @return {void}
  * @protected
  */
-widgets.Form.prototype.onResponse =
+Widgets.Form.prototype.onResponse =
 function(code, from, action, message) { };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Form.prototype.listen = function(type, func, obj) {
+Widgets.Form.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'submit':
     this.addListener(type, func, obj);
@@ -128,14 +128,14 @@ widgets.Form.prototype.listen = function(type, func, obj) {
     this.poster.listen('response', this.onResponse, this);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Form.prototype.unlisten = function(type, func, obj) {
+Widgets.Form.prototype.unlisten = function(type, func, obj) {
   switch (type) {
   case 'submit':
     if (this.submitButton) {
@@ -154,14 +154,14 @@ widgets.Form.prototype.unlisten = function(type, func, obj) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type, func, obj);
+  Widgets.Base.prototype.unlisten.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.Form.prototype.destroy = function() {
+Widgets.Form.prototype.destroy = function() {
   this.unlisten('keypress');
   this.unlisten('submit');
   this.unlisten('reset');
@@ -179,5 +179,5 @@ widgets.Form.prototype.destroy = function() {
   this.submitButton = null;
   this.resetButton = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

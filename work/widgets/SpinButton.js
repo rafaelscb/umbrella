@@ -8,11 +8,11 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.SpinButton} class.
+ * @fileoverview This file defines the {@code Widgets.SpinButton} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The spin button widget allows the user to select from a given range through
@@ -24,11 +24,11 @@ include('widgets/base.js');
  * @param {number} incr The incrementation factor.
  * @param {number} incrp The incremantation factor for page up|down.
  * @param {number} val The initial value.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.SpinButton = function(dom, min, max, incr, incrp, val) {
-  widgets.Base.call(this, dom);
+Widgets.SpinButton = function(dom, min, max, incr, incrp, val) {
+  Widgets.Base.call(this, dom);
 
   incrp = (!incrp) ? incr : incrp;
   val = (val != undefined) ? val : min;
@@ -49,7 +49,7 @@ widgets.SpinButton = function(dom, min, max, incr, incrp, val) {
   this.listen('downclick', this.onDownClick, this);
   this.listen('keydown', this.onKeyDown, this);
 };
-inherit(widgets.SpinButton, widgets.Base);
+inherit(Widgets.SpinButton, Widgets.Base);
 
 /**
  * The label element.
@@ -57,7 +57,7 @@ inherit(widgets.SpinButton, widgets.Base);
  * @type {Element}
  * @protected
  */
-widgets.SpinButton.prototype.label;
+Widgets.SpinButton.prototype.label;
 
 /**
  * The up element.
@@ -65,7 +65,7 @@ widgets.SpinButton.prototype.label;
  * @type {Element}
  * @protected
  */
-widgets.SpinButton.prototype.up;
+Widgets.SpinButton.prototype.up;
 
 /**
  * The down element.
@@ -73,7 +73,7 @@ widgets.SpinButton.prototype.up;
  * @type {Element}
  * @protected
  */
-widgets.SpinButton.prototype.down;
+Widgets.SpinButton.prototype.down;
 
 /**
  * The increment factor.
@@ -81,7 +81,7 @@ widgets.SpinButton.prototype.down;
  * @type {number}
  * @protected
  */
-widgets.SpinButton.prototype.incr;
+Widgets.SpinButton.prototype.incr;
 
 /**
  * The increment (for page) factor.
@@ -89,7 +89,7 @@ widgets.SpinButton.prototype.incr;
  * @type {number}
  * @protected
  */
-widgets.SpinButton.prototype.incrp;
+Widgets.SpinButton.prototype.incrp;
 
 /**
  * The flag that indicates the spin button has numbers with decimal places.
@@ -97,7 +97,7 @@ widgets.SpinButton.prototype.incrp;
  * @type {boolean}
  * @protected
  */
-widgets.SpinButton.prototype.hasDecimal;
+Widgets.SpinButton.prototype.hasDecimal;
 
 /**
  * Gets the minimum allowed value.
@@ -105,7 +105,7 @@ widgets.SpinButton.prototype.hasDecimal;
  * @return {number} The aria-valuemin property.
  * @public
  */
-widgets.SpinButton.prototype.getMin = function() {
+Widgets.SpinButton.prototype.getMin = function() {
   return Number(this.dom.getAttribute('aria-valuemin'));
 };
 
@@ -116,7 +116,7 @@ widgets.SpinButton.prototype.getMin = function() {
  * @return {void}
  * @public
  */
-widgets.SpinButton.prototype.setMin = function(val) {
+Widgets.SpinButton.prototype.setMin = function(val) {
   this.dom.setAttribute('aria-valuemin', val);
 };
 
@@ -126,7 +126,7 @@ widgets.SpinButton.prototype.setMin = function(val) {
  * @return {number} The aria-valuemax property.
  * @public
  */
-widgets.SpinButton.prototype.getMax = function() {
+Widgets.SpinButton.prototype.getMax = function() {
   return Number(this.dom.getAttribute('aria-valuemax'));
 };
 
@@ -137,7 +137,7 @@ widgets.SpinButton.prototype.getMax = function() {
  * @return {void}
  * @public
  */
-widgets.SpinButton.prototype.setMax = function(val) {
+Widgets.SpinButton.prototype.setMax = function(val) {
   this.dom.setAttribute('aria-valuemax', val);
 };
 
@@ -147,7 +147,7 @@ widgets.SpinButton.prototype.setMax = function(val) {
  * @return {number} The aria-valuenow property.
  * @public
  */
-widgets.SpinButton.prototype.getNumValue = function() {
+Widgets.SpinButton.prototype.getNumValue = function() {
   return Number(this.dom.getAttribute('aria-valuenow'));
 };
 
@@ -157,7 +157,7 @@ widgets.SpinButton.prototype.getNumValue = function() {
  * @return {number} The aria-valuenow property.
  * @public
  */
-widgets.SpinButton.prototype.getValue = function() {
+Widgets.SpinButton.prototype.getValue = function() {
   return this.dom.getAttribute('aria-valuenow');
 };
 
@@ -168,7 +168,7 @@ widgets.SpinButton.prototype.getValue = function() {
  * @return {void}
  * @public
  */
-widgets.SpinButton.prototype.setValue = function(val) {
+Widgets.SpinButton.prototype.setValue = function(val) {
   if (this.hasDecimal) {
     val = val.toFixed(2);
   }
@@ -182,7 +182,7 @@ widgets.SpinButton.prototype.setValue = function(val) {
  * @return {void}
  * @protected
  */
-widgets.SpinButton.prototype.decrement = function() {
+Widgets.SpinButton.prototype.decrement = function() {
   var min = this.getMin();
   var nextValue = this.getNumValue() - this.incr;
   if (nextValue < min) {
@@ -197,7 +197,7 @@ widgets.SpinButton.prototype.decrement = function() {
  * @return {void}
  * @protected
  */
-widgets.SpinButton.prototype.increment = function() {
+Widgets.SpinButton.prototype.increment = function() {
   var max = this.getMax();
   var nextValue = this.getNumValue() + this.incr;
   if (nextValue > max) {
@@ -212,7 +212,7 @@ widgets.SpinButton.prototype.increment = function() {
  * @return {void}
  * @protected
  */
-widgets.SpinButton.prototype.decrementP = function() {
+Widgets.SpinButton.prototype.decrementP = function() {
   var min = this.getMin();
   var nextValue = this.getNumValue() - this.incrp;
   if (nextValue < min) {
@@ -227,7 +227,7 @@ widgets.SpinButton.prototype.decrementP = function() {
  * @return {void}
  * @protected
  */
-widgets.SpinButton.prototype.incrementP = function() {
+Widgets.SpinButton.prototype.incrementP = function() {
   var max = this.getMax();
   var nextValue = this.getNumValue() + this.incrp;
   if (nextValue > max) {
@@ -242,7 +242,7 @@ widgets.SpinButton.prototype.incrementP = function() {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.SpinButton.prototype.onUpClick = function(e) {
+Widgets.SpinButton.prototype.onUpClick = function(e) {
   if (e.which == 1) {
     this.increment();
   }
@@ -254,7 +254,7 @@ widgets.SpinButton.prototype.onUpClick = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.SpinButton.prototype.onDownClick = function(e) {
+Widgets.SpinButton.prototype.onDownClick = function(e) {
   if (e.which == 1) {
     this.decrement();
   }
@@ -267,7 +267,7 @@ widgets.SpinButton.prototype.onDownClick = function(e) {
  * @param {Event} e Event information.
  * @protected
  */
-widgets.SpinButton.prototype.onKeyDown = function(e) {
+Widgets.SpinButton.prototype.onKeyDown = function(e) {
   if (e.altKey) return true;
   var nav = false;
 
@@ -303,7 +303,7 @@ widgets.SpinButton.prototype.onKeyDown = function(e) {
  * @inheritDoc
  * @override
  */
-widgets.SpinButton.prototype.listen = function(type, func, obj) {
+Widgets.SpinButton.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'upclick':
     this.addListener(type, func, obj);
@@ -314,14 +314,14 @@ widgets.SpinButton.prototype.listen = function(type, func, obj) {
     this.down.addEventListener('mousedown', this.listeners[type], false);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.SpinButton.prototype.unlisten = function(type, func, obj) {
+Widgets.SpinButton.prototype.unlisten = function(type, func, obj) {
   switch (type) {
   case 'upclick':
     this.up.removeEventListener('click', this.listeners[type], false);
@@ -332,14 +332,14 @@ widgets.SpinButton.prototype.unlisten = function(type, func, obj) {
     this.removeListener(type);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type, func, obj);
+  Widgets.Base.prototype.unlisten.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.SpinButton.prototype.flourish = function() {
+Widgets.SpinButton.prototype.flourish = function() {
   this.dom.setAttribute('role', 'spinbutton');
   if (!this.dom.hasAttribute('tabindex')) {
     this.dom.setAttribute('tabindex', '0');
@@ -358,7 +358,7 @@ widgets.SpinButton.prototype.flourish = function() {
  * @inheritDoc
  * @override
  */
-widgets.SpinButton.prototype.destroy = function() {
+Widgets.SpinButton.prototype.destroy = function() {
   this.unlisten('upclick');
   this.unlisten('downclick');
   this.unlisten('keydown');
@@ -370,5 +370,5 @@ widgets.SpinButton.prototype.destroy = function() {
   this.incrp = null;
   this.hasDecimal = null;
 
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };

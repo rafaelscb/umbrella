@@ -8,22 +8,22 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code widgets.SmoothWheel} class.
+ * @fileoverview This file defines the {@code Widgets.SmoothWheel} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * This widget takes a given container and adds the smooth scrolling
  * effect.
  *
  * @param {Element} dom Root element to add the smooth scrolling.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
-widgets.SmoothWheel = function(dom) {
-  widgets.Base.call(this, dom);
+Widgets.SmoothWheel = function(dom) {
+  Widgets.Base.call(this, dom);
 
   this.friction = 0.95;
   this.vy = 0;
@@ -42,7 +42,7 @@ widgets.SmoothWheel = function(dom) {
     this.animateLoop();
   }
 };
-inherit(widgets.SmoothWheel, widgets.Base);
+inherit(Widgets.SmoothWheel, Widgets.Base);
 
 /**
  * Flag to identify if the wheel is running.
@@ -50,18 +50,18 @@ inherit(widgets.SmoothWheel, widgets.Base);
  * @type {boolean}
  * @protected
  */
-widgets.SmoothWheel.prototype.running;
-widgets.SmoothWheel.prototype.currentY;
-widgets.SmoothWheel.prototype.targetY;
-widgets.SmoothWheel.prototype.oldY;
-widgets.SmoothWheel.prototype.maxScrollTop;
-widgets.SmoothWheel.prototype.minScrollTop;
-widgets.SmoothWheel.prototype.direction;
-widgets.SmoothWheel.prototype.friction;
-widgets.SmoothWheel.prototype.vy;
-widgets.SmoothWheel.prototype.stepAmt;
-widgets.SmoothWheel.prototype.minMovement;
-widgets.SmoothWheel.prototype.ts;
+Widgets.SmoothWheel.prototype.running;
+Widgets.SmoothWheel.prototype.currentY;
+Widgets.SmoothWheel.prototype.targetY;
+Widgets.SmoothWheel.prototype.oldY;
+Widgets.SmoothWheel.prototype.maxScrollTop;
+Widgets.SmoothWheel.prototype.minScrollTop;
+Widgets.SmoothWheel.prototype.direction;
+Widgets.SmoothWheel.prototype.friction;
+Widgets.SmoothWheel.prototype.vy;
+Widgets.SmoothWheel.prototype.stepAmt;
+Widgets.SmoothWheel.prototype.minMovement;
+Widgets.SmoothWheel.prototype.ts;
 
 /**
  * Animates the loop.
@@ -69,7 +69,7 @@ widgets.SmoothWheel.prototype.ts;
  * @return {void}
  * @protected
  */
-widgets.SmoothWheel.prototype.animateLoop = function() {
+Widgets.SmoothWheel.prototype.animateLoop = function() {
   if (!this.running) return;
   requestAnimFrame(this.animateLoop.bind(this));
   this.render();
@@ -81,7 +81,7 @@ widgets.SmoothWheel.prototype.animateLoop = function() {
  * @param {Event} e Event information.
  * @return {void}
  */
-widgets.SmoothWheel.prototype.onMouseWheel = function(e) {
+Widgets.SmoothWheel.prototype.onMouseWheel = function(e) {
   var delta = e.detail ? e.detail * -1 : e.wheelDelta / 40;
   var dir = delta < 0 ? -1 : 1;
   if (dir != this.direction) {
@@ -100,7 +100,7 @@ widgets.SmoothWheel.prototype.onMouseWheel = function(e) {
  * @return {void}
  * @protected
  */
-widgets.SmoothWheel.prototype.updateScrollTarget = function(amt) {
+Widgets.SmoothWheel.prototype.updateScrollTarget = function(amt) {
   this.targetY += amt;
   this.vy += (this.targetY - this.oldY) * this.stepAmt;
   this.oldY = this.targetY;
@@ -112,7 +112,7 @@ widgets.SmoothWheel.prototype.updateScrollTarget = function(amt) {
  * @return {void}
  * @protected
  */
-widgets.SmoothWheel.prototype.render = function() {
+Widgets.SmoothWheel.prototype.render = function() {
   if (this.vy < -(this.minMovement) || this.vy > this.minMovement) {
     this.currentY = (this.currentY + this.vy);
     if (this.currentY > this.maxScrollTop) {
@@ -136,7 +136,7 @@ widgets.SmoothWheel.prototype.render = function() {
  *
  * @return {Function}
  */
-widgets.SmoothWheel.prototype.normalizeWheelDelta = function() {
+Widgets.SmoothWheel.prototype.normalizeWheelDelta = function() {
   var distribution = [], done = null, scale = 30;
   return function(n) {
     // Zeroes don't count.
@@ -165,7 +165,7 @@ widgets.SmoothWheel.prototype.normalizeWheelDelta = function() {
  * @inheritDoc
  * @override
  */
-widgets.SmoothWheel.prototype.listen = function(type, func, obj) {
+Widgets.SmoothWheel.prototype.listen = function(type, func, obj) {
   switch (type) {
   case 'mousewheel':
     this.addListener(type, func, obj);
@@ -173,14 +173,14 @@ widgets.SmoothWheel.prototype.listen = function(type, func, obj) {
     this.dom.addEventListener('DOMMouseScroll', this.listeners[type], false);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.SmoothWheel.prototype.unlisten = function(type, func, obj) {
+Widgets.SmoothWheel.prototype.unlisten = function(type, func, obj) {
   switch (type) {
   case 'mousewheel':
     this.dom.removeEventListener('DOMMouseScroll', this.listeners[type], false);
@@ -188,16 +188,16 @@ widgets.SmoothWheel.prototype.unlisten = function(type, func, obj) {
     this.removeListener(type, func, obj);
     return;
   }
-  widgets.Base.prototype.unlisten.call(this, type, func, obj);
+  Widgets.Base.prototype.unlisten.call(this, type, func, obj);
 };
 
 /**
  * @inheritDoc
  * @override
  */
-widgets.SmoothWheel.prototype.destroy = function() {
+Widgets.SmoothWheel.prototype.destroy = function() {
   this.unlisten('mousewheel');
-  widgets.Base.prototype.destroy.call(this);
+  Widgets.Base.prototype.destroy.call(this);
 };
 
 /**

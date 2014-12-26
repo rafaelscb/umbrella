@@ -150,10 +150,10 @@ h3 {
   user-select: none;
 }
 [role='checkbox'][aria-checked='true'] {
-  background: #fff url(images/check-sprite.gif) no-repeat 2px center;
+  background: #fff url(Images/CheckSprite.gif) no-repeat 2px center;
 }
 [role='checkbox'][aria-checked='mixed'] {
-  background: #bbb url(images/check-sprite.gif) no-repeat 2px center;  
+  background: #bbb url(Images/CheckSprite.gif) no-repeat 2px center;  
 }
 [role='checkbox'][aria-disabled='true'] {
   border: solid 1px gray;
@@ -182,7 +182,7 @@ h3 {
   box-shadow: 0 0 3px darkcyan;
 }
 [role='radio'][aria-checked='true'] {
-  background: #fff url(images/radio-bullet.gif) no-repeat 2px center;
+  background: #fff url(Images/RadioBullet.gif) no-repeat 2px center;
 }
 [role='radio'][aria-disabled='true'] {
   border: solid 1px gray;
@@ -670,11 +670,11 @@ h3 {
 }
 
 [role='treeitem'][aria-expanded='false'] .inner .content .arrow {
-  background: url(images/arrow-right.png) no-repeat 6px 8px;
+  background: url(Images/ArrowRight.png) no-repeat 6px 8px;
 }
 
 [role='treeitem'][aria-expanded='true'] .inner .content .arrow {
-  background: url(images/arrow-down.png) no-repeat 4px 9px;
+  background: url(Images/ArrowDown.png) no-repeat 4px 9px;
 }
 
 [role='treeitem'] .inner .content .arrow.hovered,
