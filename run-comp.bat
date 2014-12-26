@@ -21,7 +21,8 @@ if "%lang%" == "multi" (
 )
 set out_css=results\%app%.css
 for /f "delims=." %%a in ("%app%") do (
-  set res_path=assets/%%a/
+  :: set res_path=assets/%%a/
+  set res_path=global/%%a/
   goto :break
 )
 :break

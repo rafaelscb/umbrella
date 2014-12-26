@@ -4,9 +4,10 @@
 
 set deps=..\..\tools\umdeps.exe
 set app_dir=work\%1
-set res_dir=assets/
+:: set res_dir=assets/
+set res_dir=global/
 set base_dir_from_app_dir=..
-set final=deps.js
+set final=global\deps.js
 
 if "%2" == "" (
   set lang=multi

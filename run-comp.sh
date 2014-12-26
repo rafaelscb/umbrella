@@ -11,7 +11,8 @@ else
 fi
 out_css=results/${app}.css
 
-res_path=assets/`echo $app | cut -d'.' -f1`/
+#res_path=assets/`echo $app | cut -d'.' -f1`/
+res_path=global/`echo $app | cut -d'.' -f1`/
 
 if [ ! -s "$main_path" ]; then
   echo "ERROR: Directory '$main_path' non-existent."

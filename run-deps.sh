@@ -2,9 +2,10 @@
 
 deps=../../tools/umdeps
 app_dir=work/$1
-res_dir=assets/
+#res_dir=assets/
+res_dir=global
 base_dir_from_app_dir=..
-final=deps.js
+final=global/deps.js
 lang=${2:-multi}
 
 if [ ! -d "$app_dir" ]; then
