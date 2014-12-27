@@ -22,7 +22,7 @@ include('Widgets/Base.js');
  * @constructor
  */
 Widgets.Textbox = function(dom) {
-  widgets.Base.call(this, dom);
+  Widgets.Base.call(this, dom);
   this.setMultiline(this.dom.tagName == 'TEXTAREA');
 };
 inherit(Widgets.Textbox, Widgets.Base);
