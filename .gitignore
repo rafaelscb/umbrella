@@ -1,6 +1,11 @@
 *.o
 *.obj
+*.ilk
+*.suo
 
+Tools/Debug
+Tools/Release
+Tools/umtools.sdf
 Tools/*.exe
 Tools/php-cgi
 Tools/umcomp

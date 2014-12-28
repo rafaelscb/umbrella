@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "umserver", "umserver.vcxproj", "{CE032E13-4C87-4657-86C8-1A394DC56E0C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "umdeps", "umdeps.vcxproj", "{6EDEDF46-2396-406F-A223-9CEC6DC4A7A8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "umcomp", "umcomp.vcxproj", "{50D6E345-BD42-4EC3-9832-9A99B537DB8E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE032E13-4C87-4657-86C8-1A394DC56E0C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CE032E13-4C87-4657-86C8-1A394DC56E0C}.Debug|Win32.Build.0 = Debug|Win32
+		{CE032E13-4C87-4657-86C8-1A394DC56E0C}.Release|Win32.ActiveCfg = Release|Win32
+		{CE032E13-4C87-4657-86C8-1A394DC56E0C}.Release|Win32.Build.0 = Release|Win32
+		{6EDEDF46-2396-406F-A223-9CEC6DC4A7A8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6EDEDF46-2396-406F-A223-9CEC6DC4A7A8}.Debug|Win32.Build.0 = Debug|Win32
+		{6EDEDF46-2396-406F-A223-9CEC6DC4A7A8}.Release|Win32.ActiveCfg = Release|Win32
+		{6EDEDF46-2396-406F-A223-9CEC6DC4A7A8}.Release|Win32.Build.0 = Release|Win32
+		{50D6E345-BD42-4EC3-9832-9A99B537DB8E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{50D6E345-BD42-4EC3-9832-9A99B537DB8E}.Debug|Win32.Build.0 = Debug|Win32
+		{50D6E345-BD42-4EC3-9832-9A99B537DB8E}.Release|Win32.ActiveCfg = Release|Win32
+		{50D6E345-BD42-4EC3-9832-9A99B537DB8E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
