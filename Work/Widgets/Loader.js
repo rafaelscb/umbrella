@@ -160,7 +160,7 @@ Widgets.Loader.prototype.resetArguments = function() {
 Widgets.Loader.prototype.onLoad = function(e) {
   this.dom = document.body;
   this.flourish();
-  
+
   this.resetArguments();
   this.initialize();
   this.load();
