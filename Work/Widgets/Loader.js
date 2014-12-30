@@ -12,7 +12,7 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('Widgets/Base.js');
+include("Widgets/Base.js");
 
 /**
  * The loader widget handles load and hashchange events.
@@ -31,7 +31,8 @@ Widgets.Loader = function(dom) {
     this.dom = dom;
     this.flourish();
   } else {
-    this.listen('load', this.onLoad, this);
+    this.listen("load", this.onLoad, this);
+    this.listen("hashchange", this.onHashChange, this);
   }
 };
 inherit(Widgets.Loader, Widgets.Base);
@@ -78,14 +79,17 @@ Widgets.Loader.prototype.getArgs = function() {
  */
 Widgets.Loader.prototype.listen = function(type, func, obj) {
   switch (type) {
-  case 'load':
+  case "load":
     this.addListener(type, func, obj);
-    window.addEventListener('load', this.listeners[type], false);
-    window.addEventListener('hashchange', this.listeners[type], false);
+    window.addEventListener("load", this.listeners[type], false);
     return;
-  case 'resize':
+  case "hashchange":
     this.addListener(type, func, obj);
-    window.addEventListener('resize', this.listeners[type], false);
+    window.addEventListener("hashchange", this.listeners[type], false);
+    return;
+  case "resize":
+    this.addListener(type, func, obj);
+    window.addEventListener("resize", this.listeners[type], false);
     return;
   }
   Widgets.Base.prototype.listen.call(this, type, func, obj);
@@ -97,13 +101,16 @@ Widgets.Loader.prototype.listen = function(type, func, obj) {
  */
 Widgets.Loader.prototype.unlisten = function(type) {
   switch (type) {
-  case 'load':
-    window.removeEventListener('load', this.listeners[type], false);
-    window.removeEventListener('hashchange', this.listeners[type], false);
+  case "load":
+    window.removeEventListener("load", this.listeners[type], false);
     this.removeListener(type, func, obj);
     return;
-  case 'resize':
-    window.removeEventListener('resize', this.listeners[type], false);
+  case "hashchange":
+    window.removeEventListener("hashchange", this.listeners[type], false);
+    this.removeListener(type, func, obj);
+    return;
+  case "resize":
+    window.removeEventListener("resize", this.listeners[type], false);
     this.removeListener(type, func, obj);
     return;
   }
@@ -111,12 +118,12 @@ Widgets.Loader.prototype.unlisten = function(type) {
 };
 
 /**
- * Resets the view name.
+ * Resets the arguments.
  *
  * @return {void}
  * @protected
  */
-Widgets.Loader.prototype.resetView = function() {
+Widgets.Loader.prototype.resetArguments = function() {
   this.args = new Array();
 
   var hash = window.location.hash.substring(1);
@@ -153,44 +160,45 @@ Widgets.Loader.prototype.resetView = function() {
 Widgets.Loader.prototype.onLoad = function(e) {
   this.dom = document.body;
   this.flourish();
+  
+  this.resetArguments();
+  this.initialize();
+  this.load();
 };
 
 /**
- * Handler function to update the view content whenever the load and
- * hashchange events occurs.
+ * Occurs every time the hash address has changed.
  *
  * @param {Event} e Event information.
  * @return {void}
  */
-Widgets.Loader.prototype.onLoad = function(e) {
-  var loading = false;
-
-  if (e.type == 'load') {
-    this.dom = document.body;
-    this.flourish();
-    loading = true;
-  }
-
-  this.resetView();
-
-  this.loadView(this.viewName, this.args);
+Widgets.Loader.prototype.onHashChange = function(e) {
+  this.resetArguments();
+  this.load();
 };
+
+/**
+ * Initializes any informatino need by the app.
+ *
+ * @param {Event} e Event information.
+ * @return {void}
+ */
+Widgets.Loader.prototype.initialize = function() {};
 
 /**
  * Receives the view name (with its arguments, if any) and updates the view
  * content accordingly.
  *
- * @param {string} viewName View name.
- * @param {Array} args Remaining arguments.
  * @return {void}
  */
-Widgets.Loader.prototype.loadView = function(viewName, args, loading) {};
+Widgets.Loader.prototype.load = function() {};
 
 /**
  * @inheritDoc
  * @override
  */
 Widgets.Loader.prototype.destroy = function() {
-  this.unlisten('load');
+  this.unlisten("load");
+  this.unlisten("hashchange");
   Widgets.Base.prototype.destroy.call(this);
 };
