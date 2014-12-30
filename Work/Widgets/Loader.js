@@ -37,6 +37,42 @@ Widgets.Loader = function(dom) {
 inherit(Widgets.Loader, Widgets.Base);
 
 /**
+ * Contains the view name.
+ *
+ * @type {string}
+ * @protected
+ */
+Widgets.Loader.prototype.viewName;
+
+/**
+ * Contains the remaining arguments for the view.
+ *
+ * @type {Array}
+ * @protected
+ */
+Widgets.Loader.prototype.args;
+
+/**
+ * Gets the view name.
+ *
+ * @return {string}
+ * @public
+ */
+Widgets.Loader.prototype.getViewName = function() {
+  return this.viewName;
+};
+
+/**
+ * Gets the arguments.
+ *
+ * @return {Array}
+ * @public
+ */
+Widgets.Loader.prototype.getArgs = function() {
+  return this.args;
+};
+
+/**
  * @inheritDoc
  * @override
  */
@@ -75,6 +111,51 @@ Widgets.Loader.prototype.unlisten = function(type) {
 };
 
 /**
+ * Resets the view name.
+ *
+ * @return {void}
+ * @protected
+ */
+Widgets.Loader.prototype.resetView = function() {
+  this.args = new Array();
+
+  var hash = window.location.hash.substring(1);
+  var arg = "";
+
+  for (var i = 0; i < hash.length; i++) {
+    if (hash[i] == "\\" && hash[i+1] == "/") {
+      i++;
+      arg = arg + "/";
+      continue;
+    }
+
+    if (hash[i] == "/") {
+      this.args.push(arg);
+      arg='';
+    } else {
+      arg = arg + hash[i];
+    }
+  }
+
+  if (arg) {
+    this.args.push(arg);
+  }
+
+  this.viewName = this.args.shift();  
+};
+
+/**
+ * Occurs every time the page is loaded.
+ *
+ * @param {Event} e Event information.
+ * @return {void}
+ */
+Widgets.Loader.prototype.onLoad = function(e) {
+  this.dom = document.body;
+  this.flourish();
+};
+
+/**
  * Handler function to update the view content whenever the load and
  * hashchange events occurs.
  *
@@ -82,31 +163,17 @@ Widgets.Loader.prototype.unlisten = function(type) {
  * @return {void}
  */
 Widgets.Loader.prototype.onLoad = function(e) {
+  var loading = false;
+
   if (e.type == 'load') {
     this.dom = document.body;
     this.flourish();
+    loading = true;
   }
-  var hash = window.location.hash.substring(1);
-  var args = new Array();
-  var arg = '';
-  for (var i = 0; i < hash.length; i++) {
-    if (hash[i] == '\\' && hash[i+1] == '/') {
-      i++;
-      arg = arg + '/';
-      continue;
-    }
-    if (hash[i] == '/') {
-      args.push(arg);
-      arg='';
-    } else {
-      arg = arg + hash[i];
-    }
-  }
-  if (arg) {
-    args.push(arg);
-  }
-  var viewName = args.shift();
-  this.loadView(viewName, args);
+
+  this.resetView();
+
+  this.loadView(this.viewName, this.args);
 };
 
 /**
@@ -117,7 +184,7 @@ Widgets.Loader.prototype.onLoad = function(e) {
  * @param {Array} args Remaining arguments.
  * @return {void}
  */
-Widgets.Loader.prototype.loadView = function(viewName, args) {};
+Widgets.Loader.prototype.loadView = function(viewName, args, loading) {};
 
 /**
  * @inheritDoc
