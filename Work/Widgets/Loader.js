@@ -43,7 +43,7 @@ inherit(Widgets.Loader, Widgets.Base);
  * @type {string}
  * @protected
  */
-Widgets.Loader.prototype.viewName;
+Widgets.Loader.prototype.pageName;
 
 /**
  * Contains the remaining arguments for the view.
@@ -59,8 +59,8 @@ Widgets.Loader.prototype.args;
  * @return {string}
  * @public
  */
-Widgets.Loader.prototype.getViewName = function() {
-  return this.viewName;
+Widgets.Loader.prototype.getPageName = function() {
+  return this.pageName;
 };
 
 /**
@@ -148,7 +148,7 @@ Widgets.Loader.prototype.resetArguments = function() {
     this.args.push(arg);
   }
 
-  this.viewName = this.args.shift();  
+  this.pageName = this.args.shift();
 };
 
 /**

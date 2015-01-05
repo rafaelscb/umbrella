@@ -66,7 +66,7 @@ Widgets.Notif.prototype.show = function(msg, action, cls) {
     'message': msg,
     'class': cls
   };
-  this.dom.className = cls;
+  this.dom.className = "notif " + cls;
   this.message.innerHTML = msg;
   this.setHidden(false);
 };
