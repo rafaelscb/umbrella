@@ -12,7 +12,7 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('Widgets/base.js');
+include('Widgets/Base.js');
 
 /**
  * The notif widget is to be used when we want to notify the user about
@@ -131,6 +131,7 @@ Widgets.Notif.prototype.unlisten = function(type, func, obj) {
  * @override
  */
 Widgets.Notif.prototype.flourish = function() {
+  this.dom.className = "notif";
   this.dom.innerHTML = "\
 <div class='bubble'>\
   <div class='message'>Notification...</div>\
