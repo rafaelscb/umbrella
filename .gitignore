@@ -13,6 +13,7 @@ Tools/umdeps
 Tools/umserver
 
 Work/*
+!Work/api.php
 !Work/Demos
 !Work/Posters
 !Work/Sayings
