@@ -56,6 +56,14 @@ var RES_PATH;
 var lang = "en";
 
 /**
+ * Internal counter for unique DOM ids.
+ *
+ * @type {number}
+ * @private
+ */
+var idCounter = 0;
+
+/**
  * Extends a given child class to have the same methods and properties fo the
  * parent class.
  *
@@ -133,6 +141,15 @@ function addDep(jsFile, files) {
     obj = obj[nsp[i]];
   }
 };
+
+/**
+ * Generates an unique id to be used in DOM elements.
+ *
+ * @return {string} The resulting id.
+ */
+function newId() {
+  return "UMID" + (++idCounter);
+}
 
 /**
  * Function to format strings.
