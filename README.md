@@ -5,6 +5,8 @@ Umbrella is a set of classes and tools to build JavaScript applications.
 With Umbrella you create a single HTML file and inherit your JavaScript
 classes from Umbrella classes.
 
+IMPORTANT! It works only on Windows and Linux. OS X is not supported at the moment.
+
 ## Steps
 
 Compiling the ANSI C utility tools:
