@@ -8,7 +8,7 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code Demos.Todo.Crud} class.
+ * @fileoverview This file defines the {@code Demos.ToDo.Crud} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
@@ -16,7 +16,7 @@ include('Widgets/Base.js');
 include('Widgets/Textbox.js');
 include('Widgets/ToggleButton.js');
 include('Widgets/Button.js');
-include('Demos/Posters/TodoItem.js');
+include('Demos/Posters/ToDoItem.js');
 
 /**
  * This class is a widget that handles todo_item records. It creates, reads, updates,
@@ -35,7 +35,7 @@ Demos.ToDo.Crud = function(dom) {
  * @type {Demos.Posters.ToDoItem}
  * @protected
  */
-Demos.Todo.Crud.prototype.poster;
+Demos.ToDo.Crud.prototype.poster;
 
 /**
  * New input widget.
@@ -43,15 +43,15 @@ Demos.Todo.Crud.prototype.poster;
  * @type {Widgets.Textbox}
  * @protected
  */
-Demos.Todo.Crud.prototype.newInput;
+Demos.ToDo.Crud.prototype.newInput;
 
 /**
  * New button widget.
  *
- * @type {widgets.Button}
+ * @type {Widgets.Button}
  * @protected
  */
-demos.todo.Crud.prototype.newButton;
+Demos.ToDo.Crud.prototype.newButton;
 
 /**
  * Items area.
@@ -59,7 +59,7 @@ demos.todo.Crud.prototype.newButton;
  * @type {Element}
  * @protected
  */
-demos.todo.Crud.prototype.itemsArea;
+Demos.ToDo.Crud.prototype.itemsArea;
 
 /**
  * Indicates if the new item button was clicked.
@@ -67,16 +67,16 @@ demos.todo.Crud.prototype.itemsArea;
  * @type {boolean}
  * @protected
  */
-demos.todo.Crud.prototype.isNew;
+Demos.ToDo.Crud.prototype.isNew;
 
 /**
  * Adds a new item to the list of items.
  *
- * @type {number} id Todo item id.
- * @type {string} desc Todo item description.
- * @type {number} status Todo item status.
+ * @type {number} id ToDo item id.
+ * @type {string} desc ToDo item description.
+ * @type {number} status ToDo item status.
  */
-demos.todo.Crud.prototype.addItem = function(id, desc, status) {
+Demos.ToDo.Crud.prototype.addItem = function(id, desc, status) {
   var li = document.createElement('li');
   var statusLabel, statusValue, statusElem, deleteElem;
 
@@ -97,8 +97,8 @@ demos.todo.Crud.prototype.addItem = function(id, desc, status) {
     statusValue = true;
   }
 
-  statusElem = new widgets.ToggleButton(li.children[1], statusLabel, statusValue);
-  deleteElem = new widgets.Button(li.children[2], 'DELETE');
+  statusElem = new Widgets.ToggleButton(li.children[1], statusLabel, statusValue);
+  deleteElem = new Widgets.Button(li.children[2], 'DELETE');
 
   statusElem.listen('toggle', this.onStatusChange, this);
   deleteElem.listen('click', this.onDeleteClick, this);
@@ -110,7 +110,7 @@ demos.todo.Crud.prototype.addItem = function(id, desc, status) {
  * @param {Event} e Event information.
  * @return {void}
  */
-demos.todo.Crud.prototype.onNewItem = function(e) {
+Demos.ToDo.Crud.prototype.onNewItem = function(e) {
   this.isNew = true;
   this.poster.write(0, this.newInput.dom.value, 0);
 };
@@ -121,7 +121,7 @@ demos.todo.Crud.prototype.onNewItem = function(e) {
  * @param {Event} e Event information.
  * @return {void}
  */
-demos.todo.Crud.prototype.onStatusChange = function(e) {
+Demos.ToDo.Crud.prototype.onStatusChange = function(e) {
   var id, desc, st, li;
 
   li = e.target.parentNode;
@@ -148,7 +148,7 @@ demos.todo.Crud.prototype.onStatusChange = function(e) {
  * @param {Event} e Event information.
  * @return {void}
  */
-demos.todo.Crud.prototype.onDeleteClick = function(e) {
+Demos.ToDo.Crud.prototype.onDeleteClick = function(e) {
   var id, ul, li;
   li = e.target.parentNode;
   ul = li.parentNode;
@@ -167,7 +167,7 @@ demos.todo.Crud.prototype.onDeleteClick = function(e) {
  * @param {Object} message The actual message.
  * @return {void}
  */
-demos.todo.Crud.prototype.handleResponse = function(code, from, action, message) {
+Demos.ToDo.Crud.prototype.handleResponse = function(code, from, action, message) {
   if (code == 'OK') {
     switch (action) {
     case 'read':
@@ -186,7 +186,7 @@ demos.todo.Crud.prototype.handleResponse = function(code, from, action, message)
  * @param {Object} message Message from server.
  * @return {void}
  */
-demos.todo.Crud.prototype.onRead = function(message) {
+Demos.ToDo.Crud.prototype.onRead = function(message) {
   var i, row;
 
   for (i = 0; i < message.rows.length; i++) {
@@ -201,7 +201,7 @@ demos.todo.Crud.prototype.onRead = function(message) {
  * @param {Object} message Message from server.
  * @return {void}
  */
-demos.todo.Crud.prototype.onWrite = function(message) {
+Demos.ToDo.Crud.prototype.onWrite = function(message) {
   if (this.isNew) {
     this.addItem(message.id, message.description, message.status);
     this.newInput.dom.value = '';
@@ -212,7 +212,7 @@ demos.todo.Crud.prototype.onWrite = function(message) {
  * @inheritDoc
  * @override
  */
-demos.todo.Crud.prototype.flourish = function() {
+Demos.ToDo.Crud.prototype.flourish = function() {
   this.dom.innerHTML = "\
   <h2>TODOS</h2>\
   <div>\
@@ -221,10 +221,10 @@ demos.todo.Crud.prototype.flourish = function() {
   </div>\
   <ul id='items-area'></ul>";
 
-  this.newInput = new widgets.Textbox('new-input');
+  this.newInput = new Widgets.Textbox('new-input');
   this.newInput.dom.setAttribute('placeholder', 'Add new item');
   this.newInput.dom.setAttribute('style', 'padding: 3px 1px 3px 1px; width: 200px;');
-  this.newButton = new widgets.Button('new-button', 'ADD');
+  this.newButton = new Widgets.Button('new-button', 'ADD');
   this.itemsArea = document.getElementById('items-area');
 
   this.newInput.listen('keyup', function(e) {
@@ -233,7 +233,7 @@ demos.todo.Crud.prototype.flourish = function() {
     }
   }, this);
   this.newButton.listen('click', this.onNewItem, this);
-  this.poster = new demos.posters.TodoItem();
+  this.poster = new Demos.Posters.ToDoItem();
   this.poster.listen('response', this.handleResponse, this);
   this.poster.read('*', {'desc': 'asc'}, 0, 0, 0);
 };

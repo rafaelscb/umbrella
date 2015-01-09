@@ -155,7 +155,7 @@ Widgets.DatePicker.prototype.noneButton;
  * @type {Array.<string>}
  * @protected
  */
-widgets.DatePicker.prototype.monthNames;
+Widgets.DatePicker.prototype.monthNames;
 
 /**
  * Contains the week names.
@@ -533,7 +533,7 @@ Widgets.DatePicker.prototype.listen = function(type, func, obj) {
     this.noneButton.addEventListener('click', this.listeners[type], false);
     return;
   }
-  widgets.Base.prototype.listen.call(this, type, func, obj);
+  Widgets.Base.prototype.listen.call(this, type, func, obj);
 };
 
 /**

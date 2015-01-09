@@ -8,40 +8,40 @@
 =============================================================================*/
 
 /**
- * @fileoverview This file defines the {@code demos.todo.Main} class.
+ * @fileoverview This file defines the {@code Demos.ToDo.Main} class.
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('widgets/application.js');
-include('widgets/notif.js');
-include('demos/todo/crud.js');
+include('Widgets/Application.js');
+include('Widgets/Notif.js');
+include('Demos/ToDo/Crud.js');
 
 /**
- * This class is for the Umbrella Demos Todo App.
+ * This class is for the Umbrella Demos ToDo App.
  *
- * @extends {widgets.Application}
+ * @extends {Widgets.Application}
  * @constructor
  */
-demos.todo.Main = function() {
-  widgets.Loader.call(this);
+Demos.ToDo.Main = function() {
+  Widgets.Application.call(this);
 };
-inherit(demos.todo.Main, widgets.Application);
+inherit(Demos.ToDo.Main, Widgets.Application);
 
 /**
- * TodoItem poster to handle items.
+ * ToDoItem poster to handle items.
  *
- * @type {demos.posters.TodoItem}
+ * @type {Demos.Posters.ToDoItem}
  * @protected
  */
-demos.todo.Main.prototype.todoItem;
+Demos.ToDo.Main.prototype.todoItem;
 
 /**
  * Notif object.
  *
- * @type {widgets.Notif}
+ * @type {Widgets.Notif}
  * @protected
  */
-demos.todo.Main.prototype.notif;
+Demos.ToDo.Main.prototype.notif;
 
 /**
  * General app area element.
@@ -49,15 +49,15 @@ demos.todo.Main.prototype.notif;
  * @type {Element}
  * @protected
  */
-demos.todo.Main.prototype.appArea;
+Demos.ToDo.Main.prototype.appArea;
 
 /**
  * Crud widget.
  *
- * @type {demos.todo.Crud}
+ * @type {Demos.ToDo.Crud}
  * @protected
  */
-demos.todo.Main.prototype.crud;
+Demos.ToDo.Main.prototype.crud;
 
 /**
  * Shows the notification area with a given message. The notification message
@@ -68,7 +68,7 @@ demos.todo.Main.prototype.crud;
  * @return {void}
  * @public
  */
-demos.todo.Main.prototype.notify = function(msg) {
+Demos.ToDo.Main.prototype.notify = function(msg) {
   this.notif.show(msg);
 };
 
@@ -77,26 +77,26 @@ demos.todo.Main.prototype.notify = function(msg) {
  * be closed by the Notif object and by the consumer, that's why we use the
  * {@code dispatch} method.
  */
-demos.todo.Main.prototype.unnotify = function() {
+Demos.ToDo.Main.prototype.unnotify = function() {
   this.notif.dispatch('close');
 };
 
 /**
- * Adds the static structure that will be used by the Todo application.
+ * Adds the static structure that will be used by the ToDo application.
  *
  * @return {void}
  */
-demos.todo.Main.prototype.flourish = function() {
-  widgets.Application.prototype.flourish.call(this);
+Demos.ToDo.Main.prototype.flourish = function() {
+  Widgets.Application.prototype.flourish.call(this);
   this.dom.innerHTML = "\
   <div id='notif-area' aria-hidden='true'></div>\
   <div id='app-area' aria-hidden='true'>\
     <div id='crud-area'></div>\
   </div>";
 
-  this.notif = new widgets.Notif('notif-area');
+  this.notif = new Widgets.Notif('notif-area');
   this.appArea = document.getElementById('app-area');
-  this.crud = new demos.todo.Crud(document.getElementById('crud-area'));
+  this.crud = new Demos.ToDo.Crud(document.getElementById('crud-area'));
 };
 
 /**
@@ -104,9 +104,9 @@ demos.todo.Main.prototype.flourish = function() {
  *
  * @return {void}
  */
-demos.todo.Main.prototype.loadView = function(viewName, args) {
+Demos.ToDo.Main.prototype.load = function() {
   this.appArea.setAttribute('aria-hidden', 'false');
 };
 
 // --
-var app = new demos.todo.Main();
+var app = new Demos.ToDo.Main();

@@ -126,7 +126,7 @@ Widgets.MenuItem.prototype.setHasPopup = function(hasPopup) {
  * @return {void}
  */
 Widgets.MenuItem.prototype.addSub = function() {
-  this.subMenu = new widgets.Menu(document.createElement('div'));
+  this.subMenu = new Widgets.Menu(document.createElement('div'));
   this.subMenu.listen('action', this.listeners['action']);
   this.dom.appendChild(this.subMenu.dom);
   this.closeSub();

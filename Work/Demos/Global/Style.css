@@ -28,6 +28,10 @@ body {
   line-height: normal !important;
 }
 
+a {
+  color: #00b;
+}
+
 h1, h2, h3 {
   text-transform: uppercase;
 }
@@ -253,7 +257,9 @@ h3 {
   overflow-y: scroll;
   border-color: #666 #ccc #ccc #666;
   border-style: solid;
-  border-width: 1px;  
+  border-width: 1px;
+  max-height: 100px;
+  min-width: 120px;
 }
 
 /** Option */
@@ -794,4 +800,15 @@ h3 {
 #box3 {
   bottom: 20px;
   left: 400px;
+}
+
+#poster-status {
+  background: #666;
+  color: #eee;
+  width: 500px;
+  padding: 10px;
+  margin-top: 10px;
+  border: solid 1px #eaa;
+  height: 150px;
+  overflow-y: scroll;
 }

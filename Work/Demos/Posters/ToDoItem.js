@@ -21,7 +21,7 @@ include('Posters/Base.js');
  * @constructor
  */
 Demos.Posters.ToDoItem = function() {
-  posters.Base.call(this, 'API.php');
+  Posters.Base.call(this, "/api2.php", "Demos");
 };
 inherit(Demos.Posters.ToDoItem, Posters.Base);
 
@@ -33,7 +33,7 @@ inherit(Demos.Posters.ToDoItem, Posters.Base);
  */
 Demos.Posters.ToDoItem.prototype.read = function(query, order, p, rpp, total) {
   var message = [query, order, p, rpp, total];
-  this.post('todo-item', 'read', message);
+  this.post('ToDoItem', 'read', message);
 };
 
 /**
@@ -44,7 +44,7 @@ Demos.Posters.ToDoItem.prototype.read = function(query, order, p, rpp, total) {
  */
 Demos.Posters.ToDoItem.prototype.write = function(id, desc, st) {
   var message = [id, desc, st];
-  this.post('todo-item', 'write', message);
+  this.post('ToDoItem', 'write', message);
 }
 
 /**
@@ -55,5 +55,5 @@ Demos.Posters.ToDoItem.prototype.write = function(id, desc, st) {
  */
 Demos.Posters.ToDoItem.prototype.remove = function(id) {
   var message = [id];
-  this.post('todo-item', 'remove', message);
+  this.post('ToDoItem', 'remove', message);
 };

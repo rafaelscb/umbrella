@@ -83,7 +83,7 @@ Widgets.TreeItem.prototype.body;
 /**
  * Sub-group region.
  *
- * @type {widgets.Tree}
+ * @type {Widgets.Tree}
  * @protected
  */
 Widgets.TreeItem.prototype.sub;
@@ -334,7 +334,7 @@ Widgets.TreeItem.prototype.flourish = function() {
 Widgets.TreeItem.prototype.flourishSub = function() {
   var subElem = document.createElement('div');
   subElem.setAttribute('role', 'group');
-  this.sub = new widgets.Tree(subElem);
+  this.sub = new Widgets.Tree(subElem);
 };
 
 /**

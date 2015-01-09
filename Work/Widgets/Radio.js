@@ -12,7 +12,7 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('Widgets/checkbox.js');
+include('Widgets/Checkbox.js');
 
 /**
  * The radio widget handles checked state(s).

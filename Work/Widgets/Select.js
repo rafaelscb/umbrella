@@ -19,7 +19,7 @@ include('Widgets/Base.js');
  * differently from a combobox, it does not use a text field.
  *
  * @param {Element} dom Root element for the select.
- * @extends {widgets.Base}
+ * @extends {Widgets.Base}
  * @constructor
  */
 Widgets.Select = function(dom, index) {
@@ -85,7 +85,7 @@ Widgets.Select.prototype.list;
  * @type {Element}
  * @protected
  */
-widgets.Select.prototype.mouseInList;
+Widgets.Select.prototype.mouseInList;
 
 /**
  * Adds a new option to the options collection.
