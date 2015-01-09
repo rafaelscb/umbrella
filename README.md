@@ -5,10 +5,6 @@ Umbrella is a set of classes and tools to build JavaScript applications.
 With Umbrella you create a single HTML file and inherit your JavaScript
 classes from Umbrella classes.
 
-## Motivation
-
-This is the [BLUE JEANS](http://lojabluejeans.com.br) framework.
-
 ## Steps
 
 Compiling the ANSI C utility tools:
@@ -49,10 +45,6 @@ To compile a final solution:
 * goto http://localhost:8080/demos/todo.html
 
 ![alt tag](http://4.bp.blogspot.com/-Mimv3COJRZc/U3ueTkJyCDI/AAAAAAAAAeo/AxqpKtc4AFs/s1600/22-Umbrella-todo-app-01.png)
-
-## Contributors
-
-[JUSTON.CO](http://juston.co) and [BLUE JEANS](http://lojabluejeans.com.br).
 
 ## License
 
