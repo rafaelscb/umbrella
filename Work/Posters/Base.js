@@ -12,7 +12,7 @@
  * @author <a href='mailto:bg@juston.co'>The Umbrella Developers</a>
  */
 
-include('Widgets/poster.js');
+include('Widgets/Poster.js');
 
 /**
  * In the application level, a poster is the edge between the visual elements
