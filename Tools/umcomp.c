@@ -172,14 +172,14 @@ void walk(const char *fname)
               walk(buffer);
               addtoincs(buffer);
 
-              if (!strcmp("sayings/base.js", (buffer + strlen(src_path))))
+              if (!strcmp("Sayings/Base.js", (buffer + strlen(src_path))))
               {
                 buffer3 = (char*)malloc(strlen(entry) +
-                    strlen("/sayings/") + strlen(lang) + 1);
+                    strlen("/Sayings/") + strlen(lang) + 1);
                 buffer2 = (char*)malloc(strlen(entry) +
-                    strlen("/sayings/") + strlen(lang) + 1);
+                    strlen("/Sayings/") + strlen(lang) + 1);
                 bufsay = (char*)malloc(strlen(entry) +
-                    strlen("/sayings/") + strlen(lang) + 1);
+                    strlen("/Sayings/") + strlen(lang) + 1);
                 startbuf = bufsay;
 
                 if (buffer2 && bufsay)
@@ -203,7 +203,7 @@ void walk(const char *fname)
                     }
 
                     strcpy(buffer3, buffer2);
-                    strcat(buffer3, "sayings");
+                    strcat(buffer3, "Sayings");
                     if (strcmp(lang, "multi"))
                     {
                       strcat(buffer3, "/");

@@ -121,7 +121,7 @@ void adddep(const char *jsfile)
 {
   FILE *fp;
   char *include = "include ( |";
-  char *saybase = "sayings/base.js";
+  char *saybase = "Sayings/Base.js";
   char *buffer = 0;
   int saycnt = 0;
   int i = 0, ininc = 0, incomm = 0, incomn = 0;
@@ -166,11 +166,11 @@ void adddep(const char *jsfile)
             if (saycnt == 15)
             {
               buffer = (char*)malloc(strlen(curlib) +
-                  strlen("/sayings/") + strlen(lang) + 1);
+                  strlen("/Sayings/") + strlen(lang) + 1);
               if (buffer)
               {
                 strcpy(buffer, curlib);
-                strcat(buffer, "/sayings");
+                strcat(buffer, "/Sayings");
                 if (strcmp(lang, "multi"))
                 {
                   strcat(buffer, "/");
