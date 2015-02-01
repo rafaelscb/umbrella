@@ -184,7 +184,7 @@ Widgets.AutoComplete.prototype.read = function(pQuery, ord) {
   var query = '';
   if (pQuery) query += pQuery + ';';
   query += 'term=' + this.dom.value + '*';
-  this.poster.readAc(query, ord, 0, 0, 0);
+  this.poster.readAC(query, ord, 0, 0, 0);
 };
 
 /**
