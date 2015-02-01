@@ -195,18 +195,21 @@ Widgets.AutoComplete.prototype.read = function(pQuery, ord) {
  * @protected
  */
 Widgets.AutoComplete.prototype.filter = function() {
-  var result = 0;
-  for (var i = 0; i < this.data.length; i++) {
-    if (result = this.match(this.data[i])) {
-      this.addRow(this.data[i]);
-      if (result == 2 && this.index == -1) {
-        this.index = this.list.firstChild.rows.length - 1;
+  if (this.data) {
+    var result = 0;
+    
+    for (var i = 0; i < this.data.length; i++) {
+      if (result = this.match(this.data[i])) {
+        this.addRow(this.data[i]);
+        if (result == 2 && this.index == -1) {
+          this.index = this.list.firstChild.rows.length - 1;
+        }
       }
     }
-  }
-  if (this.index >= 0) this.commit();
-  if (this.list.firstChild.rows.length > 0) {
-    this.open();
+    if (this.index >= 0) this.commit();
+    if (this.list.firstChild.rows.length > 0) {
+      this.open();
+    }
   }
 };
 
