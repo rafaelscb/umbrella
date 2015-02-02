@@ -8,7 +8,7 @@
 
 set server=tools\umserver.exe
 set name=localhost
-set port=8080
+set port=8081
 set document_root=Work\Bazzum\htdocs
 set cgi_interpreter=Tools\php\php-cgi.exe
 
