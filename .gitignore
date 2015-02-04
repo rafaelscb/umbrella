@@ -4,9 +4,9 @@
 *.suo
 
 Tools/Debug
+Tools/*.exe
 Tools/Release
 Tools/umtools.sdf
-Tools/*.exe
 Tools/php-cgi
 Tools/umcomp
 Tools/umdeps
