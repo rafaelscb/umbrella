@@ -120,6 +120,22 @@ Widgets.AutoComplete.prototype.index;
 Widgets.AutoComplete.prototype.chosen;
 
 /**
+ * Query prefix to be used when reading data.
+ *
+ * @type {string}
+ * @protected
+ */
+Widgets.AutoComplete.prototype.queryPrefix;
+
+/**
+ * Query order to be used when reading data.
+ *
+ * @type {string}
+ * @protected
+ */
+Widgets.AutoComplete.prototype.queryOrder;
+
+/**
  * Occurs when a response comes from the server.
  *
  * @param {string} code The code of the response.
@@ -136,6 +152,48 @@ function(code, from, action, message) {
     return;
   }
   this.onError(code, message);
+};
+
+/**
+ * Gets the query prefix.
+ *
+ * @return {string}
+ * @public
+ */
+Widgets.AutoComplete.prototype.getQueryPrefix = function() {
+  return this.queryPrefix;
+};
+
+/**
+ * Sets the query prefix.
+ *
+ * @param {string} queryPrefix
+ * @return {void}
+ * @public
+ */
+Widgets.AutoComplete.prototype.setQueryPrefix = function(queryPrefix) {
+  this.queryPrefix = queryPrefix;
+};
+
+/**
+ * Gets the query order.
+ *
+ * @return {string}
+ * @public
+ */
+Widgets.AutoComplete.prototype.getQueryOrder = function() {
+  return this.queryOrder;
+};
+
+/**
+ * Sets the query order.
+ *
+ * @param {string} queryOrder
+ * @return {void}
+ * @public
+ */
+Widgets.AutoComplete.prototype.setQueryOrder = function(queryOrder) {
+  this.queryOrder = queryOrder;
 };
 
 /**
@@ -174,16 +232,14 @@ Widgets.AutoComplete.prototype.onError = function(code, message) { };
  * Reads data from the server.
  * The client class is in charge of calling this method.
  *
- * @param {string} pQuery Query prefix to be used.
- * @param {object?} ord Optional ordering.
  * @return {void}
  * @public
  */
-Widgets.AutoComplete.prototype.read = function(pQuery, ord) {
-  if (!ord) ord = {'desc': 'asc'};
-  var query = '';
-  if (pQuery) query += pQuery + ';';
-  query += 'term=' + this.dom.value + '*';
+Widgets.AutoComplete.prototype.read = function() {
+  var ord, query = "";
+  if (!this.queryOrder) ord = {"desc": "asc"};
+  if (this.queryPrefix) query += this.queryPrefix + ';';
+  query += "term=" + this.dom.value + "*";
   this.poster.readAC(query, ord, 0, 0, 0);
 };
 
@@ -197,7 +253,7 @@ Widgets.AutoComplete.prototype.read = function(pQuery, ord) {
 Widgets.AutoComplete.prototype.filter = function() {
   if (this.data) {
     var result = 0;
-    
+
     for (var i = 0; i < this.data.length; i++) {
       if (result = this.match(this.data[i])) {
         this.addRow(this.data[i]);
